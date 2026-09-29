@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="./assets/inetwork-logo.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://iconsax.gitlab.io/i/icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Autowide&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+@font-face{font-family:'Autowide';src:url('./fonts/Autowide.woff2') format('woff2'),url('./fonts/Autowide.ttf') format('truetype'),url('./fonts/Autowide.otf') format('opentype');font-display:swap}
+body{margin:0;background:#080808;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+button{font:inherit}
+::selection{background:#F2231A;color:#080808}
+[data-play]{animation-play-state:paused!important}
+.is-active [data-play],[data-play].is-active{animation-play-state:running!important}
+@media (prefers-reduced-motion:reduce){[data-play]{animation-duration:1ms!important;animation-delay:0ms!important}}
+@keyframes iw-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes iw-draw-y{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes iw-travel{from{transform:translateX(0)}to{transform:translateX(100%)}}
+@keyframes iw-travel-y{from{transform:translateY(0)}to{transform:translateY(100%)}}
+@keyframes iw-num{from{color:#8A8984}to{color:#F2231A}}
+@keyframes iw-title{from{color:#8A8984}to{color:#080808}}
+@keyframes iw-icon{0%{transform:scale(1);color:#8A8984}45%{transform:scale(1.18);color:#F2231A}100%{transform:scale(1);color:#080808}}
+@keyframes iw-rule-k{from{border-left-color:#C9C7C1}to{border-left-color:#080808}}
+@keyframes iw-rule-r{from{border-left-color:#C9C7C1}to{border-left-color:#F2231A}}
+@keyframes iw-node-k{0%{background:#F5F4F1;border-color:#080808;transform:scale(1)}45%{background:#F2231A;border-color:#F2231A;transform:scale(1.4)}100%{background:#080808;border-color:#080808;transform:scale(1)}}
+@keyframes iw-node-r{0%{background:#F5F4F1;border-color:#080808;transform:scale(1)}45%{background:#F2231A;border-color:#F2231A;transform:scale(1.4)}100%{background:#F2231A;border-color:#F2231A;transform:scale(1)}}
+@keyframes iw-end{from{background:#080808}to{background:#F2231A}}
+@keyframes iw-px-k{0%{background:transparent}40%{background:#F2231A}100%{background:#080808}}
+@keyframes iw-px-r{0%{background:transparent}40%{background:#080808}100%{background:#F2231A}}
+@keyframes sol-sweep{0%{transform:scaleX(0);transform-origin:left center}50%{transform:scaleX(1);transform-origin:left center}50.01%{transform:scaleX(1);transform-origin:right center}100%{transform:scaleX(0);transform-origin:right center}}
+@keyframes sol-icon{40%{color:#F2231A;transform:translateY(-3px)}}
+@keyframes sol-head{40%{color:#F2231A;transform:scale(1.1)}}
+@keyframes sol-num{40%{color:#F2231A}}
+@keyframes sol-grid-l{50%{background:#BDBAB2}}
+@keyframes sol-grid-d{50%{background:#3A3A38}}
+@keyframes cta-px-k{40%{background:#F5F4F1}}
+@keyframes cta-px-r{35%{background:#F5F4F1}}
+@keyframes cta-px-e{40%{background:#262626}}
+@keyframes cta-bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes cta-nudge{45%{transform:translateX(6px)}}
+@keyframes cs-rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes cs-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes cs-clip{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes cs-img{from{transform:scale(1.06)}to{transform:none}}
+@keyframes cs-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+[data-noscroll]::-webkit-scrollbar{display:none}
+@keyframes cs-bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes cs2-up{from{transform:translateY(105%)}to{transform:none}}
+@keyframes cs2-fade{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes cs2-draw{to{stroke-dashoffset:0}}
+@keyframes cs2-wipe{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes cs2-blink{0%,100%{opacity:1}50%{opacity:0.25}}
+[data-up]{display:block;transform:translateY(105%)}
+[data-fade]{opacity:0}
+[data-wipe]{clip-path:inset(0 0 100% 0)}
+[data-draw] path{stroke-dasharray:1;stroke-dashoffset:1}
+[data-shown] [data-up],[data-shown][data-up]{animation:cs2-up 900ms cubic-bezier(0.19,1,0.22,1) both}
+[data-shown] [data-fade],[data-shown][data-fade]{animation:cs2-fade 800ms cubic-bezier(0.19,1,0.22,1) both}
+[data-shown] [data-wipe],[data-shown][data-wipe]{animation:cs2-wipe 1100ms cubic-bezier(0.77,0,0.18,1) both}
+[data-shown] [data-draw] path{animation:cs2-draw 900ms cubic-bezier(0.65,0,0.35,1) both;animation-delay:inherit}
+@media (prefers-reduced-motion:reduce){[data-up],[data-fade],[data-wipe]{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}[data-draw] path{stroke-dashoffset:0!important;animation:none!important}}
+</style>
+</helmet>
+<div style="font-family:'Geist',system-ui,sans-serif;color:#080808;background:#F5F4F1;overflow-x:clip;min-height:100vh">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:24px;padding:16px clamp(20px,4vw,64px);color:{{ navColor }};background:{{ navBg }};border-bottom:1px solid {{ navRule }};backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:color 300ms ease, background-color 300ms ease, border-color 300ms ease">
+  <a href="#/" style="flex:1 1 0;display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;letter-spacing:-0.01em;white-space:nowrap" style-hover="color:inherit">
+    <img src="assets/inetwork-logo.png" alt="" aria-hidden="true" style="width:28px;height:28px;display:block;object-fit:contain">INetwork
+  </a>
+  <sc-if value="{{ desktopNav }}" hint-placeholder-val="{{ true }}">
+    <nav style="flex:1 1 0;display:flex;justify-content:flex-end;gap:clamp(16px,2.2vw,32px);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+        <a href="{{ n.href }}" style="display:flex;align-items:center;gap:8px;opacity:{{ n.op }};transition:opacity 200ms ease" style-hover="opacity:1;color:inherit">
+          <span style="width:5px;height:5px;display:block;background:{{ n.dot }}"></span>{{ n.label }}
+        </a>
+      </sc-for>
+    </nav>
+  </sc-if>
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <button onClick="{{ toggleMenu }}" style="background:none;border:0;padding:10px 0;color:inherit;cursor:pointer;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;min-height:44px">{{ menuLabel }}</button>
+  </sc-if>
+</header>
+
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:40;background:#080808;color:#F5F4F1;display:flex;flex-direction:column;justify-content:flex-end;padding:96px 20px 40px;gap:4px">
+    <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+      <a href="{{ n.href }}" style="display:flex;align-items:center;gap:14px;font-size:44px;font-weight:600;letter-spacing:-0.05em;line-height:1;padding:10px 0;border-bottom:1px solid #262626;color:#F5F4F1" style-hover="color:#F5F4F1">
+        <span style="width:9px;height:9px;display:block;background:{{ n.dot }}"></span>{{ n.label }}
+      </a>
+    </sc-for>
+    <span style="margin-top:32px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8984">hello@inetwork.example</span>
+  </div>
+</sc-if>
+
+<main ref="{{ pageRef }}">
+
+<!-- ================= HOME ================= -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+
+  <section data-theme="dark" data-screen-label="Home — Hero" style="background:#080808;color:#F5F4F1;padding:88px clamp(16px,3vw,48px) 0">
+    <div style="position:relative;container-type:inline-size;border:1px solid #262626;background-color:#0A0A0A;display:flex;flex-direction:column;min-height:calc(100vh - 88px - 140px)">
+      <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(90deg,#232322 1px,transparent 1px),linear-gradient(#232322 1px,transparent 1px);background-size:10cqw 10cqw;background-position:-1px -1px"></div>
+      <div style="position:relative;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px clamp(16px,2.4vw,32px);border-bottom:1px solid #262626;background:#080808">
+        <span style="display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border:1px solid #2A2A28;background:#111111;font-size:13px;font-weight:500;color:#F5F4F1"><i class="iconsax" icon-name="grid-apps" aria-hidden="true" style="font-size:15px;color:#F2231A"></i>INetwork</span>
+        
+      </div>
+      <div style="position:relative;flex:1;display:flex;align-items:center;padding:clamp(40px,7vh,96px) clamp(16px,2.4vw,32px)">
+        <h1 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(26px,6.4vw,116px);line-height:1.02">
+          <span style="display:block">Digital</span>
+          <span style="display:block">systems built</span>
+          <span style="display:block">for the way</span>
+          <span style="display:block">businesses work<span style="color:#F2231A">.</span></span>
+        </h1>
+      </div>
+      <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:1px;background:#262626;border-top:1px solid #262626">
+        <p style="margin:0;padding:clamp(20px,2.4vw,32px);background:#080808;font-size:clamp(16px,1.2vw,18px);line-height:1.5;color:#B4B3AE;text-wrap:pretty"><span style="display:block">INetwork builds digital products, software and business solutions for organisations that need them to just work.</span></p>
+        <div style="padding:clamp(20px,2.4vw,32px);background:#080808;display:flex;align-items:center;justify-content:flex-end">
+          <div style="width:min(100%,520px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px">
+            <a href="#/solutions" onMouseEnter="{{ heroBtn.a.on }}" onMouseLeave="{{ heroBtn.a.off }}" onFocus="{{ heroBtn.a.on }}" onBlur="{{ heroBtn.a.off }}" style="position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px;padding:0 20px;border:1px solid {{ heroBtn.a.rule }};background:{{ heroBtn.a.bg }};color:{{ heroBtn.a.ink }};font-size:15px;font-weight:500;white-space:nowrap;outline:none;transition:background-color 250ms ease-out, border-color 250ms ease-out, color 250ms ease-out" style-hover="color:{{ heroBtn.a.ink }}"><span>Explore our solutions</span><span aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:2px;background:#FFFFFF;transform:{{ heroBtn.a.sweep }};transform-origin:left center;transition:transform 250ms ease-out;pointer-events:none"></span><span style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="display:grid;grid-template-columns:4px;gap:2px"><span style="width:4px;height:4px;background:{{ heroBtn.a.px1 }};transition:background-color 200ms ease"></span><span style="width:4px;height:4px;background:{{ heroBtn.a.px2 }};transition:background-color 200ms ease 60ms"></span></span><i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:18px;transform:{{ heroBtn.a.shift }};transition:transform 250ms ease-out"></i></span></a>
+            <a href="#/contact" onMouseEnter="{{ heroBtn.b.on }}" onMouseLeave="{{ heroBtn.b.off }}" onFocus="{{ heroBtn.b.on }}" onBlur="{{ heroBtn.b.off }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px;padding:0 20px;border:1px solid {{ heroBtn.b.rule }};background:{{ heroBtn.b.bg }};color:{{ heroBtn.b.ink }};font-size:15px;font-weight:500;white-space:nowrap;outline:none;transition:background-color 250ms ease-out, border-color 250ms ease-out, color 250ms ease-out" style-hover="color:{{ heroBtn.b.ink }}"><span>Contact us</span><span style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="display:grid;grid-template-columns:4px;gap:2px"><span style="width:4px;height:4px;background:{{ heroBtn.b.px1 }};transition:background-color 200ms ease"></span><span style="width:4px;height:4px;background:{{ heroBtn.b.px2 }};transition:background-color 200ms ease 60ms"></span></span><i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:18px;transform:{{ heroBtn.b.shift }};transition:transform 250ms ease-out"></i></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-strip="hero" aria-hidden="true" style="display:grid;height:140px;margin:0 calc(-1 * clamp(16px,3vw,48px));width:calc(100% + 2 * clamp(16px,3vw,48px))"></div>
+  </section>
+
+  <section id="solutions" data-theme="light" data-screen-label="Home — Solutions" style="background:#F5F4F1;color:#080808;min-height:100vh;display:flex;flex-direction:column;padding:clamp(56px,6vw,96px) clamp(16px,3vw,48px) clamp(16px,3vw,48px)">
+    <h2 style="margin:0 0 clamp(24px,3vw,40px);font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(34px,6.4vw,112px);line-height:1">Solutions</h2>
+    <div data-trigger="" style="flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:clamp(12px,1.4vw,20px)">
+      <div style="background:#FFFFFF;color:#080808;border:1px solid #D8D6D0;display:flex;flex-direction:column;min-width:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:clamp(24px,3vw,40px);border-bottom:1px solid #D8D6D0">
+          <div style="display:flex;flex-direction:column;gap:clamp(12px,1.6vw,20px);min-width:0">
+            <span style="font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(40px,5vw,76px);line-height:0.9;color:{{ webHead.num }};transition:color 250ms ease-out;animation:sol-num 1000ms ease 150ms" data-play="">01</span>
+            <h3 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(22px,2.4vw,38px);line-height:1.05">Digital experiences</h3>
+          </div>
+          <span style="flex-shrink:0;width:clamp(56px,5.6vw,80px);height:clamp(56px,5.6vw,80px);display:flex;align-items:center;justify-content:center;border:1px solid {{ webHead.rule }};background:#F5F4F1;transition:border-color 250ms ease-out"><i class="iconsax" icon-name="monitor" aria-hidden="true" data-play="" style="font-size:clamp(26px,2.6vw,36px);color:{{ webHead.icon }};transition:color 250ms ease-out;animation:sol-head 1000ms cubic-bezier(0.22, 1, 0.36, 1) 150ms"></i></span>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:{{ tileCols }};grid-auto-rows:minmax(clamp(104px,9vw,136px),1fr);gap:1px;background:#D8D6D0;animation:sol-grid-l 1800ms ease 200ms" data-play="">
+          <sc-for list="{{ webList }}" as="r" hint-placeholder-count="6">
+            <a href="{{ r.href }}" onMouseEnter="{{ r.on }}" onMouseLeave="{{ r.off }}" onFocus="{{ r.on }}" onBlur="{{ r.off }}" style="position:relative;overflow:hidden;grid-column:{{ r.col }};grid-row:{{ r.row }};display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:{{ r.pad }};background:{{ r.bg }};color:#080808;outline:none;transition:background-color 250ms ease-out" style-hover="color:#080808">
+              <span aria-hidden="true" style="position:absolute;left:0;top:0;right:0;height:2px;background:#F2231A;transform:{{ r.bar }};transform-origin:left center;transition:transform 250ms ease-out"></span>
+              <span aria-hidden="true" data-play="" style="position:absolute;left:0;top:0;right:0;height:2px;background:#F2231A;transform:scaleX(0);pointer-events:none;animation:sol-sweep 900ms cubic-bezier(0.22, 1, 0.36, 1) {{ r.delay }} both"></span>
+              <span style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+                <i class="iconsax" data-play="" icon-name="{{ r.icon }}" aria-hidden="true" style="font-size:{{ r.iconSize }};color:{{ r.iconColor }};transform:{{ r.lift }};transition:color 250ms ease-out, transform 250ms ease-out;animation:sol-icon 900ms cubic-bezier(0.22, 1, 0.36, 1) {{ r.delay }}"></i>
+                <i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:18px;color:{{ r.arrow }};transform:{{ r.shift }};transition:color 250ms ease-out, transform 250ms ease-out"></i>
+              </span>
+              <span style="font-size:{{ r.size }};font-weight:500;letter-spacing:-0.02em;line-height:1.15">{{ r.title }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#0B0B0B;color:#F5F4F1;border:1px solid #262626;display:flex;flex-direction:column;min-width:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:clamp(24px,3vw,40px);border-bottom:1px solid #262626">
+          <div style="display:flex;flex-direction:column;gap:clamp(12px,1.6vw,20px);min-width:0">
+            <span style="font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(40px,5vw,76px);line-height:0.9;color:{{ saasHead.num }};transition:color 250ms ease-out;animation:sol-num 1000ms ease {{ saasStart }}" data-play="">02</span>
+            <h3 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(22px,2.4vw,38px);line-height:1.05">Business systems</h3>
+          </div>
+          <span style="flex-shrink:0;width:clamp(56px,5.6vw,80px);height:clamp(56px,5.6vw,80px);display:flex;align-items:center;justify-content:center;border:1px solid {{ saasHead.rule }};background:#111111;transition:border-color 250ms ease-out"><i class="iconsax" icon-name="layers-1" aria-hidden="true" data-play="" style="font-size:clamp(26px,2.6vw,36px);color:{{ saasHead.icon }};transition:color 250ms ease-out;animation:sol-head 1000ms cubic-bezier(0.22, 1, 0.36, 1) {{ saasStart }}"></i></span>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:{{ tileCols }};grid-auto-rows:minmax(clamp(104px,9vw,136px),1fr);gap:1px;background:#262626;animation:sol-grid-d 1800ms ease {{ saasStart }}" data-play="">
+          <sc-for list="{{ saasList }}" as="r" hint-placeholder-count="7">
+            <a href="#/contact" onMouseEnter="{{ r.on }}" onMouseLeave="{{ r.off }}" onFocus="{{ r.on }}" onBlur="{{ r.off }}" style="position:relative;overflow:hidden;grid-column:{{ r.col }};grid-row:{{ r.row }};display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:{{ r.pad }};background:{{ r.bg }};color:#F5F4F1;outline:none;transition:background-color 250ms ease-out" style-hover="color:#F5F4F1">
+              <span aria-hidden="true" style="position:absolute;left:0;top:0;right:0;height:2px;background:#F2231A;transform:{{ r.bar }};transform-origin:left center;transition:transform 250ms ease-out"></span>
+              <span aria-hidden="true" data-play="" style="position:absolute;left:0;top:0;right:0;height:2px;background:#F2231A;transform:scaleX(0);pointer-events:none;animation:sol-sweep 900ms cubic-bezier(0.22, 1, 0.36, 1) {{ r.delay }} both"></span>
+              <span style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+                <i class="iconsax" data-play="" icon-name="{{ r.icon }}" aria-hidden="true" style="font-size:{{ r.iconSize }};color:{{ r.iconColor }};transform:{{ r.lift }};transition:color 250ms ease-out, transform 250ms ease-out;animation:sol-icon 900ms cubic-bezier(0.22, 1, 0.36, 1) {{ r.delay }}"></i>
+                <i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:18px;color:{{ r.arrow }};transform:{{ r.shift }};transition:color 250ms ease-out, transform 250ms ease-out"></i>
+              </span>
+              <span style="font-size:{{ r.size }};font-weight:500;letter-spacing:-0.02em;line-height:1.15">{{ r.title }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="company" data-theme="light" data-screen-label="Home — How we work" style="background:#F5F4F1;color:#080808;padding:clamp(72px,9vw,144px) clamp(16px,3vw,48px) clamp(88px,10vw,160px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 48px;margin-bottom:clamp(64px,9vw,152px)">
+      <h2 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(40px,7.4vw,132px);line-height:0.92">How we work<span style="color:#F2231A">.</span></h2>
+      <p style="margin:0;max-width:22ch;font-size:clamp(20px,1.9vw,28px);line-height:1.25;letter-spacing:-0.01em;text-wrap:pretty">One continuous system, from first question to live product.</p>
+    </div>
+    <sc-if value="{{ hwWide }}" hint-placeholder-val="{{ true }}">
+      <div data-trigger="" style="position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto 24px auto">
+        <div data-play="" style="grid-column:1;grid-row:1;align-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:0 24px 40px 24px;border-left:1px solid #C9C7C1;animation:iw-rule-k 600ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both">
+          <span data-play="" style="font-family:'Autowide','Geist',sans-serif;font-size:{{ hw1.numSize }};line-height:1;color:#8A8984;animation:iw-num 600ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both">{{ hw1.n }}</span>
+            <i class="iconsax" data-play="" icon-name="{{ hw1.icon }}" aria-hidden="true" style="font-size:{{ hw1.iconSize }};color:#8A8984;animation:iw-icon 900ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both"></i>
+            <h3 data-play="" style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:{{ hw1.size }};line-height:0.95;color:#8A8984;animation:iw-title 700ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both">{{ hw1.t }}</h3>
+            <p style="margin:0;max-width:24ch;font-size:clamp(15px,1.2vw,18px);line-height:1.45;color:#3F3E3A;text-wrap:pretty">{{ hw1.d }}</p>
+        </div>
+        <div data-play="" style="grid-column:3;grid-row:1;align-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:0 24px 40px 24px;border-left:1px solid #C9C7C1;animation:iw-rule-k 600ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both">
+          <span data-play="" style="font-family:'Autowide','Geist',sans-serif;font-size:{{ hw3.numSize }};line-height:1;color:#8A8984;animation:iw-num 600ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both">{{ hw3.n }}</span>
+            <i class="iconsax" data-play="" icon-name="{{ hw3.icon }}" aria-hidden="true" style="font-size:{{ hw3.iconSize }};color:#8A8984;animation:iw-icon 900ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both"></i>
+            <h3 data-play="" style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:{{ hw3.size }};line-height:0.95;color:#8A8984;animation:iw-title 700ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both">{{ hw3.t }}</h3>
+            <p style="margin:0;max-width:24ch;font-size:clamp(15px,1.2vw,18px);line-height:1.45;color:#3F3E3A;text-wrap:pretty">{{ hw3.d }}</p>
+        </div>
+        <div style="grid-column:1 / -1;grid-row:2;position:relative">
+          <span style="position:absolute;left:0;right:0;top:50%;height:1px;background:#080808"></span>
+          <span aria-hidden="true" data-play="" style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:#F2231A;transform:scaleX(0);transform-origin:left center;animation:iw-draw 1200ms linear 0ms both"></span>
+          <span aria-hidden="true" data-play="" style="position:absolute;inset:0;pointer-events:none;animation:iw-travel 1200ms linear 0ms both"><span style="position:absolute;left:-5px;top:50%;width:10px;height:10px;margin-top:-5px;background:#F2231A"></span><span style="position:absolute;left:-14px;top:50%;width:4px;height:4px;margin-top:-2px;background:#F2231A;opacity:0.5"></span></span>
+          <span aria-hidden="true" style="position:absolute;left:calc(0px + 20px);top:50%;margin-top:-26px;display:grid;grid-template-columns:repeat(3,5px);gap:2px"><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 340ms both"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-r 500ms ease 430ms both"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 280ms both"></span><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 460ms both"></span><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 400ms both"></span><span style="width:5px;height:5px"></span></span>
+          <span aria-hidden="true" style="position:absolute;left:calc(100% / 3 + 20px);top:50%;margin-top:-26px;display:grid;grid-template-columns:repeat(3,5px);gap:2px"><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 550ms both"></span><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 730ms both"></span><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-r 500ms ease 670ms both"></span><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 610ms both"></span><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 790ms both"></span></span>
+          <span aria-hidden="true" style="position:absolute;left:calc(200% / 3 + 20px);top:50%;margin-top:-26px;display:grid;grid-template-columns:repeat(3,5px);gap:2px"><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 940ms both"></span><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 880ms both"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-r 500ms ease 970ms both"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 1060ms both"></span><span style="width:5px;height:5px"></span><span style="width:5px;height:5px"></span><span data-play="" style="width:5px;height:5px;background:transparent;animation:iw-px-k 500ms ease 1090ms both"></span></span>
+          <span data-play="" style="position:absolute;left:-7px;top:50%;width:14px;height:14px;margin-top:-7px;background:#F5F4F1;border:1px solid #080808;animation:iw-node-k 700ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both"></span>
+          <span data-play="" style="position:absolute;left:calc(100% / 3 - 12px);top:50%;width:24px;height:24px;margin-top:-12px;background:#F5F4F1;border:1px solid #080808;animation:iw-node-r 700ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both"></span>
+          <span data-play="" style="position:absolute;left:calc(200% / 3 - 9px);top:50%;width:18px;height:18px;margin-top:-9px;background:#F5F4F1;border:1px solid #080808;animation:iw-node-k 700ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both"></span>
+          <span data-play="" style="position:absolute;right:0;top:50%;width:6px;height:6px;margin-top:-3px;background:#080808;animation:iw-end 300ms ease 1150ms both"></span>
+        </div>
+        <div data-play="" style="grid-column:2;grid-row:3;display:flex;flex-direction:column;align-items:flex-start;gap:22px;padding:48px 24px 0 24px;border-left:1px solid #C9C7C1;animation:iw-rule-r 600ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both">
+          <span data-play="" style="font-family:'Autowide','Geist',sans-serif;font-size:{{ hw2.numSize }};line-height:1;color:#8A8984;animation:iw-num 600ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both">{{ hw2.n }}</span>
+            <i class="iconsax" data-play="" icon-name="{{ hw2.icon }}" aria-hidden="true" style="font-size:{{ hw2.iconSize }};color:#8A8984;animation:iw-icon 900ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both"></i>
+            <h3 data-play="" style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:{{ hw2.size }};line-height:0.95;color:#8A8984;animation:iw-title 700ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both">{{ hw2.t }}</h3>
+            <p style="margin:0;max-width:24ch;font-size:clamp(15px,1.2vw,18px);line-height:1.45;color:#3F3E3A;text-wrap:pretty">{{ hw2.d }}</p>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ hwNarrow }}" hint-placeholder-val="{{ false }}">
+      <div data-trigger="" style="position:relative;display:flex;flex-direction:column;gap:64px;padding-left:36px">
+        <span style="position:absolute;left:8px;top:0;bottom:0;width:1px;background:#080808"></span>
+        <span aria-hidden="true" data-play="" style="position:absolute;left:7.5px;top:0;bottom:0;width:2px;background:#F2231A;transform:scaleY(0);transform-origin:center top;animation:iw-draw-y 1200ms linear 0ms both"></span>
+        <div style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:14px">
+          <span data-play="" style="position:absolute;left:calc(-28px - {{ hw1.half }});top:0;width:{{ hw1.node }};height:{{ hw1.node }};background:#F5F4F1;border:1px solid #080808;animation:iw-node-k 700ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both"></span>
+            <span data-play="" style="font-family:'Autowide','Geist',sans-serif;font-size:{{ hw1.numSize }};line-height:1;color:#8A8984;animation:iw-num 600ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both">{{ hw1.n }}</span>
+            <i class="iconsax" data-play="" icon-name="{{ hw1.icon }}" aria-hidden="true" style="font-size:{{ hw1.iconSize }};color:#8A8984;animation:iw-icon 900ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both"></i>
+            <h3 data-play="" style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:{{ hw1.size }};line-height:0.95;color:#8A8984;animation:iw-title 700ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both">{{ hw1.t }}</h3>
+            <p style="margin:0;max-width:28ch;font-size:clamp(15px,1.2vw,18px);line-height:1.45;color:#3F3E3A;text-wrap:pretty">{{ hw1.d }}</p>
+        </div>
+        <div style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:14px">
+          <span data-play="" style="position:absolute;left:calc(-28px - {{ hw2.half }});top:0;width:{{ hw2.node }};height:{{ hw2.node }};background:#F5F4F1;border:1px solid #080808;animation:iw-node-r 700ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both"></span>
+            <span data-play="" style="font-family:'Autowide','Geist',sans-serif;font-size:{{ hw2.numSize }};line-height:1;color:#8A8984;animation:iw-num 600ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both">{{ hw2.n }}</span>
+            <i class="iconsax" data-play="" icon-name="{{ hw2.icon }}" aria-hidden="true" style="font-size:{{ hw2.iconSize }};color:#8A8984;animation:iw-icon 900ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both"></i>
+            <h3 data-play="" style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:{{ hw2.size }};line-height:0.95;color:#8A8984;animation:iw-title 700ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both">{{ hw2.t }}</h3>
+            <p style="margin:0;max-width:28ch;font-size:clamp(15px,1.2vw,18px);line-height:1.45;color:#3F3E3A;text-wrap:pretty">{{ hw2.d }}</p>
+        </div>
+        <div style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:14px">
+          <span data-play="" style="position:absolute;left:calc(-28px - {{ hw3.half }});top:0;width:{{ hw3.node }};height:{{ hw3.node }};background:#F5F4F1;border:1px solid #080808;animation:iw-node-k 700ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both"></span>
+            <span data-play="" style="font-family:'Autowide','Geist',sans-serif;font-size:{{ hw3.numSize }};line-height:1;color:#8A8984;animation:iw-num 600ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both">{{ hw3.n }}</span>
+            <i class="iconsax" data-play="" icon-name="{{ hw3.icon }}" aria-hidden="true" style="font-size:{{ hw3.iconSize }};color:#8A8984;animation:iw-icon 900ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both"></i>
+            <h3 data-play="" style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:{{ hw3.size }};line-height:0.95;color:#8A8984;animation:iw-title 700ms cubic-bezier(0.22, 1, 0.36, 1) 850ms both">{{ hw3.t }}</h3>
+            <p style="margin:0;max-width:28ch;font-size:clamp(15px,1.2vw,18px);line-height:1.45;color:#3F3E3A;text-wrap:pretty">{{ hw3.d }}</p>
+        </div>
+      </div>
+    </sc-if>
+  </section>
+
+  <div data-theme="dark" aria-hidden="true" style="background:#080808"><div data-strip="bridge" style="display:grid;width:100%;height:120px"></div></div>
+</sc-if>
+
+<!-- ================= WEBSITES ARCHIVE ================= -->
+<sc-if value="{{ isWebsites }}" hint-placeholder-val="{{ false }}">
+  <section data-theme="dark" data-screen-label="Websites — Hero" style="background:#080808;color:#F5F4F1;padding:120px clamp(16px,3vw,48px) clamp(48px,5vw,80px)">
+    <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid #262626;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8984">
+      <sc-if value="{{ ws.isAll }}" hint-placeholder-val="{{ false }}"><span style="color:#F5F4F1">Work</span></sc-if>
+      <sc-if value="{{ ws.isCat }}" hint-placeholder-val="{{ true }}"><a href="#/work" style="color:#8A8984" style-hover="color:#F5F4F1">Work</a><span>/</span><span style="color:#F5F4F1">Websites</span></sc-if>
+    </nav>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px 48px;margin-top:clamp(48px,7vw,112px)">
+      <div style="display:flex;flex-direction:column;gap:24px;min-width:0">
+        <div aria-hidden="true" style="display:grid;grid-template-columns:repeat(4,8px);gap:3px">
+          <span style="width:8px;height:8px;background:#2A2A28"></span><span style="width:8px;height:8px"></span><span style="width:8px;height:8px;background:#2A2A28"></span><span style="width:8px;height:8px;background:#F2231A"></span>
+          <span style="width:8px;height:8px"></span><span style="width:8px;height:8px;background:#2A2A28"></span><span style="width:8px;height:8px;background:#F2231A"></span><span style="width:8px;height:8px;background:#F2231A"></span>
+        </div>
+        <sc-if value="{{ ws.isAll }}" hint-placeholder-val="{{ false }}"><h1 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(52px,11vw,200px);line-height:0.9">Work<span style="color:#F2231A">.</span></h1>
+        <p style="margin:0;max-width:40ch;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#D4D3CE;text-wrap:pretty">All projects, across every category.</p></sc-if>
+        <sc-if value="{{ ws.isCat }}" hint-placeholder-val="{{ true }}"><h1 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(52px,11vw,200px);line-height:0.9">Websites<span style="color:#F2231A">.</span></h1>
+        <p style="margin:0;max-width:40ch;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#D4D3CE;text-wrap:pretty">Custom digital experiences built for organisations, products and brands.</p></sc-if>
+      </div>
+      <span style="flex-shrink:0;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 14px;border:1px solid #2A2A28;font-family:'Autowide','Geist',sans-serif;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;color:#F5F4F1"><i class="iconsax" icon-name="globe" aria-hidden="true" style="font-size:18px;color:#F2231A"></i>{{ ws.count }}</span>
+    </div>
+  </section>
+
+  <section data-theme="light" data-screen-label="Websites — Archive" style="background:#F5F4F1;color:#080808;min-height:70vh;padding:clamp(24px,3vw,40px) clamp(16px,3vw,48px) clamp(88px,10vw,160px)">
+    <div style="display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px);padding-bottom:clamp(16px,1.8vw,24px);border-bottom:1px solid #080808">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px 32px">
+        <div style="display:flex;align-items:baseline;gap:14px">
+          <span style="font-family:'Autowide','Geist',sans-serif;font-size:clamp(20px,1.8vw,26px);letter-spacing:0.02em;text-transform:uppercase">Projects</span>
+          <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8984">{{ ws.shown }}</span>
+        </div>
+        <label style="flex:0 1 420px;min-width:min(100%,260px);display:flex;align-items:center;gap:12px;height:56px;padding:0 18px;border:1px solid #D8D6D0;background:transparent;transition:border-color 200ms ease" style-hover="border-color:#080808" style-focus-within="border-color:#080808">
+          <i class="iconsax" icon-name="search-normal-1" aria-hidden="true" style="font-size:16px;line-height:1;color:#A9A7A1"></i>
+          <input type="search" value="{{ ws.q }}" onChange="{{ ws.onSearch }}" placeholder="Search projects..." aria-label="Search projects" style="flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;font:inherit;font-size:15px;color:#080808"></input>
+        </label>
+      </div>
+      <nav aria-label="Filter by category" style="display:flex;flex-wrap:wrap;gap:8px clamp(20px,2.6vw,40px)">
+        <sc-for list="{{ ws.filters }}" as="f" hint-placeholder-count="6">
+          <button type="button" onClick="{{ f.pick }}" onMouseEnter="{{ f.on }}" onMouseLeave="{{ f.off }}" aria-pressed="{{ f.pressed }}" style="white-space:nowrap;display:inline-flex;align-items:center;gap:0;min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:13px;font-weight:{{ f.weight }};letter-spacing:0.08em;text-transform:uppercase;color:{{ f.ink }};cursor:pointer;transition:color 200ms ease">
+            <span aria-hidden="true" style="width:{{ f.dotW }};height:6px;margin-right:{{ f.dotGap }};background:#F2231A;opacity:{{ f.dotOp }};transform:{{ f.dotX }};overflow:hidden;transition:width 220ms cubic-bezier(0.22, 1, 0.36, 1), margin-right 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1)"></span>{{ f.label }}
+          </button>
+        </sc-for>
+      </nav>
+    </div>
+    <div style="height:clamp(20px,2.4vw,32px)"></div>
+
+    <sc-if value="{{ ws.hasRows }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ ws.rows }}" as="p" hint-placeholder-count="6">
+          <a href="{{ p.href }}" onMouseEnter="{{ p.on }}" onMouseLeave="{{ p.off }}" onFocus="{{ p.on }}" onBlur="{{ p.off }}" style="display:block;color:#080808;border:1px solid {{ p.rule }};background:{{ p.bg }};transition:border-color 200ms ease, background-color 200ms ease">
+            <sc-if value="{{ ws.desk }}" hint-placeholder-val="{{ true }}">
+              <div style="height:168px;display:grid;grid-template-columns:88px minmax(0,1.7fr) minmax(0,0.8fr) 96px 220px 132px;align-items:stretch">
+                <div style="display:flex;flex-direction:column;justify-content:space-between;padding:22px 0 22px 24px">
+                  <span style="font-family:'Autowide','Geist',sans-serif;font-size:15px;letter-spacing:0.04em;color:{{ p.ink }};transition:color 200ms ease">{{ p.n }}</span>
+                  <span aria-hidden="true" style="display:flex;gap:3px"><span style="width:6px;height:6px;background:{{ p.px1 }};transition:background-color 180ms ease"></span><span style="width:6px;height:6px;background:{{ p.px2 }};transition:background-color 180ms ease 60ms"></span></span>
+                </div>
+                <div style="display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 24px;min-width:0">
+                  <h2 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(26px,2.6vw,40px);line-height:1;transform:{{ p.shift }};transition:transform 250ms cubic-bezier(0.22, 1, 0.36, 1)">{{ p.title }}</h2>
+                  <p style="margin:0;font-size:15px;line-height:1.4;color:#5C5B57;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden">{{ p.description }}</p>
+                </div>
+                <div style="display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 20px;border-left:1px solid #E4E2DC">
+                  <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8984">Category</span>
+                  <span style="font-size:15px;font-weight:500">{{ p.cat }}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 20px;border-left:1px solid #E4E2DC">
+                  <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8984">Year</span>
+                  <span style="font-size:15px;font-weight:500">{{ p.year }}</span>
+                </div>
+                <div style="padding:12px;border-left:1px solid #E4E2DC">
+                  <div style="width:100%;height:100%;background:#ECEAE5;filter:{{ p.prevFilter }};opacity:{{ p.prevOp }};transition:filter 300ms ease, opacity 300ms ease">
+                    <sc-if value="{{ p.noThumb }}" hint-placeholder-val="{{ true }}"><image-slot id="{{ p.slot }}" placeholder="Project preview"></image-slot></sc-if><sc-if value="{{ p.hasThumb }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="{{ p.title }} — project preview" style="width:100%;height:100%;min-height:100%;background:#1A1A1A center / cover no-repeat;background-image:{{ p.thumbBg }}"></div></sc-if>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:0 24px;border-left:1px solid #E4E2DC;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:{{ p.ink }};transition:color 200ms ease">View<i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:20px;transform:{{ p.arrow }};transition:transform 250ms cubic-bezier(0.22, 1, 0.36, 1)"></i></div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ ws.compact }}" hint-placeholder-val="{{ false }}">
+              <div style="height:212px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:20px">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+                  <span style="display:flex;align-items:center;gap:10px;font-family:'Autowide','Geist',sans-serif;font-size:14px;color:{{ p.ink }}">{{ p.n }}<span aria-hidden="true" style="display:flex;gap:3px"><span style="width:6px;height:6px;background:{{ p.px1 }}"></span><span style="width:6px;height:6px;background:{{ p.px2 }}"></span></span></span>
+                  <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">{{ p.cat }} · {{ p.year }}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                  <h2 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(26px,6vw,36px);line-height:1;transform:{{ p.shift }};transition:transform 250ms cubic-bezier(0.22, 1, 0.36, 1)">{{ p.title }}</h2>
+                  <p style="margin:0;font-size:15px;line-height:1.4;color:#5C5B57;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden">{{ p.description }}</p>
+                </div>
+                <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;padding-top:12px;border-top:1px solid #E4E2DC;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:{{ p.ink }}">View project<i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:18px;transform:{{ p.arrow }};transition:transform 250ms cubic-bezier(0.22, 1, 0.36, 1)"></i></div>
+              </div>
+            </sc-if>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ ws.empty }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:280px;padding:48px 24px;text-align:center">
+        <span aria-hidden="true" style="width:6px;height:6px;background:#F2231A"></span>
+        <span style="font-family:'Autowide','Geist',sans-serif;font-size:clamp(20px,2vw,28px);letter-spacing:0.02em;text-transform:uppercase">No projects found</span>
+        <button type="button" onClick="{{ ws.reset }}" style="min-height:44px;padding:0;border:0;background:none;font:inherit;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#6B6A66;text-decoration:underline;text-underline-offset:4px;cursor:pointer" style-hover="color:#F2231A">Clear filters</button>
+      </div>
+    </sc-if>
+  </section>
+</sc-if>
+
+<!-- ================= WEBSITE CASE STUDY — #/work/websites/<slug>, renders from WEBSITES data ================= -->
+<sc-if value="{{ isWebsite }}" hint-placeholder-val="{{ false }}">
+<div ref="{{ ncs.root }}" data-ncs="" style="background:#0A0A0A;color:#FFFFFF;font-family:system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden">
+
+  
+
+  <section data-rv="" data-theme="dark" data-rail="Intro" data-screen-label="Hero" style="padding:{{ ncs.topPad }} clamp(16px,3vw,40px) 0">
+    <div data-fade="" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:#BDBDBD;animation-delay:100ms">
+      <a href="{{ ncs.backHref }}" style="display:flex;align-items:center;gap:8px;color:#BDBDBD" style-hover="color:#FF0000"><i class="iconsax" icon-name="arrow-left" aria-hidden="true" style="font-size:16px;line-height:1;display:block"></i>{{ ncs.backLabel }}</a><span>{{ ncs.year }}</span>
+    </div>
+    <h1 style="margin:clamp(20px,3vw,40px) 0 0;font-weight:700;font-size:clamp(64px,15.5vw,260px);line-height:0.84;letter-spacing:-0.065em;text-transform:uppercase">
+      <span style="display:block;overflow:hidden"><span data-up="" style="animation-delay:150ms">{{ ncs.titleA }}</span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:0.26em;margin-bottom:-0.22em"><span data-up="" style="animation-delay:280ms"><span style="position:relative;display:inline-block;isolation:isolate">{{ ncs.titleB }}<svg data-draw="" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:calc(100% + 0.03em);width:100%;height:0.12em;overflow:visible;pointer-events:none;z-index:-1;animation-delay:1000ms"><path pathLength="1" d="M4 26C60 12 140 8 210 14C270 19 330 12 396 6" fill="none" stroke="#FF0000" stroke-width="6" stroke-linecap="round"></path></svg></span></span></span>
+    </h1>
+    <div style="margin-top:clamp(28px,3vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px clamp(24px,4vw,64px);align-items:end">
+      <p data-fade="" style="margin:0;max-width:34ch;font-size:clamp(18px,1.6vw,24px);line-height:1.35;color:#D9D9D9;animation-delay:520ms">{{ ncs.description }}</p>
+      <a data-fade="" href="{{ ncs.liveUrl }}" target="_blank" rel="noopener" style="justify-self:end;display:flex;align-items:center;justify-content:space-between;gap:32px;width:min(100%,340px);height:64px;padding:0 24px;background:#FF0000;color:#FFFFFF;font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;animation-delay:640ms;transition:background-color 200ms,color 200ms" style-hover="background:#CC0000;color:#FFFFFF">View live site<i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:22px;line-height:1;display:block;transform:rotate(-45deg)"></i></a>
+    </div>
+  </section>
+
+  <section data-rv="" style="position:relative;margin-top:clamp(32px,4vw,64px)">
+    <div data-wipe="" style="position:relative;width:100%;aspect-ratio:16/9;min-height:280px;background:#1A1A1A;overflow:hidden;animation-delay:300ms">
+      <sc-if value="{{ ncs.hasHero }}" hint-placeholder-val="{{ true }}"><div role="img" aria-label="{{ ncs.heroAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;background:#1A1A1A center / cover no-repeat;background-image:{{ ncs.heroBg }}"></div></sc-if>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));border-top:1px solid #333333;border-bottom:1px solid #333333">
+      <div data-fade="" style="padding:clamp(24px,2.4vw,36px) clamp(16px,3vw,40px);border-right:1px solid #333333;display:flex;flex-direction:column;gap:12px;animation-delay:500ms"><span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#BDBDBD"><span style="width:6px;height:6px;background:#FF0000;flex:none"></span>Client</span><span style="font-size:clamp(18px,1.5vw,22px);font-weight:500;line-height:1.3;color:#FFFFFF">{{ ncs.client }}</span></div>
+      <div data-fade="" style="padding:clamp(24px,2.4vw,36px) clamp(16px,3vw,40px);border-right:1px solid #333333;display:flex;flex-direction:column;gap:12px;animation-delay:600ms"><span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#BDBDBD"><span style="width:6px;height:6px;background:#FF0000;flex:none"></span>Type</span><span style="font-size:clamp(18px,1.5vw,22px);font-weight:500;line-height:1.3;color:#FFFFFF">{{ ncs.type }}</span></div>
+      <div data-fade="" style="padding:clamp(24px,2.4vw,36px) clamp(16px,3vw,40px);display:flex;flex-direction:column;gap:12px;animation-delay:700ms"><span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#BDBDBD"><span style="width:6px;height:6px;background:#FF0000;flex:none"></span>Services</span><span style="font-size:clamp(18px,1.5vw,22px);font-weight:500;line-height:1.3;color:#FFFFFF">{{ ncs.services }}</span></div>
+    </div>
+  </section>
+
+  <section data-theme="dark" data-rail="The challenge" data-screen-label="The challenge" style="padding:clamp(80px,10vw,176px) clamp(16px,3vw,40px)">
+    <div data-rv="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px clamp(24px,5vw,96px);align-items:start">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <h2 style="margin:0;font-weight:700;font-size:clamp(48px,7vw,120px);line-height:0.88;letter-spacing:-0.06em;text-transform:uppercase"><span style="display:block;overflow:hidden"><span data-up="" style="animation-delay:80ms">The</span></span><span style="display:block;overflow:hidden"><span data-up="" style="animation-delay:180ms">challenge</span></span></h2>
+      </div>
+      <sc-if value="{{ ncs.rich }}" hint-placeholder-val="{{ true }}"><p data-fade="" style="margin:0;font-size:clamp(26px,2.9vw,46px);font-weight:500;line-height:1.12;letter-spacing:-0.035em;text-wrap:pretty;animation-delay:300ms">An outdated,
+        <span style="position:relative;display:inline-block;white-space:nowrap;isolation:isolate;margin-left:0.12em">complex<svg data-draw="" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:-10%;top:-22%;width:120%;height:144%;z-index:-1;overflow:visible;pointer-events:none;animation-delay:900ms"><path pathLength="1" d="M6 40C0 16 66 2 118 4C172 6 202 22 196 42C190 62 128 70 80 67C30 64 -2 52 4 32C8 22 30 12 56 8" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round"></path></svg></span>
+        website built to sell licences — not to explain what SWUT
+        <span style="position:relative;display:inline-block;white-space:nowrap;isolation:isolate">really does<svg data-draw="" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:calc(100% - 0.06em);width:100%;height:0.26em;z-index:-1;overflow:visible;pointer-events:none;animation-delay:1500ms"><path pathLength="1" d="M2 12C30 6 60 16 92 8C120 2 150 14 198 6" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round"></path></svg></span>.</p></sc-if><sc-if value="{{ ncs.plain }}" hint-placeholder-val="{{ false }}"><p data-fade="" style="margin:0;max-width:30ch;font-size:clamp(24px,2.5vw,40px);font-weight:500;line-height:1.15;letter-spacing:-0.03em;text-wrap:pretty;animation-delay:300ms">{{ ncs.challenge }}</p></sc-if>
+    </div>
+    <sc-if value="{{ ncs.rich }}" hint-placeholder-val="{{ true }}"><div data-rv="" style="margin-top:clamp(48px,6vw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px clamp(24px,3vw,56px);padding-top:24px;border-top:1px solid #262626">
+      <p data-fade="" style="margin:0;font-size:17px;line-height:1.55;color:#BDBDBD">SWUT Solutions had an outdated, complex website focused mainly on selling licenses for engineering software.</p>
+      <p data-fade="" style="margin:0;font-size:17px;line-height:1.55;color:#BDBDBD;animation-delay:140ms">The products and wider services were <span style="color:#FFFFFF">difficult to understand</span>.</p>
+      <p data-fade="" style="margin:0;font-size:17px;line-height:1.55;color:#BDBDBD;animation-delay:280ms">The goal: a <span style="position:relative;display:inline-block;white-space:nowrap;color:#FFFFFF;isolation:isolate">clearer, more modern<svg data-draw="" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:calc(100% - 2px);width:100%;height:8px;pointer-events:none;z-index:-1;overflow:visible;animation-delay:900ms"><path pathLength="1" d="M2 8C40 3 90 2 130 5C160 7 182 6 198 3" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round"></path></svg></span> experience that explains each offering and differentiates the brand.</p>
+    </div></sc-if>
+  </section>
+
+  <section id="approach" data-theme="dark" data-rail="The approach" data-screen-label="The approach" style="padding:clamp(80px,10vw,176px) clamp(16px,3vw,40px);background:#111111;border-top:1px solid #262626;border-bottom:1px solid #262626">
+    <div data-rv="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(56px,7vw,120px)">
+      <h2 style="margin:0;font-weight:700;font-size:clamp(48px,7vw,120px);line-height:0.88;letter-spacing:-0.06em;text-transform:uppercase"><span style="display:block;overflow:hidden"><span data-up="">The</span></span><span style="display:block;overflow:hidden;padding-bottom:0.3em;margin-bottom:-0.3em"><span data-up="" style="animation-delay:100ms"><span style="position:relative;display:inline-block;isolation:isolate">journey<svg data-draw="" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:calc(100% + 0.04em);width:100%;height:0.16em;pointer-events:none;z-index:-1;overflow:visible;animation-delay:800ms"><path pathLength="1" d="M4 30C60 20 120 10 200 14C240 16 270 22 296 8M40 36C110 26 190 24 280 28" fill="none" stroke="#FF0000" stroke-width="4" stroke-linecap="round"></path></svg></span></span></span></h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:clamp(48px,6vw,104px)">
+      <sc-for list="{{ ncs.steps }}" as="s" hint-placeholder-count="4">
+        <div data-rv="" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px clamp(20px,3vw,48px);margin-left:{{ s.ml }};max-width:780px">
+          <span style="display:block;overflow:hidden"><span data-up="" style="font-weight:700;font-size:clamp(88px,13vw,220px);line-height:0.8;letter-spacing:-0.07em;color:{{ s.numInk }}">{{ s.n }}</span></span>
+          <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:10px;padding-bottom:10px">
+            <h3 data-fade="" style="margin:0;font-size:clamp(22px,2.2vw,32px);font-weight:700;letter-spacing:-0.03em;line-height:1;text-transform:uppercase;animation-delay:220ms">{{ s.t }}</h3>
+            <p data-fade="" style="margin:0;max-width:36ch;font-size:17px;line-height:1.45;color:#BDBDBD;animation-delay:340ms">{{ s.d }}</p>
+            <span data-wipe="" aria-hidden="true" style="width:48px;height:3px;background:#FF0000;animation-delay:420ms"></span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="work" data-theme="dark" data-rail="The work" data-screen-label="The work" style="padding:clamp(80px,10vw,176px) clamp(16px,3vw,40px)">
+    <div data-rv="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(32px,4vw,56px)">
+      <h2 style="margin:0;font-weight:700;font-size:clamp(56px,10vw,176px);line-height:0.84;letter-spacing:-0.065em;text-transform:uppercase"><span style="display:block;overflow:hidden;padding:0.34em 0.5em 0.34em 0;margin:-0.34em -0.5em -0.34em 0"><span data-up="">The <span style="position:relative;display:inline-block;isolation:isolate;margin-left:0.32em">work<svg data-draw="" viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:-14%;top:-26%;width:128%;height:152%;pointer-events:none;z-index:-1;overflow:visible;animation-delay:700ms"><path pathLength="1" d="M12 50C4 20 72 3 124 5C174 7 196 28 192 52C186 78 124 88 74 84C26 80 4 64 8 40C12 26 32 14 60 9" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round"></path></svg></span></span></span></h2>
+    </div>
+    <div data-rv="" style="position:relative">
+      <div data-fade="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding:0;border-bottom:1px solid #333333;animation-delay:0ms">
+        <div role="tablist" style="display:flex;flex-wrap:wrap;gap:0;align-self:stretch;margin-bottom:-1px">
+          <sc-for list="{{ ncs.tabs }}" as="t" hint-placeholder-count="3">
+            <button type="button" role="tab" aria-selected="{{ t.on }}" onClick="{{ t.go }}" style="display:flex;align-items:center;gap:10px;height:60px;padding:0 16px;border:0;border-bottom:2px solid {{ t.rule }};background:transparent;color:{{ t.ink }};cursor:pointer;font-family:system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:background-color 200ms,color 200ms,border-color 200ms"><span style="color:{{ t.num }}">{{ t.n }}</span>{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:8px 0"><span style="font-weight:600;font-size:14px;letter-spacing:0.04em;color:#D9D9D9;font-variant-numeric:tabular-nums">{{ ncs.count }}</span><div style="display:flex;gap:8px"><button type="button" onClick="{{ ncs.prev }}" disabled="{{ ncs.atStart }}" aria-label="Previous slide" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border:1px solid #444444;border-radius:999px;background:transparent;color:#D9D9D9;cursor:pointer;opacity:{{ ncs.atStartOp }};transition:background-color 200ms,border-color 200ms,color 200ms,opacity 200ms" style-hover="border-color:#FF0000;background:#FF0000;color:#FFFFFF"><i class="iconsax" icon-name="arrow-left" aria-hidden="true" style="font-size:18px;line-height:1;display:block;"></i></button><button type="button" onClick="{{ ncs.next }}" disabled="{{ ncs.atEnd }}" aria-label="Next slide" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border:1px solid #444444;border-radius:999px;background:transparent;color:#D9D9D9;cursor:pointer;opacity:{{ ncs.atEndOp }};transition:background-color 200ms,border-color 200ms,color 200ms,opacity 200ms" style-hover="border-color:#FF0000;background:#FF0000;color:#FFFFFF"><i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:18px;line-height:1;display:block;"></i></button></div></div>
+      </div>
+      <div data-fade="" style="position:relative;width:100%;height:{{ ncs.stageH }};background:#111111;border:1px solid #333333;border-top:0;overflow:hidden;animation-delay:160ms">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;opacity:{{ ncs.s0.op }};visibility:{{ ncs.s0.vis }};transform:{{ ncs.s0.tf }};transition:opacity 500ms ease,transform 700ms cubic-bezier(0.19,1,0.22,1),visibility 500ms">
+          <div style="flex:none;display:flex;justify-content:space-between;align-items:center;gap:12px;height:40px;padding:0 clamp(14px,1.6vw,20px);background:#0A0A0A;border-bottom:1px solid #333333;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">
+            <span style="display:flex;align-items:center;gap:8px;color:#FFFFFF"><span style="width:7px;height:7px;background:#FF0000;animation:cs2-blink 1.2s steps(1) infinite"></span>Live — interactive</span>
+            <a href="{{ ncs.liveUrl }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;color:#9A9A9A" style-hover="color:#FF0000">Open<i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:14px;line-height:1;display:block;transform:rotate(-45deg)"></i></a>
+          </div>
+          <iframe sc-camel-src="{{ ncs.liveUrl }}" title="{{ ncs.liveTitle }}" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" style="flex:1;width:100%;min-height:0;border:0;background:#FFFFFF"></iframe>
+        </div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;padding:clamp(20px,2.4vw,40px);opacity:{{ ncs.s1.op }};visibility:{{ ncs.s1.vis }};transform:{{ ncs.s1.tf }};transition:opacity 500ms ease,transform 700ms cubic-bezier(0.19,1,0.22,1),visibility 500ms">
+          <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+            <div style="min-width:0;min-height:0;display:flex;flex-direction:column;gap:10px">
+              <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9A9A9A">Before<span style="font-weight:500;letter-spacing:0.04em;color:#7A7A7A">— scroll</span></span>
+              <div data-noscroll="" tabindex="0" aria-label="Previous SWUT Solutions homepage, full page — scrollable" style="position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;background:#1A1A1A;border:1px solid #333333"><img src="assets/swut-before.png" alt="Previous SWUT Solutions homepage, full page" loading="lazy" style="display:block;width:100%;height:auto"></div>
+            </div>
+            <div style="min-width:0;min-height:0;display:flex;flex-direction:column;gap:10px">
+              <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#FF0000">After<span style="font-weight:500;letter-spacing:0.04em;color:#7A7A7A">— scroll</span></span>
+              <div data-noscroll="" tabindex="0" aria-label="New SWUT Solutions homepage, full page — scrollable" style="position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;background:#1A1A1A;border:1px solid #FF0000"><img src="assets/swut-after.png" alt="New SWUT Solutions homepage, full page" loading="lazy" style="display:block;width:100%;height:auto"></div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;padding:clamp(20px,2.4vw,40px);opacity:{{ ncs.s2.op }};visibility:{{ ncs.s2.vis }};transform:{{ ncs.s2.tf }};transition:opacity 500ms ease,transform 700ms cubic-bezier(0.19,1,0.22,1),visibility 500ms">
+          <span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9A9A9A">New pages</span>
+          <div style="flex:1;min-height:0;display:grid;grid-template-columns:{{ ncs.pagesCols }};grid-template-rows:{{ ncs.pagesRows }};grid-template-areas:{{ ncs.pagesAreas }};gap:16px">
+            <figure style="grid-area:a;margin:0;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px">
+              <div style="position:relative;flex:1;min-height:0;overflow:hidden;background:#1A1A1A;border:1px solid #333333"><img src="assets/swut-page-product.png" alt="SWUT Product landing page shown on a laptop" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transition:transform 900ms cubic-bezier(0.19,1,0.22,1)" style-hover="transform:scale(1.03)"></div>
+              <figcaption style="display:flex;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#D9D9D9"><span style="color:#FF0000">01</span>Product landing</figcaption>
+            </figure>
+            <figure style="grid-area:b;margin:0;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px">
+              <div style="position:relative;flex:1;min-height:0;overflow:hidden;background:#1A1A1A;border:1px solid #333333"><img src="assets/swut-page-service.png" alt="SWUT Services — Training page shown on a laptop" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transition:transform 900ms cubic-bezier(0.19,1,0.22,1)" style-hover="transform:scale(1.03)"></div>
+              <figcaption style="display:flex;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#D9D9D9"><span style="color:#FF0000">02</span>Services — Training</figcaption>
+            </figure>
+            <figure style="grid-area:c;margin:0;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px">
+              <div style="position:relative;flex:1;min-height:0;overflow:hidden;background:#1A1A1A;border:1px solid #333333"><img src="assets/swut-page-about.png" alt="SWUT About us page shown on a laptop" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transition:transform 900ms cubic-bezier(0.19,1,0.22,1)" style-hover="transform:scale(1.03)"></div>
+              <figcaption style="display:flex;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#D9D9D9"><span style="color:#FF0000">03</span>About us</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-rv="" style="margin-top:clamp(64px,8vw,128px)">
+      <div data-fade="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;margin-bottom:20px">
+        <h3 style="margin:0;font-weight:700;font-size:clamp(28px,3.2vw,52px);line-height:0.9;letter-spacing:-0.05em;text-transform:uppercase">Branding &amp; system</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ ncs.bentoCols }};gap:8px;align-items:stretch">
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+        <div data-fade="" style="flex:1 1 auto;min-height:clamp(420px,40vw,620px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:clamp(20px,2vw,32px);background:#FFFFFF;color:#0A0A0A;animation-delay:80ms">
+          <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase"><span>Typography</span><span style="color:#FF0000">01</span></div>
+          <span style="font-family:system-ui,sans-serif;font-weight:600;font-size:clamp(120px,15vw,260px);line-height:0.8;letter-spacing:-0.04em">Aa</span>
+          <div style="display:flex;flex-direction:column;border-top:1px solid #0A0A0A">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid #D9D9D9;font-family:system-ui,sans-serif"><span style="font-weight:300;font-size:22px">Engineering solutions</span><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7A7A">Light 300</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid #D9D9D9;font-family:system-ui,sans-serif"><span style="font-weight:400;font-size:22px">Engineering solutions</span><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7A7A">Regular 400</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;font-family:system-ui,sans-serif"><span style="font-weight:600;font-size:22px">Engineering solutions</span><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7A7A7A">Semibold 600</span></div>
+          </div>
+        </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+        <div data-fade="" style="position:relative;flex:1 1 auto;min-height:clamp(260px,24vw,400px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid #333333;animation-delay:160ms">
+          <span style="position:absolute;top:14px;right:16px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#FF0000">02</span>
+          <span style="position:absolute;top:14px;left:16px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9A9A9A">Colour</span>
+          <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:16px;background:#09090B;color:#FFFFFF;border-right:1px solid #333333;"><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">Black</span><span style="font-size:12px;color:#9A9A9A">zinc-950</span><span style="font-size:12px;color:#9A9A9A">#09090B</span></div>
+          <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:16px;background:#71717A;color:#FFFFFF;"><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">Zinc</span><span style="font-size:12px;color:#E4E4E7">zinc-500</span><span style="font-size:12px;color:#E4E4E7">#71717A</span></div>
+          <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:16px;background:#FFFFFF;color:#09090B;"><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">White</span><span style="font-size:12px;color:#71717A">white</span><span style="font-size:12px;color:#71717A">#FFFFFF</span></div>
+        </div>
+        <div data-fade="" style="display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-height:clamp(200px,16vw,260px);padding:clamp(18px,1.6vw,24px);background:#1A1A1A;animation-delay:240ms">
+          <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9A9A9A"><span>Client icon set</span><span style="color:#FF0000">03</span></div>
+          <div style="display:grid;grid-template-columns:{{ ncs.iconCols }};gap:clamp(8px,1vw,14px)"><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #FF0000;color:#FF0000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"></path><path d="m21 2-9.6 9.6"></path><circle cx="7.5" cy="15.5" r="5.5"></circle></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Login</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #3A3A3A;color:#FFFFFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Training</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #3A3A3A;color:#FFFFFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Maintenance</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #3A3A3A;color:#FFFFFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Question</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #3A3A3A;color:#FFFFFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Search</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #3A3A3A;color:#FFFFFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Manuals</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #3A3A3A;color:#FFFFFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Sync</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #3A3A3A;color:#FFFFFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Support</span></div><div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0"><span style="width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid #3A3A3A;color:#FFFFFF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:clamp(20px,1.7vw,26px);height:clamp(20px,1.7vw,26px)"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"></path></svg></span><span style="font-size:11px;color:#9A9A9A;white-space:nowrap">Settings</span></div></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-theme="dark" data-rail="Outcome" data-screen-label="Outcome" style="padding:clamp(80px,10vw,176px) clamp(16px,3vw,40px) clamp(128px,15vw,256px);border-top:1px solid #262626;border-bottom:1px solid rgba(237,234,227,0.1)">
+    <div data-rv="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px clamp(24px,5vw,96px);align-items:end">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <h2 style="margin:0;font-weight:700;font-size:clamp(48px,7vw,120px);line-height:0.88;letter-spacing:-0.06em;text-transform:uppercase"><span style="display:block;overflow:hidden"><span data-up="" style="animation-delay:100ms">Outcome</span></span></h2>
+      </div>
+      <sc-if value="{{ ncs.rich }}" hint-placeholder-val="{{ true }}"><p data-fade="" style="margin:0;font-size:clamp(22px,2.3vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.03em;text-wrap:pretty;animation-delay:250ms">SWUT now has a modern digital experience that makes its products and services <span style="position:relative;display:inline-block;white-space:nowrap;isolation:isolate">easier to understand<svg data-draw="" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:calc(100% - 0.04em);width:100%;height:0.28em;pointer-events:none;z-index:-1;overflow:visible;animation-delay:900ms"><path pathLength="1" d="M2 8C40 3 90 2 130 5C160 7 182 6 198 3" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round"></path></svg></span> — with a more premium, differentiated position in a competitive engineering software market.</p></sc-if><sc-if value="{{ ncs.plain }}" hint-placeholder-val="{{ false }}"><p data-fade="" style="margin:0;font-size:clamp(22px,2.3vw,36px);font-weight:500;line-height:1.2;letter-spacing:-0.03em;text-wrap:pretty;animation-delay:250ms">{{ ncs.outcome }}</p></sc-if>
+    </div>
+  </section>
+
+</div>
+</sc-if>
+
+<!-- ================= CATEGORY ARCHIVE ================= -->
+<sc-if value="{{ isArchive }}" hint-placeholder-val="{{ false }}">
+  <section data-theme="light" data-screen-label="Category archive" style="background:#F5F4F1;min-height:100vh;padding:128px clamp(20px,4vw,64px) clamp(88px,10vw,160px)">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 32px;padding-top:16px;border-top:1px solid #080808;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">
+      <span style="display:flex;gap:10px"><a href="#/work" style="color:#080808" style-hover="color:#F2231A">Work</a><span>/</span><span>{{ arc.title }}</span></span>
+      <span style="color:#F2231A">Chapter {{ arc.n }}</span>
+      <span>{{ arc.disciplines }}</span>
+    </div>
+    <div style="margin-top:clamp(32px,4vw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
+      <h1 style="margin:0;font-size:clamp(60px,12vw,224px);font-weight:600;letter-spacing:-0.065em;line-height:0.82;text-transform:uppercase">{{ arc.title }}<span style="color:#F2231A">.</span></h1>
+    </div>
+    <p style="margin:clamp(32px,4vw,56px) 0 0;max-width:26ch;font-size:clamp(26px,2.8vw,44px);font-weight:500;letter-spacing:-0.035em;line-height:1.08;text-wrap:balance">{{ arc.statement }}</p>
+
+    <div style="margin-top:clamp(48px,6vw,96px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 24px;border-top:1px solid #080808;border-bottom:1px solid #D8D6D0">
+      <div style="display:flex;flex-wrap:wrap;gap:0 24px">
+        <sc-for list="{{ arc.filters }}" as="f" hint-placeholder-count="7">
+          <a href="{{ f.href }}" style="min-height:52px;display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:{{ f.color }};transition:color 200ms ease" style-hover="color:#080808">
+            <span style="width:6px;height:6px;display:block;background:{{ f.dot }}"></span>{{ f.label }}<span style="font-size:9px;color:#8E8C86;align-self:flex-start;margin-top:15px">{{ f.count }}</span>
+          </a>
+        </sc-for>
+      </div>
+      <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">{{ arc.countLabel }}</span>
+    </div>
+
+    <sc-if value="{{ arc.empty }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:clamp(64px,8vw,120px) 0;display:flex;flex-direction:column;gap:16px;border-bottom:1px solid #D8D6D0">
+        <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#F2231A">No public case studies yet</span>
+        <p style="margin:0;max-width:40ch;font-size:20px;line-height:1.45;color:#3F3E3A">Work in this discipline is under NDA or still being written up. Ask me about it directly.</p>
+      </div>
+    </sc-if>
+
+    <div style="margin-top:clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:clamp(56px,6vw,96px)">
+      <sc-for list="{{ arc.rows }}" as="row" hint-placeholder-count="2">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,{{ row.min }}),1fr));gap:clamp(56px,6vw,96px) clamp(20px,2.4vw,40px)">
+          <sc-for list="{{ row.items }}" as="p" hint-placeholder-count="1">
+            <a href="{{ p.href }}" onMouseEnter="{{ p.enter }}" onMouseLeave="{{ p.leave }}" data-reveal="" style="display:flex;flex-direction:column;gap:16px;color:#080808" style-hover="color:#080808">
+              <div style="position:relative;overflow:hidden;aspect-ratio:{{ row.ratio }};background:#E7E5E0">
+                <div style="position:absolute;inset:0;transform:scale({{ p.scale }});transition:transform 1200ms cubic-bezier(.2,.7,.2,1)">
+                  <image-slot id="{{ p.thumb }}" shape="rect" placeholder="[ PROJECT SCREENSHOT ]"></image-slot>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:14px;border-top:1px solid #080808">
+                <h3 style="margin:0;font-size:clamp(28px,2.8vw,44px);font-weight:600;letter-spacing:-0.045em;line-height:1;transform:{{ p.shift }};transition:transform 600ms cubic-bezier(.2,.7,.2,1)">{{ p.title }}</h3>
+                <span style="display:flex;align-items:center;gap:10px;font-size:11px"><span style="color:#F2231A;opacity:{{ p.arrowOp }};transition:opacity 300ms ease">→</span>{{ p.year }}</span>
+              </div>
+              <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">{{ p.subLabel }}</span>
+              <p style="margin:0;max-width:52ch;font-size:16px;line-height:1.5;color:#3F3E3A;text-wrap:pretty">{{ p.description }}</p>
+            </a>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+
+    <a href="{{ arc.other.href }}" style="margin-top:clamp(88px,10vw,160px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;padding-top:24px;border-top:1px solid #080808;color:#080808" style-hover="color:#F2231A">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Next chapter — {{ arc.other.n }}</span>
+        <span style="font-size:clamp(40px,6vw,104px);font-weight:600;letter-spacing:-0.06em;line-height:0.88;text-transform:uppercase">{{ arc.other.title }}</span>
+      </div>
+      <span style="font-size:clamp(32px,4vw,64px)">→</span>
+    </a>
+  </section>
+</sc-if>
+
+<!-- ================= CASE STUDY ================= -->
+<sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+  <article>
+    <section data-theme="light" data-screen-label="Case study — Hero" style="background:#F5F4F1;padding:120px clamp(20px,4vw,64px) 0">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 32px;padding-top:16px;border-top:1px solid #080808;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">
+        <span style="display:flex;flex-wrap:wrap;gap:10px"><a href="#/work" style="color:#080808" style-hover="color:#F2231A">Work</a><span>/</span><a href="{{ cs.catHref }}" style="color:#080808" style-hover="color:#F2231A">{{ cs.catTitle }}</a><span>/</span><span>{{ cs.subTitle }}</span></span>
+        <span>Case {{ cs.n }} / {{ cs.total }}</span>
+      </div>
+      <div style="margin-top:clamp(40px,5vw,80px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
+        <h1 style="margin:0;font-size:clamp(64px,14vw,260px);font-weight:600;letter-spacing:-0.065em;line-height:0.8;text-transform:uppercase">{{ cs.title }}<span style="color:#F2231A">.</span></h1>
+      </div>
+      <p style="margin:clamp(32px,4vw,56px) 0 0;max-width:28ch;font-size:clamp(24px,2.6vw,40px);font-weight:500;letter-spacing:-0.035em;line-height:1.1;text-wrap:balance">{{ cs.description }}</p>
+      <div style="margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));border-top:1px solid #D8D6D0">
+        <sc-for list="{{ cs.meta }}" as="m" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:8px;padding:16px 16px 24px 0">
+            <span style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">{{ m.k }}</span>
+            <span style="font-size:16px;line-height:1.35">{{ m.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    <div data-theme="light" style="background:#F5F4F1">
+      <div data-reveal="" style="position:relative;aspect-ratio:16/8;min-height:300px;background:#E7E5E0">
+        <image-slot id="{{ cs.heroImage }}" shape="rect" placeholder="[ PROJECT HERO — FULL BLEED ]"></image-slot>
+      </div>
+    </div>
+
+    <section data-theme="light" data-screen-label="Case study — 01 Overview" style="background:#F5F4F1;padding:clamp(88px,10vw,160px) clamp(20px,4vw,64px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:40px clamp(32px,5vw,96px)">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:11px;letter-spacing:0.08em;color:#F2231A">01</span>
+          <h2 style="margin:0;font-size:clamp(32px,3.4vw,56px);font-weight:600;letter-spacing:-0.045em;line-height:0.95">Overview</h2>
+        </div>
+        <div style="grid-column:span 2;min-width:0;display:flex;flex-direction:column;gap:56px">
+          <p data-reveal="" style="margin:0;max-width:32ch;font-size:clamp(24px,2.6vw,40px);letter-spacing:-0.03em;line-height:1.18;text-wrap:pretty">{{ cs.overview.product }}</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:32px 24px">
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:14px;border-top:1px solid #080808">
+              <span style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Who it’s for</span>
+              <p style="margin:0;font-size:16px;line-height:1.55;color:#3F3E3A">{{ cs.overview.audience }}</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:14px;border-top:1px solid #080808">
+              <span style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">My role</span>
+              <p style="margin:0;font-size:16px;line-height:1.55;color:#3F3E3A">{{ cs.overview.role }}</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:14px;border-top:1px solid #080808">
+              <span style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Context</span>
+              <p style="margin:0;font-size:16px;line-height:1.55;color:#3F3E3A">{{ cs.overview.context }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-theme="dark" data-screen-label="Case study — 02 Problem" style="background:#080808;color:#F5F4F1;padding:clamp(88px,10vw,160px) clamp(20px,4vw,64px)">
+      <span style="display:block;font-size:11px;letter-spacing:0.08em;color:#F2231A;margin-bottom:20px">02</span>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
+        <h2 style="margin:0;font-size:clamp(56px,10vw,184px);font-weight:600;letter-spacing:-0.06em;line-height:0.84;text-transform:uppercase">The<br>problem</h2>
+        <p style="margin:0;flex:0 1 460px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;color:#B4B3AE;text-wrap:pretty">{{ cs.problem.intro }}</p>
+      </div>
+      <div style="margin-top:clamp(56px,6vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:0 32px">
+        <sc-for list="{{ cs.problemPoints }}" as="pt" hint-placeholder-count="3">
+          <div data-reveal="" style="display:flex;flex-direction:column;gap:14px;padding:20px 0 40px;border-top:1px solid #3A3A38">
+            <span style="font-size:11px;color:#F2231A">{{ pt.n }}</span>
+            <h3 style="margin:0;font-size:24px;font-weight:600;letter-spacing:-0.03em;line-height:1.1">{{ pt.t }}</h3>
+            <p style="margin:0;font-size:16px;line-height:1.55;color:#A3A29D">{{ pt.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-theme="light" data-screen-label="Case study — 03 Discovery" style="background:#F5F4F1;padding:clamp(88px,10vw,160px) clamp(20px,4vw,64px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px clamp(32px,5vw,96px);margin-bottom:clamp(48px,5vw,80px)">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:11px;letter-spacing:0.08em;color:#F2231A">03</span>
+          <h2 style="margin:0;font-size:clamp(32px,3.4vw,56px);font-weight:600;letter-spacing:-0.045em;line-height:0.95">Discovery</h2>
+        </div>
+        <p style="grid-column:span 2;margin:0;max-width:34ch;font-size:clamp(22px,2.2vw,34px);letter-spacing:-0.025em;line-height:1.22;text-wrap:pretty">{{ cs.research.intro }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:0 24px">
+        <sc-for list="{{ cs.methods }}" as="m" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:12px;padding:18px 0 36px;border-top:1px solid #080808">
+            <span style="font-size:11px;color:#5C5B57">{{ m.n }}</span>
+            <h3 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.02em">{{ m.t }}</h3>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#3F3E3A">{{ m.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(12px,1.6vw,24px);margin-top:16px">
+        <figure style="margin:0;display:flex;flex-direction:column;gap:10px">
+          <div data-reveal="" style="position:relative;aspect-ratio:4/3;background:#E7E5E0"><image-slot id="{{ cs.slug }}-flows" shape="rect" placeholder="[ USER FLOWS ]"></image-slot></div>
+          <figcaption style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Fig. 03.1 — User flows, current state</figcaption>
+        </figure>
+        <figure style="margin:0;display:flex;flex-direction:column;gap:10px">
+          <div data-reveal="" style="position:relative;aspect-ratio:4/3;background:#E7E5E0"><image-slot id="{{ cs.slug }}-ia" shape="rect" placeholder="[ INFORMATION ARCHITECTURE ]"></image-slot></div>
+          <figcaption style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Fig. 03.2 — Information architecture</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section data-theme="light" data-screen-label="Case study — 04 Strategy" style="background:#FFFFFF;padding:clamp(88px,10vw,160px) clamp(20px,4vw,64px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px clamp(32px,5vw,96px);margin-bottom:clamp(48px,5vw,80px)">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:11px;letter-spacing:0.08em;color:#F2231A">03</span>
+          <h2 style="margin:0;font-size:clamp(32px,3.4vw,56px);font-weight:600;letter-spacing:-0.045em;line-height:0.95">Strategy</h2>
+        </div>
+        <p style="grid-column:span 2;margin:0;max-width:34ch;font-size:clamp(22px,2.2vw,34px);letter-spacing:-0.025em;line-height:1.22;text-wrap:pretty">{{ cs.strategy.intro }}</p>
+      </div>
+      <sc-for list="{{ cs.decisions }}" as="dc" hint-placeholder-count="3">
+        <div data-reveal="" style="display:grid;grid-template-columns:48px minmax(0,1fr) minmax(0,1fr);align-items:baseline;gap:10px 32px;padding:24px 0;border-top:1px solid #080808">
+          <span style="font-size:11px;color:#F2231A">{{ dc.n }}</span>
+          <h3 style="margin:0;font-size:clamp(22px,2.2vw,32px);font-weight:600;letter-spacing:-0.035em;line-height:1.1">{{ dc.t }}</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#3F3E3A">{{ dc.d }}</p>
+        </div>
+      </sc-for>
+    </section>
+
+    <section data-theme="light" data-screen-label="Case study — 05 Design" style="background:#F5F4F1;padding:clamp(88px,10vw,160px) clamp(20px,4vw,64px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px clamp(32px,5vw,96px);margin-bottom:clamp(48px,5vw,80px)">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:11px;letter-spacing:0.08em;color:#F2231A">05</span>
+          <h2 style="margin:0;font-size:clamp(32px,3.4vw,56px);font-weight:600;letter-spacing:-0.045em;line-height:0.95">Design</h2>
+        </div>
+        <p style="grid-column:span 2;margin:0;max-width:34ch;font-size:clamp(22px,2.2vw,34px);letter-spacing:-0.025em;line-height:1.22;text-wrap:pretty">{{ cs.process.intro }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(12px,1.6vw,24px)">
+        <sc-for list="{{ cs.stages }}" as="sg" hint-placeholder-count="4">
+          <figure style="margin:0;display:flex;flex-direction:column;gap:10px">
+            <div data-reveal="" style="position:relative;aspect-ratio:4/5;background:#E7E5E0"><image-slot id="{{ sg.img }}" shape="rect" placeholder="{{ sg.tag }}"></image-slot></div>
+            <figcaption style="display:flex;gap:10px;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57"><span style="color:#F2231A">{{ sg.n }}</span>{{ sg.t }}</figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-theme="light" data-screen-label="Case study — 06 System" style="background:#FFFFFF;padding:clamp(88px,10vw,160px) clamp(20px,4vw,64px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px clamp(32px,5vw,96px);margin-bottom:clamp(48px,5vw,80px)">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:11px;letter-spacing:0.08em;color:#F2231A">06</span>
+          <h2 style="margin:0;font-size:clamp(32px,3.4vw,56px);font-weight:600;letter-spacing:-0.045em;line-height:0.95">System</h2>
+        </div>
+        <p style="grid-column:span 2;margin:0;max-width:40ch;font-size:clamp(18px,1.5vw,22px);line-height:1.5;color:#3F3E3A;text-wrap:pretty">{{ cs.designSystem.intro }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:#D8D6D0;border:1px solid #D8D6D0">
+        <div style="background:#FFFFFF;padding:24px;display:flex;flex-direction:column;gap:20px;min-height:340px">
+          <span style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Typography — {{ cs.designSystem.typeface }}</span>
+          <span style="font-size:112px;font-weight:600;letter-spacing:-0.06em;line-height:0.8">Aa</span>
+          <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #EFEEEA;padding-top:8px"><span style="font-size:30px;font-weight:600;letter-spacing:-0.03em">Display</span><span style="font-size:10px;color:#5C5B57">32 / 600</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #EFEEEA;padding-top:8px"><span style="font-size:20px;font-weight:600">Heading</span><span style="font-size:10px;color:#5C5B57">20 / 600</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #EFEEEA;padding-top:8px"><span style="font-size:15px">Body text</span><span style="font-size:10px;color:#5C5B57">15 / 400</span></div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;padding:24px;display:flex;flex-direction:column;gap:20px;min-height:340px">
+          <span style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Colour</span>
+          <div style="flex:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:8px">
+            <sc-for list="{{ cs.palette }}" as="c" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;justify-content:flex-end;padding:10px;min-height:96px;background:{{ c.hex }};color:{{ c.ink }};border:1px solid #EFEEEA">
+                <span style="font-size:13px;font-weight:500">{{ c.name }}</span>
+                <span style="font-size:10px">{{ c.hex }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;padding:24px;display:flex;flex-direction:column;gap:20px;min-height:340px">
+          <span style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Core components</span>
+          <div style="margin-top:auto;display:flex;flex-direction:column">
+            <sc-for list="{{ cs.components }}" as="k" hint-placeholder-count="5">
+              <div style="display:flex;gap:14px;align-items:baseline;padding:10px 0;border-top:1px solid #EFEEEA"><span style="font-size:10px;color:#F2231A">{{ k.n }}</span><span style="font-size:16px">{{ k.c }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <figure style="margin:clamp(12px,1.6vw,24px) 0 0;display:flex;flex-direction:column;gap:10px">
+        <div data-reveal="" style="position:relative;aspect-ratio:16/7;min-height:220px;background:#EFEEEA"><image-slot id="{{ cs.slug }}-components" shape="rect" placeholder="[ COMPONENTS &amp; RESPONSIVE BEHAVIOUR ]"></image-slot></div>
+        <figcaption style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#5C5B57">Fig. 06.1 — Components, states and breakpoints</figcaption>
+      </figure>
+    </section>
+
+    <section data-theme="light" data-screen-label="Case study — 07 Solution" style="background:#F5F4F1;padding:clamp(88px,10vw,160px) 0">
+      <div style="padding:0 clamp(20px,4vw,64px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(48px,5vw,80px)">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <span style="font-size:11px;letter-spacing:0.08em;color:#F2231A">07</span>
+          <h2 style="margin:0;font-size:clamp(56px,10vw,184px);font-weight:600;letter-spacing:-0.06em;line-height:0.84;text-transform:uppercase">The<br>solution</h2>
+        </div>
+        <p style="margin:0;flex:0 1 440px;font-size:clamp(18px,1.5vw,22px);line-height:1.5;color:#3F3E3A;text-wrap:pretty">{{ cs.solution.intro }}</p>
+      </div>
+      <div data-reveal="" style="position:relative;aspect-ratio:16/9;min-height:280px;background:#E7E5E0">
+        <image-slot id="{{ cs.slug }}-sol-main" shape="rect" placeholder="[ FINAL PRODUCT — KEY SCREEN ]"></image-slot>
+      </div>
+      <div style="padding:0 clamp(20px,4vw,64px);display:flex;flex-direction:column">
+        <sc-for list="{{ cs.features }}" as="ft" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px clamp(32px,5vw,96px);padding:clamp(56px,6vw,96px) 0;border-bottom:1px solid #D8D6D0">
+            <div style="display:flex;flex-direction:column;gap:14px;max-width:420px">
+              <span style="font-size:11px;color:#F2231A">07.{{ ft.i }}</span>
+              <h3 style="margin:0;font-size:clamp(28px,3vw,48px);font-weight:600;letter-spacing:-0.045em;line-height:1">{{ ft.t }}</h3>
+              <p style="margin:0;font-size:17px;line-height:1.55;color:#3F3E3A;text-wrap:pretty">{{ ft.d }}</p>
+            </div>
+            <div data-reveal="" style="grid-column:span 2;min-width:0;position:relative;aspect-ratio:16/10;background:#E7E5E0">
+              <image-slot id="{{ ft.img }}" shape="rect" placeholder="[ {{ ft.t }} — SCREEN ]"></image-slot>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-theme="dark" data-screen-label="Case study — 08 Results" style="background:#080808;color:#F5F4F1;padding:clamp(88px,10vw,160px) clamp(20px,4vw,64px)">
+      <span style="display:block;font-size:11px;letter-spacing:0.08em;color:#F2231A;margin-bottom:20px">08</span>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(48px,6vw,96px)">
+        <h2 style="margin:0;font-size:clamp(56px,10vw,184px);font-weight:600;letter-spacing:-0.06em;line-height:0.84;text-transform:uppercase">Results</h2>
+        <sc-if value="{{ cs.qualitative }}" hint-placeholder-val="{{ true }}">
+          <span style="flex:0 1 360px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;line-height:1.6;color:#8A8984">Qualitative outcomes — no metrics are published for this project.</span>
+        </sc-if>
+      </div>
+      <sc-for list="{{ cs.results }}" as="rs" hint-placeholder-count="3">
+        <div data-reveal="" style="display:grid;grid-template-columns:48px minmax(0,1.4fr) minmax(0,1fr);align-items:baseline;gap:10px 32px;padding:clamp(24px,3vw,40px) 0;border-top:1px solid #3A3A38">
+          <span style="font-size:11px;color:#F2231A">{{ rs.n }}</span>
+          <h3 style="margin:0;font-size:clamp(26px,3.4vw,56px);font-weight:600;letter-spacing:-0.045em;line-height:1">{{ rs.t }}</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#A3A29D">{{ rs.d }}</p>
+        </div>
+      </sc-for>
+    </section>
+
+    <section data-theme="light" data-screen-label="Case study — 09 Gallery" style="background:#F5F4F1;padding:clamp(88px,10vw,160px) clamp(20px,4vw,64px)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:clamp(32px,4vw,56px)">
+        <h2 style="margin:0;font-size:clamp(32px,3.4vw,56px);font-weight:600;letter-spacing:-0.045em;line-height:0.95">Gallery</h2>
+        <span style="font-size:11px;letter-spacing:0.08em;color:#F2231A">09</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:clamp(12px,1.6vw,24px)">
+        <div data-reveal="" style="position:relative;aspect-ratio:16/8;background:#E7E5E0"><image-slot id="{{ cs.g.full }}" shape="rect" placeholder="[ GALLERY — FULL WIDTH ]"></image-slot></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(12px,1.6vw,24px)">
+          <div data-reveal="" style="position:relative;aspect-ratio:4/3;background:#E7E5E0"><image-slot id="{{ cs.g.a }}" shape="rect" placeholder="[ UI DETAIL ]"></image-slot></div>
+          <div data-reveal="" style="position:relative;aspect-ratio:4/3;background:#E7E5E0"><image-slot id="{{ cs.g.b }}" shape="rect" placeholder="[ UI DETAIL ]"></image-slot></div>
+        </div>
+        <div data-reveal="" style="background:#080808;padding:clamp(24px,5vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:clamp(12px,2vw,32px)">
+          <div style="position:relative;aspect-ratio:9/19;border-radius:20px;overflow:hidden;background:#1A1A1A"><image-slot id="{{ cs.g.m1 }}" shape="rounded" radius="20" placeholder="[ MOBILE ]"></image-slot></div>
+          <div style="position:relative;aspect-ratio:9/19;border-radius:20px;overflow:hidden;background:#1A1A1A"><image-slot id="{{ cs.g.m2 }}" shape="rounded" radius="20" placeholder="[ MOBILE ]"></image-slot></div>
+          <div style="position:relative;aspect-ratio:9/19;border-radius:20px;overflow:hidden;background:#1A1A1A"><image-slot id="{{ cs.g.m3 }}" shape="rounded" radius="20" placeholder="[ MOBILE ]"></image-slot></div>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ cs.hasLive }}" hint-placeholder-val="{{ false }}">
+      <section data-theme="light" data-screen-label="Case study — 10 Live preview" style="background:#F5F4F1;padding:0 clamp(20px,4vw,64px) clamp(88px,10vw,160px)">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:32px;padding-top:clamp(40px,5vw,72px);border-top:1px solid #080808">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <span style="font-size:11px;letter-spacing:0.08em;color:#F2231A">10 — Live preview</span>
+            <h2 style="margin:0;font-size:clamp(40px,6vw,104px);font-weight:600;letter-spacing:-0.055em;line-height:0.9;text-transform:uppercase">See it live</h2>
+          </div>
+          <a href="{{ cs.liveUrl }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:16px;min-height:60px;padding:0 28px;background:#F2231A;color:#080808;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;transition:background-color 200ms ease" style-hover="background:#080808;color:#F5F4F1">View live project <span style="font-size:16px">→</span></a>
+        </div>
+      </section>
+    </sc-if>
+
+    <section data-theme="dark" data-screen-label="Case study — Next project" style="background:#080808;color:#F5F4F1">
+      <a href="{{ cs.next.href }}" onMouseEnter="{{ cs.next.enter }}" onMouseLeave="{{ cs.next.leave }}" style="display:flex;flex-direction:column;gap:clamp(24px,3vw,48px);padding:clamp(64px,8vw,120px) clamp(20px,4vw,64px) 0;color:#F5F4F1" style-hover="color:#F5F4F1">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8984">
+          <span style="color:#F2231A">{{ cs.nextNum }} — Next project →</span><span>{{ cs.next.subLabel }} — {{ cs.next.year }}</span>
+        </div>
+        <h2 style="margin:0;font-size:clamp(64px,13vw,240px);font-weight:600;letter-spacing:-0.065em;line-height:0.82;text-transform:uppercase;transform:{{ cs.next.shift }};transition:transform 700ms cubic-bezier(.2,.7,.2,1)">{{ cs.next.title }}</h2>
+        <div style="position:relative;overflow:hidden;aspect-ratio:16/7;min-height:220px;background:#1A1A1A">
+          <div style="position:absolute;inset:0;transform:scale({{ cs.next.scale }});transition:transform 1200ms cubic-bezier(.2,.7,.2,1)">
+            <image-slot id="{{ cs.next.thumb }}" shape="rect" placeholder="[ NEXT PROJECT ]"></image-slot>
+          </div>
+        </div>
+      </a>
+    </section>
+  </article>
+</sc-if>
+
+</main>
+
+<sc-if value="{{ showContact }}" hint-placeholder-val="{{ true }}">
+<section id="contact" data-theme="dark" data-screen-label="Contact CTA" style="background:#080808;color:#F5F4F1;padding:clamp(8px,1vw,16px) clamp(16px,3vw,48px) clamp(56px,6vw,96px)">
+  <div data-trigger="" style="position:relative;border:1px solid #262626;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:1px;background:#262626">
+    <div style="background:#0B0B0B;padding:clamp(28px,4vw,72px);display:flex;flex-direction:column;gap:clamp(24px,2.6vw,40px);min-height:clamp(360px,34vw,560px)">
+      <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border:1px solid #2A2A28;background:#111111;font-size:13px;font-weight:500;color:#F5F4F1"><i class="iconsax" icon-name="messages-2" aria-hidden="true" style="font-size:15px;color:#F2231A"></i>Contact</span>
+      <h2 style="margin:auto 0 0;max-width:12ch;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(36px,6vw,108px);line-height:0.98;text-wrap:balance"><span style="display:block">Let’s build</span><span style="display:block">something useful<span style="color:#F2231A">.</span></span></h2>
+      <p style="margin:0;max-width:36ch;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#D4D3CE;text-wrap:pretty">Have a website, digital product, CMS, or business system in mind? Let’s talk about what you need to build.</p>
+    </div>
+    <div style="background:#0B0B0B;padding:clamp(28px,4vw,72px);display:flex;flex-direction:column;justify-content:space-between;gap:48px">
+      <div aria-hidden="true" style="align-self:flex-end;display:grid;grid-template-columns:repeat(8,clamp(10px,1vw,16px));gap:3px">
+        <sc-for list="{{ ctaPixels }}" as="px" hint-placeholder-count="32">
+          <span data-play="" style="aspect-ratio:1;background:{{ px.c }};animation:{{ px.anim }}"></span>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1px;background:#262626;border:1px solid #262626">
+        <a href="mailto:hello@inetwork.example" onMouseEnter="{{ ctaOn }}" onMouseLeave="{{ ctaOff }}" onFocus="{{ ctaOn }}" onBlur="{{ ctaOff }}" style="position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:clamp(64px,5.6vw,84px);padding:0 clamp(20px,2vw,28px);background:#F5F4F1;color:#080808;font-size:clamp(17px,1.4vw,20px);font-weight:500;transition:background-color 200ms ease, color 200ms ease" style-hover="background:#F2231A;color:#080808"><span>Talk to INetwork</span><span style="display:flex;align-items:center;gap:10px"><span aria-hidden="true" style="display:grid;grid-template-columns:4px;gap:2px"><span style="width:4px;height:4px;background:{{ ctaPx1 }};transition:background-color 200ms ease"></span><span style="width:4px;height:4px;background:{{ ctaPx2 }};transition:background-color 200ms ease 60ms"></span></span><span data-play="" style="display:flex;animation:cta-nudge 800ms cubic-bezier(0.22, 1, 0.36, 1) 1300ms"><i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:22px;color:currentColor;transform:{{ ctaArrow }};transition:transform 300ms cubic-bezier(0.22, 1, 0.36, 1)"></i></span></span><span aria-hidden="true" data-play="" style="position:absolute;left:0;right:0;bottom:0;height:3px;background:#F2231A;transform:scaleX(0);transform-origin:left center;pointer-events:none;animation:cta-bar 900ms cubic-bezier(0.22, 1, 0.36, 1) 900ms both"></span></a>
+        <a href="mailto:hello@inetwork.example" style="display:flex;align-items:center;gap:12px;min-height:64px;padding:0 clamp(20px,2vw,28px);background:#0B0B0B;color:#B4B3AE;font-size:15px;transition:color 200ms ease, background-color 200ms ease" style-hover="color:#F5F4F1;background:#111111"><i class="iconsax" icon-name="mail" aria-hidden="true" style="font-size:20px;color:#F2231A"></i>hello@inetwork.example</a>
+      </div>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<footer data-theme="dark" data-screen-label="Footer" style="background:#0D0D0D;color:#EDEAE3;font-family:system-ui,sans-serif;padding:clamp(56px,7vw,112px) clamp(16px,3vw,48px) 28px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 48px;padding-bottom:clamp(40px,5vw,72px);border-bottom:1px solid #262624">
+    <a href="#/" style="display:flex;align-items:center;gap:12px;color:#EDEAE3;text-decoration:none;font-weight:700;font-size:clamp(28px,3.6vw,56px);letter-spacing:-0.04em;line-height:1" style-hover="color:#EDEAE3"><img src="assets/inetwork-logo.png" alt="" aria-hidden="true" style="width:1.3em;height:1.3em;display:block;object-fit:contain">INETWORK-ME</a>
+    <p style="margin:0;max-width:44ch;font-size:clamp(15px,1.2vw,18px);line-height:1.5;color:#B8B5AE;text-wrap:pretty">A 360° creative agency building brands, websites and digital products — from first idea to launch and beyond.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px clamp(24px,3vw,48px);padding:clamp(40px,5vw,72px) 0;border-bottom:1px solid #262624">
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0"><span style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#FF0000">Explore</span><nav style="display:flex;flex-direction:column;gap:10px"><a href="#/solutions" style="color:#EDEAE3;text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase" style-hover="color:#FF0000">Solutions</a><a href="#/work" style="color:#EDEAE3;text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase" style-hover="color:#FF0000">Work</a><a href="#/company" style="color:#EDEAE3;text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase" style-hover="color:#FF0000">About</a><a href="#/contact" style="color:#EDEAE3;text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase" style-hover="color:#FF0000">Contact</a></nav></div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0"><span style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#FF0000">Get in touch</span><div style="display:flex;flex-direction:column;gap:10px"><a href="mailto:hello@inetwork.example" style="color:#EDEAE3;text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase" style-hover="color:#FF0000">hello@inetwork.example</a><a href="#/contact" style="display:flex;align-items:center;gap:8px;color:#EDEAE3;text-decoration:none;font-size:13px;letter-spacing:0.08em;text-transform:uppercase" style-hover="color:#FF0000">Start a project<i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:16px"></i></a></div></div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0"><span style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#FF0000">Hubs</span><div style="display:flex;flex-direction:column;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span>Cairo — EG</span><span>Dubai — AE</span><span>Riyadh — SA</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0"><span style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#FF0000">Network · Live</span><div style="display:flex;flex-direction:column;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;border-radius:999px;background:#FF0000;animation:cs2-blink 1.6s steps(1) infinite"></span>Accepting projects</span><span style="color:#B8B5AE;font-variant-numeric:tabular-nums">Cairo {{ footTime }}</span></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:{{ footCols }};align-items:center;gap:20px 24px;padding-top:24px">
+    <span style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#8A8984">© 2026 INetwork ME · All Rights Reserved</span>
+    <div style="display:flex;gap:8px;justify-self:{{ footSocAlign }}">
+      <a href="#" aria-label="LinkedIn" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid #2E2E2C;border-radius:999px;color:#EDEAE3;transition:border-color 200ms,color 200ms" style-hover="border-color:#FF0000;color:#FF0000"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"></path></svg></a>
+      <a href="#" aria-label="Instagram" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid #2E2E2C;border-radius:999px;color:#EDEAE3;transition:border-color 200ms,color 200ms" style-hover="border-color:#FF0000;color:#FF0000"><i class="iconsax" icon-name="instagram" aria-hidden="true" style="font-size:17px"></i></a>
+      <a href="#" aria-label="X" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid #2E2E2C;border-radius:999px;color:#EDEAE3;transition:border-color 200ms,color 200ms" style-hover="border-color:#FF0000;color:#FF0000"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.78zm-1.08 16.2h1.7L7.4 4.73H5.58z"></path></svg></a>
+      <a href="#" aria-label="Behance" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid #2E2E2C;border-radius:999px;color:#EDEAE3;transition:border-color 200ms,color 200ms" style-hover="border-color:#FF0000;color:#FF0000"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px"><path d="M8.2 11.3c.9-.4 1.5-1.2 1.5-2.4C9.7 6.8 8.1 6 6.1 6H1v12h5.3c2.2 0 4.1-1 4.1-3.4 0-1.5-.8-2.8-2.2-3.3zM3.4 8h2.3c.9 0 1.7.3 1.7 1.3S6.8 10.7 5.9 10.7H3.4zm2.6 8H3.4v-3.2H6c1.1 0 1.9.5 1.9 1.6S7.1 16 6 16zm11.3-8.1c-3 0-5 2.1-5 4.9 0 2.9 1.9 4.9 5 4.9 2.3 0 3.9-1 4.6-3.2h-2.4c-.3.8-1.2 1.2-2.1 1.2-1.6 0-2.4-.9-2.5-2.4H22c.2-3-1.4-5.4-4.7-5.4zm-2.4 4c.1-1.2 1-2 2.3-2 1.3 0 2 .8 2.2 2zM15 6.6h5v1.3h-5z"></path></svg></a>
+    </div>
+    <button type="button" onClick="{{ toTop }}" style="justify-self:{{ footTopAlign }};display:flex;align-items:center;gap:10px;height:40px;padding:0 16px;border:1px solid #2E2E2C;background:transparent;color:#EDEAE3;cursor:pointer;font-family:system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;transition:border-color 200ms,color 200ms" style-hover="border-color:#FF0000;color:#FF0000">Back to top <span aria-hidden="true">↑</span></button>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const RED = '#F2231A';
+const pad = (n) => String(n).padStart(2, '0');
+
+const CATS = [
+  { id: 'web-design', key: 'web', n: '01', title: 'Web design',
+    statement: 'Digital experiences built to communicate clearly, perform quickly and turn attention into action.',
+    archiveStatement: 'Digital experiences built for brands, institutions and people who need to be understood.',
+    subs: [
+      { id: 'websites', title: 'Websites', fig: 'Website hero', desc: 'Sites that explain a business in seconds and hold up under real content, real traffic and real editors.', items: ['Marketing websites', 'Corporate websites', 'Brand experiences', 'Landing pages'] },
+      { id: 'web-apps', title: 'Web apps', fig: 'Application screen', desc: 'Browser-based products where the interface is the service — built for repeated, everyday use.', items: ['Customer portals', 'Interactive platforms', 'Operational interfaces', 'Web applications'] },
+      { id: 'e-commerce', title: 'E-commerce', fig: 'Product listing', desc: 'Shopping experiences that make choosing easy and buying easier, from discovery to checkout.', items: ['E-commerce experiences', 'Product discovery', 'Conversion-focused UI', 'Commerce systems'] },
+      { id: 'government', title: 'Government', fig: 'Service portal', desc: 'Public services that work for every citizen — accessible, plain-spoken and trustworthy.', items: ['Government websites', 'Public-service platforms', 'Information portals', 'Citizen-facing services'] },
+      { id: 'healthcare', title: 'Healthcare', fig: 'Patient experience', desc: 'Calm, clear experiences for patients and departments, where every word and step matters.', items: ['Healthcare websites', 'Hospital departments', 'Patient-facing experiences', 'Medical service platforms'] },
+      { id: 'tourism', title: 'Tourism', fig: 'Destination hero', desc: 'Destination and hospitality sites that sell a feeling first, then make booking effortless.', items: ['Tourism websites', 'Hotels & resorts', 'Travel experiences', 'Destination platforms'] }
+    ] },
+  { id: 'saas', key: 'saas', n: '02', title: 'SaaS systems',
+    statement: 'Complex products designed to organise, automate and scale real-world operations.',
+    archiveStatement: 'The software behind the work — systems people rely on eight hours a day.',
+    subs: [
+      { id: 'work-management', title: 'Work management', fig: 'Project board', desc: 'Tools that let teams plan, assign and track work without the tool becoming the work.', items: ['Project management', 'Task management', 'Team collaboration', 'Time tracking'] },
+      { id: 'cms', title: 'CMS', fig: 'Editor view', desc: 'Editorial systems that give content teams structure, speed and control over what gets published.', items: ['Content management', 'Publishing workflows', 'Media management', 'Structured content'] },
+      { id: 'erp', title: 'ERP', fig: 'Operations table', desc: 'Operational backbones — finance, procurement, inventory, HR — made legible for daily use.', items: ['Finance & procurement', 'Inventory', 'HR', 'Reporting'] },
+      { id: 'crm', title: 'CRM', fig: 'Sales pipeline', desc: 'Customer systems that keep every account, deal and conversation in one reliable view.', items: ['Customer management', 'Sales pipelines', 'Accounts', 'Communication'] },
+      { id: 'healthcare', title: 'Healthcare systems', fig: 'Clinical schedule', desc: 'Clinical and administrative software designed around the realities of care delivery.', items: ['Patient management', 'Appointments', 'Medical workflows', 'Healthcare operations'] },
+      { id: 'operations', title: 'Operations', fig: 'Workflow builder', desc: 'Internal tools that replace spreadsheets and hand-offs with clear, automated workflows.', items: ['Internal tools', 'Workflow management', 'Reporting', 'Automation'] },
+      { id: 'analytics', title: 'Analytics', fig: 'Dashboard', desc: 'Dashboards and reporting that turn data into decisions instead of more questions.', items: ['Dashboards', 'Business intelligence', 'Performance reporting', 'Data visualisation'] }
+    ] }
+];
+
+const METHODS = ['Research', 'Existing experience', 'Flows & architecture', 'Competitive analysis'];
+const STAGES = ['Wireframes', 'Iterations', 'UI', 'Interactions'];
+
+const RAW = [
+  { slug: 'northwind', title: 'Northwind', category: 'web-design', subcategory: 'websites', year: '2024', client: 'Northwind Architects', role: 'Lead designer & art direction', duration: '10 weeks', liveUrl: 'https://example.com',
+    description: 'An editorial website for an architecture studio, built around large-scale photography and project stories.',
+    overview: { product: 'The public website of an architecture studio — projects, practice, people and hiring, in one editorial home.', audience: 'Prospective clients, collaborators and future hires.', role: 'Designed the site end to end and art-directed the photography edit.', context: 'The studio had outgrown a template site that made every project look the same.' },
+    problem: { intro: 'The old site buried the studio’s best work behind slow galleries and a generic structure.', points: [['Work lost in templates', 'Every project looked identical, regardless of its story.'], ['Heavy on mobile', 'Unoptimised imagery made pages slow on phones.'], ['Unclear positioning', 'Visitors couldn’t tell what the studio specialised in.']] },
+    research: { intro: 'Partner workshops clarified positioning; a content and analytics audit showed where visitors gave up.', methods: ['Workshops with the partners to define what each project should say.', 'A page-by-page audit of the existing site and image library.', 'Mapped how visitors move from a project to an enquiry.', 'Studied editorial publishers and peer studios.'] },
+    strategy: { intro: 'Treat every project like a magazine feature — inside a strict grid and a strict performance budget.', decisions: [['Editorial grid', 'A 12-column system with modular layouts per story.'], ['Images lead', 'Photography carries the narrative; text supports it.'], ['Performance budget', 'Every template designed to load fast on mobile networks.']] },
+    process: { intro: 'Layouts were prototyped with real photography from day one, so the grid was tested against actual content.' },
+    designSystem: { intro: 'A lean set of layout modules and type styles the studio combines to publish new projects without a developer.', typeface: 'Geist', palette: [['Ink', '#111111'], ['Stone', '#E8E4DC'], ['Concrete', '#A39E94'], ['Paper', '#FAF9F6']], components: ['Project hero', 'Image pair', 'Caption block', 'Index row', 'Team card'] },
+    solution: { intro: 'A site that reads like a publication and loads like a landing page.', features: [['Project stories', 'Modular layouts that fit each project’s narrative.'], ['Studio index', 'A filterable index of every project by type and year.'], ['Responsive imagery', 'Art-directed crops for every breakpoint.']] },
+    results: { type: 'qualitative', items: [['Work on its own terms', 'Each project now has a layout that fits its story.'], ['Fast everywhere', 'Pages were built around a strict performance budget.'], ['Self-publishing', 'The studio publishes new projects on its own.']] } },
+
+  { slug: 'civica', title: 'Civica', category: 'web-design', subcategory: 'government', year: '2025', client: 'Municipal client (placeholder)', role: 'Lead UX/UI designer', duration: '6 months', liveUrl: null,
+    description: 'A citizen services portal that brings permits, payments and public information into one accessible website.',
+    overview: { product: 'A single front door for a municipality’s online services — from parking permits to waste collection.', audience: 'Residents of every age and ability, and the service teams behind each form.', role: 'Led UX and UI across research, architecture and the component library.', context: 'Services were spread across a dozen department sites with different logins and language.' },
+    problem: { intro: 'Residents had to understand how the council was organised to find what they needed.', points: [['Organised by department', 'Navigation mirrored the org chart, not residents’ tasks.'], ['Inconsistent forms', 'Every service used a different pattern and tone.'], ['Accessibility gaps', 'Key journeys failed basic accessibility checks.']] },
+    research: { intro: 'Task-based research with residents and front-line staff, grounded in call-centre and search data.', methods: ['Interviews and usability sessions with residents, including assistive-technology users.', 'An audit of service pages and forms across departments.', 'Top-task analysis and a new task-based architecture.', 'Reviewed leading public-sector service standards.'] },
+    strategy: { intro: 'Organise by task, write in plain language, and let one pattern serve every service.', decisions: [['Tasks, not departments', 'Navigation built around the most common resident needs.'], ['One form pattern', 'A single step-by-step pattern for every application.'], ['Accessible by default', 'Contrast, focus and structure built into every component.']] },
+    process: { intro: 'Every journey was prototyped at low fidelity and tested with residents before any visual design.' },
+    designSystem: { intro: 'A public-sector component library covering forms, notices, navigation and content patterns.', typeface: 'Geist', palette: [['Civic ink', '#0E1A2B'], ['Paper', '#FFFFFF'], ['Civic blue', '#1F4FD1'], ['Notice', '#F2C230']], components: ['Step form', 'Notice banner', 'Service card', 'Search', 'Breadcrumb'] },
+    solution: { intro: 'One website, one account, one way of doing things.', features: [['Service finder', 'Search and task navigation that surface the right service first.'], ['Step-by-step forms', 'A consistent, save-as-you-go pattern for every application.'], ['Resident account', 'Applications, payments and messages in one place.']] },
+    results: { type: 'qualitative', items: [['One front door', 'Services previously spread across department sites share one home.'], ['A shared pattern', 'Service teams build new forms from the same components.'], ['Accessibility built in', 'Core journeys were designed and reviewed against accessibility guidelines.']] } },
+
+  { slug: 'marea', title: 'Marea', category: 'web-design', subcategory: 'tourism', year: '2025', client: 'Coastal resort (placeholder)', role: 'Web designer', duration: '12 weeks', liveUrl: null,
+    description: 'A destination website for a coastal resort that sells the stay first and makes booking effortless.',
+    overview: { product: 'The website and booking entry point for a boutique resort — rooms, dining and experiences.', audience: 'Leisure travellers planning a stay, mostly on their phones.', role: 'Designed the site, booking entry flow and photography direction.', context: 'Direct bookings were losing out to third-party travel sites.' },
+    problem: { intro: 'The old site listed facilities; it never made anyone want to go.', points: [['No sense of place', 'Generic imagery and lists of amenities.'], ['Booking hidden', 'Availability sat three clicks away, on a separate engine.'], ['Weak on mobile', 'Most visitors arrived on phones to a desktop-first layout.']] },
+    research: { intro: 'Guest interviews and a booking-funnel review showed where intent turned into drop-off.', methods: ['Interviews with recent and prospective guests.', 'A review of the site and booking-engine hand-off.', 'Mapped the path from inspiration to reservation.', 'Benchmarked hospitality and destination sites.'] },
+    strategy: { intro: 'Lead with the feeling of the place, then keep booking one tap away on every page.', decisions: [['Story first', 'Each page opens with place, not facilities.'], ['Persistent booking', 'Dates and availability reachable from anywhere.'], ['Mobile as the canvas', 'Layouts designed for the phone, then expanded.']] },
+    process: { intro: 'Mobile layouts came first, paired with a shot list so photography and design were produced together.' },
+    designSystem: { intro: 'A warm editorial system with room, offer and experience modules the resort team can update.', typeface: 'Geist', palette: [['Deep sea', '#0F2A33'], ['Sand', '#EFE6D6'], ['Terracotta', '#C0643E'], ['Foam', '#FBFAF7']], components: ['Booking bar', 'Room card', 'Experience tile', 'Offer banner', 'Gallery'] },
+    solution: { intro: 'An experience that sells the stay and steps aside when it’s time to book.', features: [['Booking bar', 'Dates and guests available on every page.'], ['Rooms & offers', 'Comparable room cards with clear inclusions.'], ['Experiences', 'Editorial pages for dining, spa and the coast.']] },
+    results: { type: 'qualitative', items: [['Booking within reach', 'Availability is one tap away from any page.'], ['A sense of place', 'Photography and copy lead with the destination.'], ['Built for phones', 'Every template was designed mobile-first.']] } },
+
+  { slug: 'halden', title: 'Halden', category: 'web-design', subcategory: 'e-commerce', year: '2024', client: 'Homeware retailer (placeholder)', role: 'Product & web designer', duration: '4 months', liveUrl: 'https://example.com',
+    description: 'A homeware store redesigned around product discovery and a calmer, faster checkout.',
+    overview: { product: 'An online store for furniture and homeware with a catalogue of several thousand products.', audience: 'Shoppers comparing considered, higher-value purchases.', role: 'Led UX and UI for discovery, product pages and checkout.', context: 'A growing catalogue had made the store harder to browse every season.' },
+    problem: { intro: 'Shoppers could find a product only if they already knew its name.', points: [['Flat navigation', 'Thousands of products under a handful of menus.'], ['Thin product pages', 'Dimensions and materials were buried.'], ['Long checkout', 'Account creation was forced before payment.']] },
+    research: { intro: 'Session reviews, shopper interviews and a catalogue audit framed discovery as the core problem.', methods: ['Interviews with recent customers and store staff.', 'An audit of navigation, filters and product pages.', 'Mapped browse, compare and checkout flows.', 'Reviewed specialist and marketplace retailers.'] },
+    strategy: { intro: 'Help people choose, not just browse — and remove every step between decision and payment.', decisions: [['Room-based discovery', 'Browse by room and style as well as by product type.'], ['Decision-ready product pages', 'Dimensions, materials and delivery up front.'], ['Guest checkout', 'Accounts offered after purchase, not before.']] },
+    process: { intro: 'Navigation was validated with tree tests before interface work; product pages were iterated with real catalogue data.' },
+    designSystem: { intro: 'A retail component set for product cards, filters, galleries and checkout steps.', typeface: 'Geist', palette: [['Charcoal', '#1B1B1A'], ['Linen', '#F3EFE8'], ['Oak', '#B48A5A'], ['White', '#FFFFFF']], components: ['Product card', 'Filter panel', 'Gallery', 'Size table', 'Checkout step'] },
+    solution: { intro: 'A store that helps people decide with confidence.', features: [['Discovery', 'Room, style and product filters that work together.'], ['Product pages', 'Everything needed to decide, close to the top.'], ['Checkout', 'A shorter, guest-first path to payment.']] },
+    results: { type: 'qualitative', items: [['Easier to browse', 'The catalogue is navigable by room, style and product.'], ['Clearer product information', 'Key details now appear above the fold.'], ['Fewer steps to buy', 'Guest checkout removed the forced account step.']] } },
+
+  { slug: 'nabdy', title: 'Nabdy', category: 'saas', subcategory: 'healthcare', year: '2026', client: 'Nabdy', role: 'Lead product designer', duration: '7 months', liveUrl: 'https://example.com',
+    description: 'A reservation and patient-management platform designed around real clinical workflows.',
+    overview: { product: 'A booking and patient-management platform that lets private clinics run appointments, records and front-desk operations from one place.', audience: 'Receptionists, clinicians and clinic managers — and patients booking from their phones.', role: 'Lead designer from discovery through launch, working directly with the founding team.', context: 'Clinics ran their day across a legacy booking tool, spreadsheets and phone calls.' },
+    problem: { intro: 'The software mirrored a database, not the way a clinic actually works.', points: [['Fragmented scheduling', 'Availability lived in three places; double-bookings were fixed by phone.'], ['Front-desk overload', 'Check-in, payment and rescheduling meant jumping between screens.'], ['Opaque patient history', 'Clinicians couldn’t see prior visits without leaving the appointment.']] },
+    research: { intro: 'The first weeks were spent inside clinics — observing front desks and mapping every hand-off.', methods: ['Shadowed receptionists and clinicians across full working days.', 'Audited the existing product screen by screen.', 'Mapped booking, check-in and follow-up end to end, workarounds included.', 'Reviewed practice-management tools for useful conventions.'] },
+    strategy: { intro: 'Design the day, not the record. Every screen answers: what does the person at the desk need to do next?', decisions: [['One timeline for the day', 'A single schedule replaced four separate calendars.'], ['Patient context everywhere', 'History, notes and payments open beside any appointment.'], ['Configurable by the clinic', 'Specialties, rooms and rules became settings, not tickets.']] },
+    process: { intro: 'Wireframes were tested at the front desk with real schedules, then refined over weekly iteration cycles.' },
+    designSystem: { intro: 'A compact component library tuned for data-dense clinical screens: clear status colours, generous targets, and states for every edge case.', typeface: 'Geist', palette: [['Ink', '#0B0B0B'], ['Surface', '#F4F3F0'], ['Clinical', '#2F6F6A'], ['Alert', '#D93A2B']], components: ['Schedule grid', 'Patient panel', 'Status tag', 'Slot picker', 'Data table'] },
+    solution: { intro: 'A calm, dense workspace built for people who use it all day.', features: [['Day view', 'A live schedule across rooms and practitioners, with drag-to-reschedule.'], ['Patient panel', 'Context-rich records from any appointment, without leaving the schedule.'], ['Patient booking', 'A mobile booking flow that reflects real availability.']] },
+    results: { type: 'qualitative', items: [['One place to run the day', 'Scheduling, check-in and payments live in a single workspace.'], ['Fewer hand-offs at the desk', 'Multi-screen tasks are handled from one view.'], ['Clinics onboard without engineering', 'New specialties are configured by clinic admins.']] } },
+
+  { slug: 'ledgerline', title: 'Ledgerline', category: 'saas', subcategory: 'erp', year: '2025', client: 'Ledgerline', role: 'Senior product designer', duration: '5 months', liveUrl: null,
+    description: 'A finance operations system giving teams one trustworthy view of cash, invoices and approvals.',
+    overview: { product: 'Ledgerline connects bank feeds, accounting tools and approval chains so finance teams can act on their numbers daily.', audience: 'Finance managers, controllers and the approvers they chase every week.', role: 'Owned the core dashboard and approvals experience alongside a second designer.', context: 'Teams exported data from four systems into spreadsheets to answer basic questions.' },
+    problem: { intro: 'By the time a report was ready, it was already out of date.', points: [['No single source of truth', 'Cash, invoices and approvals were reconciled by hand.'], ['Charts without answers', 'Dashboards showed data but not what needed action.'], ['Approval bottlenecks', 'Approvers lacked context, so requests stalled.']] },
+    research: { intro: 'Interviews showed the real job wasn’t reporting — it was knowing what to act on today.', methods: ['Interviews with controllers, CFOs and approvers.', 'Reverse-engineered the spreadsheets teams built by hand.', 'Ranked recurring tasks by frequency and pain.', 'Studied how analytics tools prioritise signals.'] },
+    strategy: { intro: 'Lead with exceptions. Show what changed and what needs you — everything else is one click deeper.', decisions: [['Exceptions first', 'Anomalies and pending actions appear before totals.'], ['Context-rich approvals', 'Every request carries its history and budget impact.'], ['Progressive detail', 'Summaries expand into full tables in place.']] },
+    process: { intro: 'Dense table layouts were stress-tested with real ledgers before the visual layer was designed.' },
+    designSystem: { intro: 'A data-visualisation layer with rules for density, number formatting and chart states.', typeface: 'Geist', palette: [['Ink', '#0B0B0B'], ['Paper', '#FFFFFF'], ['Positive', '#2E7D4F'], ['Negative', '#C4352B']], components: ['Data table', 'KPI tile', 'Approval card', 'Filter bar', 'Chart'] },
+    solution: { intro: 'A system that reads like a briefing, backed by tables that hold up to scrutiny.', features: [['Daily briefing', 'Cash position, overdue invoices and pending approvals, prioritised.'], ['Approval inbox', 'One-tap decisions with full context attached.'], ['Explorable tables', 'Filters, grouping and drill-downs for large data sets.']] },
+    results: { type: 'qualitative', items: [['Daily visibility', 'Teams check the briefing each morning instead of building reports.'], ['Better-informed approvals', 'Approvers decide with context, not follow-up emails.'], ['A clearer hierarchy', 'What needs action is always the most prominent thing on screen.']] } },
+
+  { slug: 'tempo', title: 'Tempo', category: 'saas', subcategory: 'work-management', year: '2025', client: 'Agency software (placeholder)', role: 'Product designer', duration: '6 months', liveUrl: null,
+    description: 'Project, task and time management for studios that bill by the hour.',
+    overview: { product: 'A work-management tool combining project planning, tasks and time tracking for creative studios.', audience: 'Project managers, producers and the designers logging their hours.', role: 'Designed planning, task and timesheet experiences end to end.', context: 'Studios juggled a task tool, a timesheet tool and a spreadsheet for budgets.' },
+    problem: { intro: 'Plans, tasks and time lived in separate tools, so nobody could see whether a project was on budget.', points: [['Three tools, no picture', 'Budgets were checked manually at month end.'], ['Timesheets as a chore', 'Time was logged late and inaccurately.'], ['Invisible capacity', 'Managers couldn’t see who was overloaded.']] },
+    research: { intro: 'Interviews with studio teams mapped how work is planned, done and billed.', methods: ['Interviews with producers, PMs and designers.', 'Audit of the tools and templates in use.', 'Mapped the plan → task → timesheet → invoice flow.', 'Reviewed project and time-tracking products.'] },
+    strategy: { intro: 'Connect time to tasks, and tasks to budgets — so tracking becomes a side effect of doing the work.', decisions: [['Time on the task', 'Start a timer directly from any task.'], ['Live budgets', 'Every project shows spend against plan in real time.'], ['Capacity view', 'A team-level view of workload across projects.']] },
+    process: { intro: 'Board, list and timeline views were prototyped in parallel and tested with two studios.' },
+    designSystem: { intro: 'A productivity component set: boards, rows, timers and capacity bars.', typeface: 'Geist', palette: [['Ink', '#111111'], ['Paper', '#FAFAF8'], ['Focus', '#3B5BDB'], ['Over', '#E03131']], components: ['Board column', 'Task row', 'Timer', 'Capacity bar', 'Budget meter'] },
+    solution: { intro: 'One place to plan the work, do the work and see what it costs.', features: [['Project board', 'Tasks by stage with owners and estimates.'], ['Built-in timers', 'Track time without leaving the task.'], ['Capacity planning', 'See workload before it becomes overtime.']] },
+    results: { type: 'qualitative', items: [['One tool instead of three', 'Planning, tasks and time share one model.'], ['Budgets in real time', 'Projects show spend as work happens.'], ['Visible workload', 'Managers rebalance work before deadlines slip.']] } },
+
+  { slug: 'signal', title: 'Signal', category: 'saas', subcategory: 'analytics', year: '2024', client: 'Retail analytics (placeholder)', role: 'Product designer', duration: '4 months', liveUrl: null,
+    description: 'Performance dashboards that help retail operations teams spot problems before they become trends.',
+    overview: { product: 'An analytics product for multi-store retailers, covering sales, stock and staffing performance.', audience: 'Regional managers and head-office operations teams.', role: 'Designed the dashboard framework and the reporting builder.', context: 'Managers received dozens of static reports a week and read almost none.' },
+    problem: { intro: 'There was plenty of data and very little insight.', points: [['Report overload', 'Static reports arrived weekly and went unread.'], ['No prioritisation', 'Every metric looked equally important.'], ['Slow answers', 'Follow-up questions went to an analyst queue.']] },
+    research: { intro: 'Store visits and manager interviews revealed the few questions people actually ask every week.', methods: ['Interviews with regional and store managers.', 'Audit of existing reports and their usage.', 'Mapped the path from question to answer.', 'Reviewed BI and dashboard tools.'] },
+    strategy: { intro: 'Answer the weekly questions first; let people explore only when they need to.', decisions: [['Question-led dashboards', 'Each view is built around one recurring question.'], ['Exceptions highlighted', 'Outliers are flagged, not buried in tables.'], ['Self-serve drill-down', 'Managers explore without waiting for an analyst.']] },
+    process: { intro: 'Chart types and density were tested with managers on real, anonymised store data.' },
+    designSystem: { intro: 'A chart and dashboard system with rules for colour, emphasis and comparison.', typeface: 'Geist', palette: [['Ink', '#0B0B0B'], ['Paper', '#FFFFFF'], ['Series', '#4263EB'], ['Flag', '#F2231A']], components: ['KPI tile', 'Bar chart', 'Trend line', 'Outlier flag', 'Report builder'] },
+    solution: { intro: 'Dashboards that point to what matters this week.', features: [['Weekly overview', 'The core questions answered on one screen.'], ['Outlier flags', 'Stores and products that need attention, surfaced.'], ['Report builder', 'Custom views without an analyst.']] },
+    results: { type: 'qualitative', items: [['From reports to answers', 'Managers start from questions, not spreadsheets.'], ['Problems spotted earlier', 'Outliers are visible without digging.'], ['Less analyst load', 'Routine questions are self-served.']] } }
+];
+
+const PROJECTS = RAW.map((p, i) => Object.assign({
+  id: 'p' + pad(i + 1),
+  heroImage: p.slug + '-hero',
+  thumbnail: p.slug + '-thumb',
+  gallery: [1, 2, 3, 4, 5, 6].map(k => p.slug + '-g' + k)
+}, p));
+
+// Websites archive data. Replace placeholders with real projects; slug drives #/work/websites/<slug>.
+const WEBSITE_CATEGORIES = [['corporate', 'Corporate'], ['healthcare', 'Healthcare'], ['government', 'Government'], ['tourism', 'Tourism'], ['ecommerce', 'E-commerce']];
+// Case-study content. TBD() marks copy that is a neutral placeholder (renders a "Content pending" tag).
+const TBD = (text) => ({ text, tbd: true });
+const WEBSITES = [
+  { slug: 'swut-solutions', title: 'SWUT Solutions', thumbSrc: 'assets/swut-thumb.png', category: 'corporate', year: '2026', image: null,
+    client: 'SWUT Solutions', type: 'Website / Digital Experience', services: ['UX/UI Design', 'Web Design', 'Development'],
+    description: 'The website and digital experience for SWUT Solutions, designed and developed by INetwork.',
+    previewUrl: 'https://inetwork-me.github.io/swut-html/',
+    // Storytelling — challenge (string), approach[] and solution[] accept any number of {title, text} items, outcome (string).
+    // Gallery: previewType 'live' (livePreview URL, interactive featured area) or 'image'. Items {label, image, thumbnail?, live?}; one featured area + thumbnail carousel.
+    challenge: 'SWUT Solutions had an outdated, complex website focused mainly on selling licenses for engineering software. The products and wider services were difficult to understand, so the goal was to create a clearer, more modern experience that could explain each offering and differentiate the brand.',
+    approach: [
+      { title: 'Content structure', text: 'Reorganized the website into clear categories so products and services are easier to discover.' },
+      { title: 'Product experience', text: 'Created dedicated landing pages for the four main software products.' },
+      { title: 'Purposeful motion', text: 'Used technical animations and illustrations to reinforce the subject matter throughout the experience.' },
+      { title: 'Distinctive experiences', text: 'Gave each product its own visual treatment instead of repeating one generic template.' }
+    ],
+    outcome: 'SWUT now has a modern digital experience that makes its products and services easier to understand while giving the brand a more premium and differentiated position within a competitive engineering software market.',
+    heroImage: 'swut-solutions-hero',
+    // Project preview: livePreview (embeddable public URL) renders an interactive site; otherwise imagePreview (image slot id) renders a static screenshot.
+    livePreview: 'https://inetwork-me.github.io/swut-html/',
+    imagePreview: 'swut-solutions-g1',
+    previewType: 'live',
+    gallery: [
+      { label: 'Live website', image: 'swut-solutions-g1', live: true },
+      { label: 'Full website', image: 'swut-solutions-hero' },
+      { label: 'Services', image: 'swut-solutions-g2' },
+      { label: 'Product landing page', image: 'swut-solutions-g6' },
+      { label: 'Content structure', image: 'swut-solutions-g3' },
+      { label: 'Interface details', image: 'swut-solutions-g4' },
+      { label: 'Interface details', image: 'swut-solutions-g5' },
+      { label: 'Mobile experience', image: 'swut-solutions-m1' }
+    ],
+    details: [
+      { label: 'Product experience', image: 'swut-solutions-g6' },
+      { label: 'Content structure', image: 'swut-solutions-g3' },
+      { label: 'Responsive experience', image: 'swut-solutions-m1' }
+    ],
+    nextProject: null, previousProject: null },
+  { slug: 'project-02', title: 'Project 02', category: 'healthcare', year: 'YYYY', description: 'One-line project description.', image: null },
+  { slug: 'project-03', title: 'Project 03', category: 'government', year: 'YYYY', description: 'One-line project description.', image: null },
+  { slug: 'project-04', title: 'Project 04', category: 'tourism', year: 'YYYY', description: 'One-line project description.', image: null },
+  { slug: 'project-05', title: 'Project 05', category: 'ecommerce', year: 'YYYY', description: 'One-line project description.', image: null },
+  { slug: 'project-06', title: 'Project 06', category: 'corporate', year: 'YYYY', description: 'One-line project description.', image: null }
+];
+const storyItem = (x) => (Array.isArray(x) ? { title: x[0], text: x[1] } : { title: x.title, text: x.text });
+// Fills any case-study field a project hasn't defined yet, so every archive entry renders the same template.
+const caseOf = (p) => {
+  const s = p.slug, T = (v, d) => (v == null ? TBD(d) : typeof v === 'string' ? { text: v, tbd: false } : v);
+  return Object.assign({}, p, {
+    client: p.client || p.title, type: p.type || 'Website / Digital Experience', services: p.services || ['To be confirmed'],
+    challenge: !p.challenge ? TBD('Project challenge to be added.') : typeof p.challenge === 'string' ? { text: p.challenge, tbd: false } : { text: [p.challenge.text || p.challenge.summary, p.challenge.detail].filter(Boolean).join(' '), tbd: !!p.challenge.tbd },
+    approachIntro: p.approachIntro || '',
+    approach: (p.approach || [{ title: 'Approach', text: 'Details to be added.' }, { title: 'Approach', text: 'Details to be added.' }]).map(storyItem),
+    solutionIntro: p.solutionIntro || null,
+    solution: (p.solution || [{ title: 'Deliverable', text: 'Details to be added.' }]).map(storyItem),
+    outcome: T(p.outcome, 'Outcome to be confirmed.'),
+    heroImage: p.heroImage || s + '-hero',
+    livePreview: p.livePreview || null, imagePreview: p.imagePreview || s + '-g1',
+    previewType: p.previewType || (p.livePreview ? 'live' : 'image'),
+    gallery: (p.gallery || [{ label: 'Homepage', image: s + '-g1', live: true }, { label: 'Main page', image: s + '-g2' }, { label: 'Supporting page', image: s + '-g3' }])
+      .map((g) => ({ label: g.label || g.caption || 'Screen', image: g.image || g.slot || p.imagePreview || s + '-g1', thumbnail: g.thumbnail || g.image || g.slot || s + '-g1', live: !!(g.live || g.kind === 'preview') }))
+  });
+};
+const wsCat = (id) => (WEBSITE_CATEGORIES.find(c => c[0] === id) || [id, id])[1];
+
+const ANCHORS = ['solutions', 'company', 'contact'];
+const OFFER = {
+  web: [['Websites', 'Corporate and marketing sites', 'globe'], ['Web applications', 'Portals and browser-based tools', 'code-1'], ['E-commerce', 'Stores and product discovery', 'shopping-cart'], ['Government platforms', 'Public services and portals', 'courthouse'], ['Healthcare platforms', 'Patient-facing services', 'hospital'], ['Tourism platforms', 'Hotels, travel and destinations', 'airplane']],
+  saas: [['Work management', 'Projects, tasks and time', 'task-list-square'], ['CMS', 'Content and publishing', 'note-text'], ['ERP', 'Finance, inventory and HR', 'setting-3'], ['CRM', 'Customers and pipelines', 'users'], ['Healthcare systems', 'Patients and appointments', 'heart-monitor-square'], ['Operations', 'Internal tools and automation', 'flow-chart-1'], ['Analytics', 'Dashboards and reporting', 'bar-graph-2']]
+};
+const MAIL_URL = null;
+// [grid-column, grid-row, featured] on the 4-column tile grid
+const TILE_LAYOUT = {
+  web: [['1 / span 2', '1 / span 2', true], ['3 / span 2', '1', false], ['3', '2', false], ['4', '2', false], ['1 / span 2', '3', false], ['3 / span 2', '3', false]],
+  saas: [['1 / span 2', '1 / span 2', true], ['3', '1', false], ['4', '1', false], ['3 / span 2', '2', false], ['1', '3', false], ['2', '3', false], ['3 / span 2', '3', false]]
+};
+
+const MAIL_FEATURES = [
+  ['Your domain', 'Professional addresses on your organisation’s own domain.', 'globe'],
+  ['Secure by default', 'Protection against spam, phishing and unauthorised access.', 'shield-tick'],
+  ['Central administration', 'Manage users, groups and policies from one place.', 'user-octagon'],
+  ['Any device', 'Webmail and standard protocols for desktop and mobile.', 'devices-1']
+];
+const APPROACH = [
+  ['Understand', 'How the organisation actually works.', 'search-normal-1'],
+  ['Build', 'Products and systems that fit it.', 'layers-1'],
+  ['Operate', 'Infrastructure that stays dependable.', 'cpu-setting']
+];
+
+const rng = (seed) => { let s = seed; return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; };
+const inkFor = (hex) => { const h = hex.replace('#', ''); const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16); return (r * 299 + g * 587 + b * 114) / 1000 > 150 ? '#080808' : '#F5F4F1'; };
+const clamp = (v) => Math.min(1, Math.max(0, v));
+const catOf = (id) => CATS.find(c => c.id === id);
+const countOf = (cat, sub) => PROJECTS.filter(p => p.category === cat && (!sub || p.subcategory === sub)).length;
+
+const parseRoute = () => {
+  const raw = (window.location.hash || '').replace(/^#\/?/, '');
+  const [path, q] = raw.split('?');
+  const h = path.split('/').filter(Boolean);
+  if (h[0] === 'work' && h[1] === 'websites') {
+    if (h[2] && WEBSITES.some(p => p.slug === h[2])) return { kind: 'website', slug: h[2] };
+    return { kind: 'websites' };
+  }
+  if (h[0] === 'work') {
+    const cat = catOf(h[1]);
+    if (cat && h[2] && PROJECTS.some(p => p.slug === h[2] && p.category === cat.id)) return { kind: 'detail', cat: cat.id, slug: h[2] };
+    if (cat) return { kind: 'archive', cat: cat.id, q: q || null };
+    return { kind: 'work' };
+  }
+  if (ANCHORS.includes(h[0])) return { kind: 'home', anchor: h[0] };
+  return { kind: 'home' };
+};
+const routeKey = (r) => [r.kind, r.cat || '', r.slug || ''].join('/');
+
+class Component extends DCLogic {
+  state = { route: parseRoute(), menu: false, navDark: true, scrolled: false, hover: null, cat: null, hb: null };
+  pageRef = React.createRef();
+  _ncsRoot = React.createRef();
+  ncsObserve() {
+    const el = this._ncsRoot.current; if (!el) return;
+    const show = (n) => n.setAttribute('data-shown', '');
+    if (!('IntersectionObserver' in window) || document.visibilityState === 'hidden') { el.querySelectorAll('[data-rv]').forEach(show); return; }
+    if (!this._ncsIO) this._ncsIO = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { show(e.target); this._ncsIO.unobserve(e.target); } }), { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    el.querySelectorAll('[data-rv]:not([data-shown]):not([data-obs])').forEach(n => { n.setAttribute('data-obs', ''); this._ncsIO.observe(n); });
+  }
+  newCase(wc, w) {
+    if (!wc) return null;
+    const steps = (wc.approach || []).map((s, k) => ({ t: s.title, d: s.text, n: String(k + 1).padStart(2, '0'), numInk: k % 2 ? '#FFFFFF' : '#FF0000', ml: w >= 900 ? ['0%', '38%', '12%', '46%'][k % 4] : '0%' }));
+    const S = ['Live website', 'Before & after', 'New pages'], st = this.state.ncs, i = st && st.slug === wc.slug ? st.i : 0;
+    const go = (j) => this.setState({ ncs: { slug: wc.slug, i: Math.max(0, Math.min(S.length - 1, j)) } });
+    const slide = (k) => ({ op: k === i ? '1' : '0', vis: k === i ? 'visible' : 'hidden', tf: k === i ? 'none' : k < i ? 'translateX(-4%)' : 'translateX(4%)' });
+    const tabs = S.map((label, k) => { const on = k === i; return { label, n: '0' + (k + 1), on: on ? 'true' : 'false', go: () => go(k),
+      bg: 'transparent', ink: on ? '#FFFFFF' : '#7A7A7A', rule: on ? '#FF0000' : 'transparent', num: on ? '#FF0000' : '#555555' }; });
+    const rich = !!wc.isSwut;
+    return { topPad: 'clamp(112px,12vw,160px)', rich, plain: !rich, titleA: wc.titleA, titleB: wc.titleB, year: wc.year, description: wc.description,
+      liveUrl: wc.liveUrl, liveTitle: wc.client + ' — live website', heroBg: wc.heroImg ? 'url("' + wc.heroImg + '")' : 'none', hasHero: !!wc.heroImg,
+      heroAlt: rich ? 'SWUT Solutions homepage shown on a laptop resting on dark stone' : wc.title + ' — project hero',
+      client: wc.client, type: wc.type, services: wc.servicesStr, challenge: wc.challenge.text, outcome: wc.outcome.text,
+      backHref: '#/work', backLabel: 'Work', nextHref: wc.next.href, nextTitle: wc.next.title, root: this._ncsRoot, steps, tabs,
+      s0: slide(0), s1: slide(1), s2: slide(2), prev: () => go(i - 1), next: () => go(i + 1),
+      atStart: i === 0, atEnd: i === S.length - 1, atStartOp: i === 0 ? '0.25' : '1', atEndOp: i === S.length - 1 ? '0.25' : '1',
+      count: '0' + (i + 1) + ' / 0' + S.length, stageH: w >= 900 ? 'min(82vh,820px)' : 'clamp(460px,78vh,640px)', wrap: w >= 700 ? 'nowrap' : 'wrap',
+      pagesCols: w >= 700 ? 'minmax(0,1.7fr) minmax(0,1fr)' : 'minmax(0,1fr)', pagesRows: w >= 700 ? 'repeat(2,minmax(0,1fr))' : 'repeat(3,minmax(0,1fr))', pagesAreas: w >= 700 ? '"a b" "a c"' : '"a" "b" "c"', bentoCols: w >= 900 ? 'minmax(0,1.15fr) minmax(0,1fr)' : 'minmax(0,1fr)', iconCols: w >= 1100 ? 'repeat(9,minmax(0,1fr))' : w >= 480 ? 'repeat(5,minmax(0,1fr))' : 'repeat(3,minmax(0,1fr))' };
+  }
+
+  componentDidMount() {
+    this._prevKey = routeKey(this.state.route); this._prevA = this._prevKey + '#' + (this.state.route.anchor || ''); this._prevQ = this.state.route.q;
+    this._lastW = 0;
+    this.syncW = () => { const w = document.documentElement.clientWidth || window.innerWidth; if (w !== this._lastW) { this._lastW = w; this.forceUpdate(); } };
+    [0, 80, 400].forEach(ms => setTimeout(this.syncW, ms));
+    this.onHash = () => { const r = parseRoute(), prev = this.state.route; this.setState(Object.assign({ route: r, menu: false, hover: null }, (r.kind === 'work' || r.kind === 'websites') && r.kind !== prev.kind ? { wsF: null, wsQ: '' } : null)); };
+    this.onScroll = () => { if (!this.raf) this.raf = requestAnimationFrame(() => { this.raf = 0; this.frame(); }); };
+    this.onResize = () => { this.syncW(); clearTimeout(this.rt); this.rt = setTimeout(() => { document.querySelectorAll('[data-strip]').forEach(el => { el.__s = null; }); this.frame(); }, 120); };
+    window.addEventListener('hashchange', this.onHash);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.poll = setInterval(() => { this.frame(); this.setupInternal(); this.ncsObserve(); }, 400);
+    this.clock = setInterval(() => this.forceUpdate(), 30000);
+    setTimeout(() => { this.setupReveal(); this.goAnchor(); this.frame(); }, 80);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this.onHash);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+    clearInterval(this.poll); clearInterval(this.clock); cancelAnimationFrame(this.raf);
+    if (this.io) this.io.disconnect(); if (this._ncsIO) this._ncsIO.disconnect();
+    if (this.tio) this.tio.disconnect();
+    (this._tm || []).forEach(clearTimeout);
+  }
+  componentDidUpdate() {
+    const r = this.state.route, k = routeKey(r), ak = k + '#' + (r.anchor || '');
+    if (ak !== this._prevA) {
+      const samePage = k === this._prevKey;
+      this._prevKey = k; this._prevA = ak;
+      if (!samePage) {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        const el = this.pageRef.current;
+        if (el && el.animate) el.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 480, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      }
+      setTimeout(() => { this.setupReveal(); this.goAnchor(); this.frame(); }, 80);
+    } else if (r.q !== this._prevQ) {
+      setTimeout(() => this.setupReveal(), 40);
+    }
+    this._prevQ = r.q;
+  }
+
+  goAnchor() {
+    const id = this.state.route.anchor; if (!id) return;
+    const el = document.getElementById(id); if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 40, behavior: 'smooth' });
+  }
+
+  setupInternal() {
+    const els = [...document.querySelectorAll('[data-trigger]')];
+    if (!('IntersectionObserver' in window)) { els.forEach((el) => el.classList.add('is-active')); return; }
+    if (!this.tio) this.tio = new IntersectionObserver((es) => es.forEach((e) => {
+      const vh = window.innerHeight, seen = e.intersectionRect.height;
+      if (e.isIntersecting && (e.intersectionRatio >= 0.55 || seen >= vh * 0.5)) { e.target.classList.add('is-active'); this.tio.unobserve(e.target); }
+    }), { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.55, 0.6, 0.7, 0.8, 0.9, 1], rootMargin: '0px 0px -10% 0px' });
+    els.forEach((el) => { if (!el.__ti) { el.__ti = true; this.tio.observe(el); } });
+    if (!this.iio) this.iio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-active'); this.iio.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('[data-in]').forEach((el) => { if (!el.__ii) { el.__ii = true; this.iio.observe(el); } });
+  }
+
+  setupReveal() {
+    this.setupInternal();
+    if (!this.io && 'IntersectionObserver' in window) {
+      this.io = new IntersectionObserver((entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this.io.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -6% 0px' });
+    }
+    if (!this.io) return;
+    const vh = window.innerHeight;
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      if (el.__rv) return; el.__rv = true;
+      if (el.getBoundingClientRect().top < vh) return;
+      el.style.opacity = '0'; el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 900ms cubic-bezier(.2,.7,.2,1), transform 900ms cubic-bezier(.2,.7,.2,1)';
+      this.io.observe(el);
+    });
+  }
+
+  makeCells(el, n, cells) {
+    el.textContent = '';
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < n; i++) { const d = document.createElement('div'); frag.appendChild(d); cells.push(d); }
+    el.appendChild(frag);
+  }
+  buildStrip(el) {
+    const kind = el.getAttribute('data-strip'), w = el.clientWidth;
+    const size = w < 700 ? 20 : 28, cols = Math.max(8, Math.round(w / size)), cs = w / cols;
+    const rows = kind === 'hero' ? 6 : 5;
+    el.style.gridTemplateColumns = 'repeat(' + cols + ', ' + cs + 'px)';
+    el.style.gridAutoRows = cs + 'px'; el.style.height = (rows * cs) + 'px';
+    const rand = rng(kind === 'hero' ? 20260927 : 1122334), els = []; this.makeCells(el, rows * cols, els);
+    const list = [];
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const depth = rows > 1 ? r / (rows - 1) : 1, j = rand(), k = rand(), q = rand();
+      let a = 'transparent', b;
+      if (kind === 'hero') {
+        if (j < 0.1 + 0.82 * Math.pow(depth, 1.35)) a = k < 0.12 ? RED : k < 0.58 ? '#F5F4F1' : '#1C1C1C';
+        b = '#F5F4F1';
+      } else {
+        if (j < 0.06 + 0.94 * Math.pow(1 - depth, 1.3)) a = k < 0.05 ? RED : k < 0.9 ? '#F5F4F1' : '#1C1C1C';
+        b = 'transparent';
+      }
+      const d = els[r * cols + c]; d.style.transition = 'background-color 110ms linear'; d.style.background = a;
+      list.push({ el: d, a, b, key: (1 - depth) * 0.7 + q * 0.3 });
+    }
+    list.sort((x, y) => x.key - y.key);
+    el.__s = { cells: list, lit: 0, w, kind, rows };
+  }
+  strips(vh) {
+    document.querySelectorAll('[data-strip]').forEach((el) => {
+      if (el.clientWidth < 10) return;
+      const want = el.getAttribute('data-strip') === 'hero' ? 6 : 5;
+      if (!el.__s || Math.abs(el.__s.w - el.clientWidth) > 1 || el.__s.rows !== want || el.children.length !== el.__s.cells.length) this.buildStrip(el);
+      const s = el.__s, r = el.getBoundingClientRect();
+      const t = s.kind === 'hero' ? clamp((vh - r.bottom) / (vh * 0.7)) : clamp((vh * 0.85 - r.top) / (vh * 0.6));
+      const target = Math.round(t * s.cells.length);
+      if (target > s.lit) for (let i = s.lit; i < target; i++) s.cells[i].el.style.background = s.cells[i].b;
+      else if (target < s.lit) for (let i = target; i < s.lit; i++) s.cells[i].el.style.background = s.cells[i].a;
+      s.lit = target;
+    });
+  }
+  frame() {
+    try {
+      const vh = window.innerHeight;
+      this.strips(vh);
+      this.railUpdate(vh);
+      let dark = this.state.navDark;
+      const secs = document.querySelectorAll('[data-theme]');
+      for (let i = 0; i < secs.length; i++) { const b = secs[i].getBoundingClientRect(); if (b.top <= 34 && b.bottom > 34) { dark = secs[i].getAttribute('data-theme') === 'dark'; break; } }
+      const scrolled = (window.scrollY || document.documentElement.scrollTop) > 24;
+      if (dark !== this.state.navDark || scrolled !== this.state.scrolled) this.setState({ navDark: dark, scrolled });
+    } catch (e) { console.error('frame: ' + (e && e.message)); }
+  }
+
+  card(p) {
+    const cat = catOf(p.category), si = cat.subs.findIndex(s => s.id === p.subcategory), on = this.state.hover === p.slug;
+    return {
+      slug: p.slug, title: p.title, year: p.year, description: p.description, thumb: p.thumbnail,
+      href: '#/work/' + p.category + '/' + p.slug, catTitle: cat.title, subTitle: cat.subs[si].title,
+      subLabel: cat.n + '.' + (si + 1) + ' — ' + cat.subs[si].title,
+      scale: on ? 1.03 : 1, arrowOp: on ? 1 : 0, shift: on ? 'translateX(10px)' : 'none',
+      enter: () => this.setState({ hover: p.slug }), leave: () => this.setState({ hover: null })
+    };
+  }
+
+  list(key, light) {
+    const cur = this.state.cat, any = cur && cur.k === key, narrow = (document.documentElement.clientWidth || 1200) < 700;
+    const L = TILE_LAYOUT[key];
+    return OFFER[key].map(([title, , icon], i) => {
+      const on = any && cur.i === i, [col, row, big] = narrow ? [L[i][2] || (key === 'web' && i === 1) ? 'span 2' : 'span 1', 'auto', L[i][2]] : L[i];
+      return {
+        title, icon, col, row, href: key === 'web' && title === 'Websites' ? '#/work/websites' : '#/contact',
+        pad: big ? 'clamp(20px,2.2vw,32px)' : 'clamp(16px,1.6vw,22px)',
+        size: big ? 'clamp(20px,1.9vw,28px)' : '16px',
+        iconSize: big ? '36px' : '24px',
+        bg: on ? (light ? '#F5F4F1' : '#141414') : (light ? '#FFFFFF' : '#0B0B0B'),
+        iconColor: on ? '#F2231A' : (light ? '#080808' : '#F5F4F1'),
+        arrow: on ? '#F2231A' : (light ? '#A9A7A1' : '#5A5955'),
+        lift: on ? 'translateY(-2px)' : 'none', shift: on ? 'translateX(5px)' : 'none',
+        bar: on ? 'scaleX(1)' : 'scaleX(0)',
+        on: () => this.setState({ cat: { k: key, i } }),
+        off: () => this.setState(s => (s.cat && s.cat.k === key && s.cat.i === i ? { cat: null } : null))
+      };
+    });
+  }
+  head(key, light) {
+    const on = this.state.cat && this.state.cat.k === key;
+    return { num: on ? '#F2231A' : (light ? '#C4C2BB' : '#3A3A38'), icon: on ? '#F2231A' : (light ? '#080808' : '#F5F4F1'), rule: on ? '#F2231A' : (light ? '#D8D6D0' : '#2A2A28') };
+  }
+
+  websites(route, w) {
+    const q = (this.state.wsQ || '').trim().toLowerCase(), f = this.state.wsF || null;
+    const match = (p) => (!f || p.category === f) && (!q || [p.title, wsCat(p.category), p.year, p.description].join(' ').toLowerCase().includes(q));
+    const list = WEBSITES.filter(match);
+    const rows = list.map((p) => {
+      const n = pad(WEBSITES.indexOf(p) + 1), on = this.state.wsH === p.slug;
+      return { n, slug: p.slug, title: p.title, cat: wsCat(p.category), year: p.year, description: p.description,
+        href: '#/work/websites/' + p.slug, slot: 'ws-' + p.slug, hasThumb: !!p.thumbSrc, noThumb: !p.thumbSrc, thumbBg: p.thumbSrc ? 'url("' + p.thumbSrc + '")' : 'none',
+        rule: on ? '#080808' : '#D8D6D0', bg: on ? '#FFFFFF' : '#FBFAF8',
+        shift: on ? 'translateX(6px)' : 'none', arrow: on ? 'translateX(5px)' : 'none', ink: on ? '#F2231A' : '#080808',
+        px1: on ? '#F2231A' : 'transparent', px2: on ? '#080808' : 'transparent',
+        prevFilter: on ? 'none' : 'grayscale(1)', prevOp: on ? '1' : '0.72',
+        on: () => this.setState({ wsH: p.slug }), off: () => this.setState(s => (s.wsH === p.slug ? { wsH: null } : null)) };
+    });
+    const filters = [[null, 'All']].concat(WEBSITE_CATEGORIES).map(([id, label]) => {
+      const on = f === id, hov = this.state.wsFH === (id || 'all'), show = on || hov;
+      return { label, pressed: on ? 'true' : 'false', weight: on ? '600' : '500', ink: show ? '#080808' : '#8A8984',
+        dotW: show ? '6px' : '0px', dotGap: show ? '10px' : '0px', dotOp: show ? (on ? '1' : '0.6') : '0', dotX: show ? 'none' : 'translateX(-4px)',
+        pick: () => this.setState({ wsF: id }), on: () => this.setState({ wsFH: id || 'all' }), off: () => this.setState(s => (s.wsFH === (id || 'all') ? { wsFH: null } : null)) };
+    });
+    const cur = route.kind === 'website' ? WEBSITES.find(p => p.slug === route.slug) : null;
+    return { ws: {
+      count: pad(WEBSITES.length) + ' projects', shown: pad(list.length) + ' / ' + pad(WEBSITES.length),
+      isAll: route.kind === 'work', isCat: route.kind !== 'work',
+      rows, filters, hasRows: list.length > 0, empty: list.length === 0,
+      q: this.state.wsQ || '', onSearch: (e) => this.setState({ wsQ: e.target.value }), reset: () => this.setState({ wsQ: '', wsF: null }),
+      desk: w >= 1000, compact: w < 1000, tablet: w >= 640 && w < 1000,
+      cur: cur ? { n: pad(WEBSITES.indexOf(cur) + 1), title: cur.title, cat: wsCat(cur.category) } : { n: '', title: '', cat: '' }
+    } };
+  }
+
+  railUpdate(vh) {
+    const A = document.querySelector('[data-rail-a]'), B = document.querySelector('[data-rail-b]'), art = document.querySelector('[data-case]');
+    if (!A || !B || !art) { this._rail = null; return; }
+    const secs = [...art.querySelectorAll('[data-rail]')]; if (!secs.length) return;
+    const ar = art.getBoundingClientRect(), total = Math.max(1, art.offsetHeight - vh), L = A.clientHeight;
+    const p = clamp(-ar.top / total), fr = secs.map(s => clamp((s.getBoundingClientRect().top - ar.top) / total));
+    let act = 0; secs.forEach((s, i) => { if (s.getBoundingClientRect().top <= vh * 0.45) act = i; });
+    const q = (el, k) => el.querySelector('[data-r="' + k + '"]');
+    q(A, 'fill').style.transform = 'scaleY(' + p.toFixed(4) + ')';
+    const sig = secs.length + ':' + L + ':' + fr.map(x => x.toFixed(3)).join(',');
+    if (!this._rail || this._rail.sig !== sig) {
+      const t = q(A, 'ticks'); t.textContent = '';
+      fr.forEach(x => { const d = document.createElement('div'); d.style.cssText = 'position:absolute;left:10px;width:7px;height:1px;background:#F5F4F1;opacity:0.5;top:' + Math.round(x * L) + 'px'; t.appendChild(d); });
+      this._rail = Object.assign(this._rail || { act: -1 }, { sig });
+    }
+    const top = Math.round(Math.min(fr[act] * L, L - 17));
+    const mark = q(B, 'mark'), title = q(A, 'title');
+    mark.style.top = (top - 8) + 'px'; title.style.top = (top - 8) + 'px';
+    if (this._rail.act !== act) {
+      const first = this._rail.act === -1; this._rail.act = act;
+      mark.textContent = pad(act); title.textContent = secs[act].getAttribute('data-rail');
+      if (!first && title.animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        title.animate([{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }, { opacity: 1, clipPath: 'inset(0 0 0 0)' }], { duration: 520, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
+        mark.animate([{ transform: 'scale(0.6)' }, { transform: 'scale(1.15)', offset: 0.6 }, { transform: 'none' }], { duration: 420, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
+      }
+    }
+  }
+
+  btn(k, solid) {
+    const on = this.state.hb === k;
+    return { bg: solid ? (on ? '#F2231A' : '#F5F4F1') : 'transparent', rule: solid ? (on ? '#F2231A' : '#D8D6D0') : (on ? '#F2231A' : '#3A3A38'),
+      sweep: on ? 'scaleX(1)' : 'scaleX(0)', ink: solid ? (on ? '#FFFFFF' : '#080808') : (on ? '#F2231A' : '#F5F4F1'),
+      shift: on ? 'translateX(5px)' : 'none', px1: on ? (solid ? '#080808' : '#F2231A') : 'transparent', px2: on ? '#F5F4F1' : 'transparent',
+      on: () => this.setState({ hb: k }), off: () => this.setState(s => (s.hb === k ? { hb: null } : null)) };
+  }
+
+  caseStudy(route, w) {
+    if (route.kind !== 'website') return null;
+    const raw = WEBSITES.find(x => x.slug === route.slug); if (!raw) return null;
+    const p = caseOf(raw), i = WEBSITES.indexOf(raw), N = WEBSITES.length;
+    const nx = (p.nextProject && WEBSITES.find(x => x.slug === p.nextProject)) || WEBSITES[(i + 1) % N];
+    const mob = w < 700, ms = (v) => v + 'ms', hasPreview = !!p.previewUrl;
+    const host = (u) => { try { const x = new URL(u); return x.host + x.pathname.replace(/\/$/, ''); } catch (e) { return u; } };
+    const desk = w >= 900, tab = w >= 640;
+    const liveP = p.previewType === 'live' && !!p.livePreview;
+    const G = p.gallery.map(g => Object.assign({}, g, { live: liveP && g.live }));
+    if (liveP && !G.some(g => g.live)) G.unshift({ label: 'Live website', image: p.imagePreview, thumbnail: p.imagePreview, live: true });
+    const gst = this.state.gal, gi = gst && gst.slug === p.slug ? Math.min(gst.i, G.length - 1) : 0, cur = G[gi] || { label: 'Screen', image: p.imagePreview, live: liveP };
+    this._stripRef = this._stripRef || React.createRef();
+    const go = (i) => { const j = Math.max(0, Math.min(G.length - 1, i)); if (j === gi) return;
+      this.setState({ gal: { slug: p.slug, i: j } }, () => { const el = this._stripRef.current, t = el && el.querySelectorAll('[data-thumb]')[j];
+        if (t) el.scrollTo({ left: t.offsetLeft - (el.clientWidth - t.offsetWidth) / 2, behavior: 'smooth' }); }); };
+    const gal = { isLive: liveP, live: liveP ? p.livePreview : '', showLive: !!cur.live, liveDisp: cur.live ? 'block' : 'none', imgDisp: cur.live ? 'none' : 'block',
+      slot: cur.image, label: cur.label, bar: cur.live ? host(p.livePreview) : cur.label, count: pad(gi + 1) + ' / ' + pad(G.length),
+      h: desk ? 'min(clamp(420px,46vw,680px),74vh)' : 'clamp(340px,62vh,560px)', hasStrip: G.length > 1, stripRef: this._stripRef,
+      prevOn: gi > 0, prevOff: gi === 0, nextOn: gi < G.length - 1, nextOff: gi >= G.length - 1, prev: () => go(gi - 1), next: () => go(gi + 1),
+      items: G.map((g, k) => { const a = k === gi; return { n: pad(k + 1), label: g.label, thumb: g.thumbnail || g.image, active: a, pick: () => go(k),
+        ring: a ? '#F2231A' : 'transparent', ink: a ? '#F5F4F1' : '#8A8984', num: a ? '#F2231A' : '#5C5B57' }; }) };
+    const nS = p.solution.length;
+    const sol = p.solution.map((s, k) => ({ title: s.title, text: s.text, n: pad(k + 1) }));
+    const solCols = w >= 1100 ? 'repeat(' + (nS === 4 || nS === 2 ? 2 : Math.min(nS, 3)) + ',minmax(0,1fr))' : tab ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)';
+    const hov = (k) => this.state.hb === k, on = (k) => () => this.setState({ hb: k }), off = (k) => () => this.setState(s => (s.hb === k ? { hb: null } : null));
+    const nOn = hov('csNext'), bOn = hov('csBack');
+    return {
+      rail: w >= 1280, n: pad(i + 1), total: pad(N), title: p.title, year: p.year, type: p.type, description: p.description,
+      titleLines: p.title.split(' ').map((t, k, arr) => ({ t, delay: ms(80 + k * 120), indent: desk && k % 2 === 1 ? '16.66%' : '0', last: k === arr.length - 1 })),
+      g12: desk ? 'repeat(12,minmax(0,1fr))' : 'minmax(0,1fr)',
+      sp: ((d) => { const f = (v) => d ? v : '1 / -1'; return { hDesc: f('1 / span 5'), hMeta: f('7 / -1'), chHead: f('1 / span 6'), chText: f('8 / -1'),
+        cx: f('1 / span 6'), arrow: f('7 / span 1'), cl: f('8 / -1'), dA: f('1 / span 8'), dB: f('10 / span 3'), dBTop: d ? 'clamp(120px,14vw,240px)' : '0',
+        dC: d ? '5 / span 3' : '1 / -1', oHead: f('1 / span 5'), oText: f('6 / -1'), oPad: d ? 'clamp(40px,4vw,64px)' : '0' }; })(desk),
+      complex: 'Complex'.split('').map((c, k) => ({ c, y: ['0em', '-0.22em', '0.14em', '-0.08em', '0.26em', '-0.18em', '0.06em'][k] || '0em', ink: k === 3 ? '#8A8984' : '#B4B3AE' })),
+      pix: Array.from({ length: 12 }, (_, k) => k === 11 ? '#F2231A' : k >= 8 ? '#080808' : 'transparent'),
+      ...((D) => ({ hasDetails: D.length >= 3, d1: D[0] || {}, d2: D[1] || {}, d3: D[2] || {} }))(p.details || G.filter(g => !g.live).slice(-3)),
+      previewUrl: p.previewUrl || '', hasPreview, noPreview: !hasPreview,
+      meta: [['Client', [p.client]], ['Type', [p.type]], ['Services', p.services]].map(([k, vals]) => ({ k, vals })),
+      heroCols: w >= 1000 ? 'minmax(0,7fr) minmax(0,5fr)' : 'minmax(0,1fr)',
+      split: w >= 900 ? 'minmax(0,4fr) minmax(0,8fr)' : 'minmax(0,1fr)',
+      appRow: w >= 900 ? 'minmax(0,1.3fr) minmax(0,3.2fr) minmax(0,5fr)' : 'minmax(0,1fr)',
+      appTextCol: w >= 900 ? 'auto' : '1 / -1', solCols,
+      ctaCols: w >= 1000 ? 'minmax(0,2fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      navCols: w >= 800 ? 'minmax(0,1fr) minmax(0,2fr)' : 'minmax(0,1fr)',
+      challenge: p.challenge,
+      outcome: p.outcome, approachIntro: p.approachIntro, hasApproachIntro: !!p.approachIntro,
+      solutionIntro: p.solutionIntro || 'What INetwork delivered for ' + p.title + '.',
+      isSwut: p.slug === 'swut-solutions', slug: p.slug,
+      titleA: p.title.split(' ')[0], titleB: p.title.split(' ').slice(1).join(' '), client: p.client, servicesStr: (p.services || []).join(', '),
+      liveUrl: p.livePreview || p.previewUrl || '', heroImg: p.slug === 'swut-solutions' ? 'assets/swut-macbook.png' : (p.heroSrc || ''),
+      approach: p.approach.map((a, k) => Object.assign({}, a, { n: pad(k + 1), delay: ms(k * 100) , icon: ['hierarchy-3','monitor','mouse','magic-star'][k] || null, col: desk ? ['1 / span 8', '4 / span 9', '2 / span 8', '5 / span 8'][k % 4] : '1 / -1' })),
+      solution: sol,
+      gal, galleryCount: pad(G.length) + ' screens',
+      btnA: this.btn('csA', false), btnB: this.btn('csB', true),
+      back: { bg: bOn ? '#141414' : '#0B0B0B', ink: bOn ? '#F2231A' : '#8A8984', arrow: bOn ? 'translateX(-5px)' : 'none', on: on('csBack'), off: off('csBack') },
+      next: { href: '#/work/websites/' + nx.slug, title: nx.title, n: pad(WEBSITES.indexOf(nx) + 1), cat: wsCat(nx.category), year: nx.year,
+        bg: nOn ? '#141414' : '#0B0B0B', ink: nOn ? '#F2231A' : '#8A8984', arrow: nOn ? 'translateX(5px)' : 'none', shift: nOn ? 'translateX(8px)' : 'none',
+        px1: nOn ? '#F2231A' : 'transparent', px2: nOn ? '#F5F4F1' : 'transparent', on: on('csNext'), off: off('csNext') }
+    };
+  }
+
+  renderVals() {
+    const { route, menu, navDark, scrolled } = this.state;
+    const w = document.documentElement.clientWidth || window.innerWidth || 1200;
+    const isMobile = w < 900, wide = w >= 1000;
+    const menuOpen = isMobile && menu, dark = menuOpen || navDark;
+
+    const navItems = [
+      ['Solutions', '#/solutions', route.anchor === 'solutions'],
+      ['Work', '#/work', ['work', 'archive', 'detail', 'websites', 'website'].includes(route.kind)],
+      ['About', '#/company', route.anchor === 'company'],
+      ['Contact', '#/contact', route.anchor === 'contact']
+    ].map(([label, href, on]) => ({ label, href, op: on ? 1 : 0.62, dot: on ? RED : 'transparent' }));
+
+    const W = CATS[0], S = CATS[1];
+
+
+    let arc = null;
+    if (route.kind === 'archive') {
+      const cat = catOf(route.cat), q = route.q && cat.subs.some(s => s.id === route.q) ? route.q : null;
+      const list = PROJECTS.filter(p => p.category === cat.id && (!q || p.subcategory === q)).map(p => this.card(p));
+      const rows = []; let i = 0, full = true;
+      while (i < list.length) {
+        if (full || i === list.length - 1) { rows.push({ min: '100%', ratio: '21/9', items: [list[i]] }); i += 1; }
+        else { rows.push({ min: '420px', ratio: '4/3', items: [list[i], list[i + 1]] }); i += 2; }
+        full = !full;
+      }
+      const other = CATS.find(c => c.id !== cat.id);
+      arc = {
+        n: cat.n, title: cat.title, statement: cat.archiveStatement, rows, empty: !list.length,
+        px: cat.key + ':0:dark', disciplines: pad(cat.subs.length) + ' disciplines',
+        countLabel: 'Showing ' + pad(list.length) + ' / ' + pad(countOf(cat.id)),
+        filters: [{ id: null, label: 'All', count: countOf(cat.id), href: '#/work/' + cat.id }]
+          .concat(cat.subs.map(s => ({ id: s.id, label: s.title, count: countOf(cat.id, s.id), href: '#/work/' + cat.id + '?' + s.id })))
+          .map(f => ({ label: f.label, href: f.href, count: pad(f.count), color: f.id === q ? '#080808' : (f.count ? '#5C5B57' : '#A9A7A1'), dot: f.id === q ? RED : 'transparent' })),
+        other: { n: other.n, title: other.title, href: '#/work/' + other.id }
+      };
+    }
+
+
+    let cs = null;
+    if (route.kind === 'detail') {
+      const p = PROJECTS.find(x => x.slug === route.slug), cat = catOf(p.category);
+      const inCat = PROJECTS.filter(x => x.category === cat.id), i = inCat.indexOf(p), nx = inCat[(i + 1) % inCat.length];
+      const si = cat.subs.findIndex(s => s.id === p.subcategory);
+      const num = (arr) => arr.map(([t, d], k) => ({ n: pad(k + 1), i: k + 1, t, d }));
+      cs = Object.assign({}, p, {
+        n: pad(i + 1), total: pad(inCat.length), catTitle: cat.title, catHref: '#/work/' + cat.id,
+        subTitle: cat.subs[si].title, code: cat.n + '.' + (si + 1), px: cat.key + ':' + (si + 1) + ':dark',
+        meta: [['Client', p.client], ['Role', p.role], ['Year', p.year], ['Duration', p.duration], ['Discipline', cat.title + ' / ' + cat.subs[si].title]].map(([k, v]) => ({ k, v })),
+        problemPoints: num(p.problem.points),
+        methods: METHODS.map((t, k) => ({ n: pad(k + 1), t, d: p.research.methods[k] })),
+        decisions: num(p.strategy.decisions),
+        stages: STAGES.map((t, k) => ({ n: pad(k + 1), t, tag: '[ ' + t.toUpperCase() + ' ]', img: p.slug + '-design-' + (k + 1) })),
+        palette: p.designSystem.palette.map(([name, hex]) => ({ name, hex, ink: inkFor(hex) })),
+        components: p.designSystem.components.map((c, k) => ({ n: pad(k + 1), c })),
+        features: num(p.solution.features).map(f => Object.assign(f, { img: p.slug + '-feat-' + f.i })),
+        results: num(p.results.items), qualitative: p.results.type === 'qualitative',
+        g: { full: p.gallery[0], a: p.gallery[1], b: p.gallery[2], m1: p.gallery[3], m2: p.gallery[4], m3: p.gallery[5] },
+        hasLive: !!p.liveUrl, nextNum: p.liveUrl ? '11' : '10',
+        next: this.card(nx)
+      });
+    }
+
+    return {
+      pageRef: this.pageRef,
+      isWebsites: route.kind === 'websites' || route.kind === 'work', isWebsite: route.kind === 'website', ...this.websites(route, w),
+      isHome: route.kind === 'home', isArchive: route.kind === 'archive', isDetail: route.kind === 'detail',
+      isMobile, desktopNav: !isMobile, wide, menuOpen, menuLabel: menuOpen ? 'Close' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      navItems,
+      navColor: dark ? '#F5F4F1' : '#080808',
+      navBg: menuOpen || !scrolled ? 'transparent' : dark ? 'rgba(8,8,8,0.74)' : 'rgba(245,244,241,0.82)',
+      navRule: menuOpen || !scrolled ? 'transparent' : dark ? '#1E1E1E' : '#D8D6D0',
+      webList: this.list('web', true).map((r, i) => ({ ...r, delay: (250 + i * 140) + 'ms' })), saasList: this.list('saas', false).map((r, i) => ({ ...r, delay: (250 + (OFFER.web.length + i) * 140) + 'ms' })),
+      saasStart: (200 + OFFER.web.length * 140) + 'ms',
+      webHead: this.head('web', true), saasHead: this.head('saas', false),
+      tileCols: w < 700 ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))',
+      heroBtn: (() => {
+        const mk = (k, solid) => { const on = this.state.hb === k; return {
+          bg: solid ? (on ? '#F2231A' : '#F5F4F1') : 'transparent',
+          rule: solid ? (on ? '#F2231A' : '#D8D6D0') : (on ? '#F2231A' : '#3A3A38'),
+          sweep: on ? 'scaleX(1)' : 'scaleX(0)',
+          ink: solid ? (on ? '#FFFFFF' : '#080808') : (on ? '#F2231A' : '#F5F4F1'),
+          shift: on ? 'translateX(5px)' : 'none', px1: on ? (solid ? '#080808' : '#F2231A') : 'transparent', px2: on ? '#F5F4F1' : 'transparent',
+          on: () => this.setState({ hb: k }), off: () => this.setState(s => (s.hb === k ? { hb: null } : null)) }; };
+        return { a: mk('a', true), b: mk('b', false) };
+      })(),
+      ctaPixels: '..#.....|.#.#..#.|..#.#.#r|...#.#rr'.split('|').join('').split('').map((c, i) => ({
+        c: c === 'r' ? '#F2231A' : c === '#' ? '#2A2A28' : 'transparent',
+        anim: 'cta-px-' + (c === 'r' ? 'r' : c === '#' ? 'k' : 'e') + ' 700ms ease ' + (150 + (i % 8) * 110 + Math.floor(i / 8) * 40) + 'ms' })),
+      ctaArrow: this.state.ctaHov ? 'translateX(5px)' : 'none',
+      ctaPx1: this.state.ctaHov ? '#080808' : 'transparent', ctaPx2: this.state.ctaHov ? '#F5F4F1' : 'transparent',
+      ctaOn: () => this.setState({ ctaHov: true }), ctaOff: () => this.setState({ ctaHov: false }),
+      ...(() => {
+        const HW = [['01','Understand','The organisation, users, workflows and requirements.','search-normal-1'],['02','Build','The right digital products and systems.','layers-1'],['03','Operate','Evolving, useful and reliable over time.','cpu-setting']];
+        const look = [
+          { numSize:'clamp(20px,1.6vw,24px)', iconSize:'clamp(28px,2.4vw,36px)', size:'clamp(28px,3.2vw,54px)', node:'14px', half:'7px' },
+          { numSize:'clamp(28px,2.6vw,40px)', iconSize:'clamp(36px,3.4vw,52px)', size:'clamp(40px,5.4vw,96px)', node:'24px', half:'12px' },
+          { numSize:'clamp(22px,2vw,30px)', iconSize:'clamp(30px,2.8vw,42px)', size:'clamp(32px,4.2vw,72px)', node:'18px', half:'9px' }];
+        const list = HW.map(([n, t, d, icon], i) => ({ n, t, d, icon, ...look[i] }));
+        return { hwWide: w >= 820, hwNarrow: w < 820, hw1: list[0], hw2: list[1], hw3: list[2] };
+      })(),
+      arc, cs, ...((wc) => ({ wc, ncs: this.newCase(wc, w) }))(this.caseStudy(route, w)), showContact: route.kind !== 'website',
+      footCols: w >= 800 ? 'minmax(0,1fr) auto minmax(0,1fr)' : 'minmax(0,1fr)', footSocAlign: w >= 800 ? 'center' : 'start', footTopAlign: w >= 800 ? 'end' : 'start',
+      footTime: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Cairo' }),
+      toTop: () => window.scrollTo({ top: 0, behavior: 'smooth' })
+    };
+  }
+}
+</script>
+</body>
+</html>
