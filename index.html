@@ -71,6 +71,13 @@ button{font:inherit}
 [data-shown] [data-wipe],[data-shown][data-wipe]{animation:cs2-wipe 1100ms cubic-bezier(0.77,0,0.18,1) both}
 [data-shown] [data-draw] path{animation:cs2-draw 900ms cubic-bezier(0.65,0,0.35,1) both;animation-delay:inherit}
 @media (prefers-reduced-motion:reduce){[data-up],[data-fade],[data-wipe]{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}[data-draw] path{stroke-dashoffset:0!important;animation:none!important}}
+@keyframes cs2-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes cs2-grow-y{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+[data-grow]{transform:scaleX(0);transform-origin:left center}
+[data-grow-y]{transform:scaleY(0);transform-origin:center top}
+[data-shown] [data-grow]{animation:cs2-grow 900ms cubic-bezier(0.65,0,0.35,1) both}
+[data-shown] [data-grow-y]{animation:cs2-grow-y 900ms cubic-bezier(0.65,0,0.35,1) both}
+@media (prefers-reduced-motion:reduce){[data-grow],[data-grow-y]{animation:none!important;transform:none!important}}
 </style>
 </helmet>
 <div style="font-family:'Geist',system-ui,sans-serif;color:#080808;background:#F5F4F1;overflow-x:clip;min-height:100vh">
@@ -173,7 +180,7 @@ button{font:inherit}
         </div>
         <div style="flex:1;display:grid;grid-template-columns:{{ tileCols }};grid-auto-rows:minmax(clamp(104px,9vw,136px),1fr);gap:1px;background:#262626;animation:sol-grid-d 1800ms ease {{ saasStart }}" data-play="">
           <sc-for list="{{ saasList }}" as="r" hint-placeholder-count="7">
-            <a href="#/contact" onMouseEnter="{{ r.on }}" onMouseLeave="{{ r.off }}" onFocus="{{ r.on }}" onBlur="{{ r.off }}" style="position:relative;overflow:hidden;grid-column:{{ r.col }};grid-row:{{ r.row }};display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:{{ r.pad }};background:{{ r.bg }};color:#F5F4F1;outline:none;transition:background-color 250ms ease-out" style-hover="color:#F5F4F1">
+            <a href="{{ r.href }}" onMouseEnter="{{ r.on }}" onMouseLeave="{{ r.off }}" onFocus="{{ r.on }}" onBlur="{{ r.off }}" style="position:relative;overflow:hidden;grid-column:{{ r.col }};grid-row:{{ r.row }};display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:{{ r.pad }};background:{{ r.bg }};color:#F5F4F1;outline:none;transition:background-color 250ms ease-out" style-hover="color:#F5F4F1">
               <span aria-hidden="true" style="position:absolute;left:0;top:0;right:0;height:2px;background:#F2231A;transform:{{ r.bar }};transform-origin:left center;transition:transform 250ms ease-out"></span>
               <span aria-hidden="true" data-play="" style="position:absolute;left:0;top:0;right:0;height:2px;background:#F2231A;transform:scaleX(0);pointer-events:none;animation:sol-sweep 900ms cubic-bezier(0.22, 1, 0.36, 1) {{ r.delay }} both"></span>
               <span style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
@@ -264,7 +271,7 @@ button{font:inherit}
   <section data-theme="dark" data-screen-label="Websites — Hero" style="background:#080808;color:#F5F4F1;padding:120px clamp(16px,3vw,48px) clamp(48px,5vw,80px)">
     <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid #262626;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8984">
       <sc-if value="{{ ws.isAll }}" hint-placeholder-val="{{ false }}"><span style="color:#F5F4F1">Work</span></sc-if>
-      <sc-if value="{{ ws.isCat }}" hint-placeholder-val="{{ true }}"><a href="#/work" style="color:#8A8984" style-hover="color:#F5F4F1">Work</a><span>/</span><span style="color:#F5F4F1">Websites</span></sc-if>
+      <sc-if value="{{ ws.isCat }}" hint-placeholder-val="{{ true }}"><a href="#/work" style="color:#8A8984" style-hover="color:#F5F4F1">Work</a><span>/</span><span style="color:#F5F4F1">{{ ws.label }}</span></sc-if>
     </nav>
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px 48px;margin-top:clamp(48px,7vw,112px)">
       <div style="display:flex;flex-direction:column;gap:24px;min-width:0">
@@ -274,10 +281,10 @@ button{font:inherit}
         </div>
         <sc-if value="{{ ws.isAll }}" hint-placeholder-val="{{ false }}"><h1 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(52px,11vw,200px);line-height:0.9">Work<span style="color:#F2231A">.</span></h1>
         <p style="margin:0;max-width:40ch;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#D4D3CE;text-wrap:pretty">All projects, across every category.</p></sc-if>
-        <sc-if value="{{ ws.isCat }}" hint-placeholder-val="{{ true }}"><h1 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(52px,11vw,200px);line-height:0.9">Websites<span style="color:#F2231A">.</span></h1>
-        <p style="margin:0;max-width:40ch;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#D4D3CE;text-wrap:pretty">Custom digital experiences built for organisations, products and brands.</p></sc-if>
+        <sc-if value="{{ ws.isCat }}" hint-placeholder-val="{{ true }}"><h1 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(52px,11vw,200px);line-height:0.9">{{ ws.label }}<span style="color:#F2231A">.</span></h1>
+        <p style="margin:0;max-width:40ch;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#D4D3CE;text-wrap:pretty">{{ ws.desc }}</p></sc-if>
       </div>
-      <span style="flex-shrink:0;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 14px;border:1px solid #2A2A28;font-family:'Autowide','Geist',sans-serif;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;color:#F5F4F1"><i class="iconsax" icon-name="globe" aria-hidden="true" style="font-size:18px;color:#F2231A"></i>{{ ws.count }}</span>
+      <span style="flex-shrink:0;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 14px;border:1px solid #2A2A28;font-family:'Autowide','Geist',sans-serif;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;color:#F5F4F1"><i class="iconsax" icon-name="{{ ws.icon }}" aria-hidden="true" style="font-size:18px;color:#F2231A"></i>{{ ws.count }}</span>
     </div>
   </section>
 
@@ -856,6 +863,142 @@ button{font:inherit}
   </article>
 </sc-if>
 
+<!-- ================= SYSTEMS CASE STUDY — #/work/systems/<slug>, renders from SYSTEMS data ================= -->
+<sc-if value="{{ isSystem }}" hint-placeholder-val="{{ false }}">
+<article ref="{{ sys.root }}" style="background:#0A0A0A;color:#F5F4F1;overflow:hidden">
+
+  <section data-rv="" data-theme="dark" data-screen-label="System — Intro" style="padding:clamp(112px,12vw,160px) clamp(16px,3vw,48px) 0">
+    <div data-fade="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 32px;padding-top:16px;border-top:1px solid #262626;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8984;animation-delay:80ms">
+      <nav aria-label="Breadcrumb" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px"><a href="#/work" style="color:#8A8984" style-hover="color:#F5F4F1">Work</a><span>/</span><a href="#/work/systems" style="color:#8A8984" style-hover="color:#F5F4F1">Systems</a><span>/</span><span style="color:#F5F4F1">{{ sys.title }}</span></nav>
+      <span>{{ sys.year }}</span>
+    </div>
+    <div style="margin-top:clamp(48px,7vw,112px);display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px)">
+      <h1 style="margin:0;font-family:'Autowide','Geist',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;font-size:{{ sys.titleSize }};line-height:0.9">
+        <span style="display:block;overflow:hidden;padding-bottom:0.22em;margin-bottom:-0.22em"><span data-up="" style="animation-delay:180ms"><span style="position:relative;display:inline-block;isolation:isolate">{{ sys.title }}<svg data-draw="" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:calc(100% + 0.04em);width:100%;height:0.1em;overflow:visible;pointer-events:none;z-index:-1;animation-delay:1000ms"><path pathLength="1" d="M4 26C60 12 140 8 210 14C270 19 330 12 396 6" fill="none" stroke="#F2231A" stroke-width="6" stroke-linecap="round"></path></svg></span><span style="color:#F2231A">.</span></span></span>
+      </h1>
+    </div>
+    <div style="margin-top:clamp(28px,3vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px clamp(24px,4vw,64px);align-items:end">
+      <p data-fade="" style="margin:0;max-width:34ch;font-size:clamp(18px,1.6vw,24px);line-height:1.35;color:#D9D9D9;text-wrap:pretty;animation-delay:520ms">{{ sys.description }}</p>
+      <a data-fade="" href="{{ sys.ctaHref }}" target="{{ sys.ctaTarget }}" rel="noopener" onClick="{{ sys.ctaClick }}" style="justify-self:end;display:flex;align-items:center;justify-content:space-between;gap:32px;width:min(100%,340px);height:64px;padding:0 24px;background:#FF0000;color:#FFFFFF;font-size:15px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;animation-delay:640ms;transition:background-color 200ms,color 200ms" style-hover="background:#CC0000;color:#FFFFFF">{{ sys.ctaLabel }}<i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:22px;line-height:1;display:block;transform:{{ sys.ctaRot }}"></i></a>
+    </div>
+  </section>
+
+  <section data-rv="" data-theme="dark" data-screen-label="System — Product hero" style="position:relative;margin-top:clamp(32px,4vw,64px);padding:0">
+    <div data-wipe="" style="position:relative;width:100%;aspect-ratio:16/9;min-height:240px;overflow:hidden;animation-delay:300ms"><image-slot id="{{ sys.heroSlot }}" shape="rect" fit="cover" placeholder="{{ sys.heroPh }}" style="position:absolute;inset:0;display:block;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:0"></image-slot></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));border-top:1px solid #262626;border-bottom:1px solid #262626">
+      <sc-for list="{{ sys.meta }}" as="m" hint-placeholder-count="4">
+        <div data-fade="" style="padding:clamp(24px,2.4vw,36px) clamp(16px,3vw,48px);border-right:1px solid #262626;display:flex;flex-direction:column;gap:10px;animation-delay:{{ m.delay }}">
+          <span style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#8A8984"><span style="width:6px;height:6px;background:#F2231A;flex:none"></span>{{ m.k }}</span>
+          <span style="font-size:clamp(17px,1.4vw,20px);font-weight:500;line-height:1.3">{{ m.v }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-rv="" data-theme="dark" data-screen-label="System — The challenge" style="padding:clamp(72px,6.5vw,96px) clamp(16px,3vw,48px) clamp(80px,8vw,112px);background:#0A0A0A">
+
+    <div style="display:grid;grid-template-columns:{{ sys.split }};gap:clamp(24px,3vw,48px) clamp(32px,4vw,80px);align-items:end">
+      <h2 style="margin:0;min-width:0;font-weight:700;font-size:clamp(48px,6vw,104px);line-height:0.86;letter-spacing:-0.06em;text-transform:uppercase;color:#FFFFFF"><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-up="" style="animation-delay:80ms">The</span></span><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-up="" style="animation-delay:180ms">challenge<span style="color:#FF0000">.</span></span></span></h2>
+      <p data-fade="" style="margin:0;padding-bottom:0.3em;max-width:30ch;font-size:clamp(22px,2.2vw,36px);font-weight:500;line-height:1.12;letter-spacing:-0.035em;color:#FFFFFF;text-wrap:pretty;animation-delay:300ms">{{ sys.chA }}<span style="position:relative;display:inline-block;white-space:nowrap;isolation:isolate">{{ sys.chMark }}<svg data-draw="" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:-8%;top:-20%;width:116%;height:140%;z-index:-1;overflow:visible;pointer-events:none;animation-delay:900ms"><path pathLength="1" d="M6 40C0 16 66 2 118 4C172 6 202 22 196 42C190 62 128 70 80 67C30 64 -2 52 4 32C8 22 30 12 56 8" fill="none" stroke="#FF0000" stroke-width="3" stroke-linecap="round"></path></svg></span>{{ sys.chB }}</p>
+    </div>
+    <div style="margin-top:clamp(40px,4.5vw,72px);display:grid;grid-template-columns:{{ sys.ptCols }};gap:0 clamp(20px,2.4vw,40px)">
+      <sc-for list="{{ sys.points }}" as="pt" hint-placeholder-count="3">
+        <div data-fade="" style="display:flex;flex-direction:column;gap:12px;padding:20px 0 40px;border-top:1px solid #333333;animation-delay:{{ pt.delay }}">
+          <span style="font-size:13px;font-weight:700;letter-spacing:0.08em;color:#FF0000">{{ pt.n }}</span>
+          <h3 style="margin:0;font-size:clamp(20px,1.8vw,28px);font-weight:700;letter-spacing:-0.03em;line-height:1;text-transform:uppercase;color:#FFFFFF">{{ pt.title }}</h3>
+          <p style="margin:0;max-width:36ch;font-size:16px;line-height:1.5;color:#BDBDBD;text-wrap:pretty">{{ pt.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-rv="" data-theme="light" data-screen-label="System — The system" style="padding:clamp(64px,7vw,96px) clamp(16px,3vw,48px);background:#FFFFFF;color:#0A0A0A">
+    <div style="display:grid;grid-template-columns:{{ sys.split }};gap:clamp(24px,3vw,48px) clamp(32px,4vw,80px);align-items:end">
+      <h2 style="margin:0;min-width:0;font-weight:700;font-size:clamp(48px,6vw,104px);line-height:0.86;letter-spacing:-0.06em;text-transform:uppercase;color:#0A0A0A"><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-up="" style="animation-delay:80ms">The</span></span><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-up="" style="animation-delay:180ms">system<span style="color:#FF0000">.</span></span></span></h2>
+      <p data-fade="" style="margin:0;max-width:44ch;padding-bottom:0.3em;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#3F3F3F;text-wrap:pretty;animation-delay:300ms">{{ sys.sysLead }}</p>
+    </div>
+    <div style="margin-top:clamp(40px,4.5vw,64px);display:grid;grid-template-columns:{{ sys.modCols }};gap:clamp(12px,1.2vw,20px)">
+      <sc-for list="{{ sys.modules }}" as="m" hint-placeholder-count="6">
+        <div data-fade="" style="display:flex;min-width:0;animation-delay:{{ m.delay }}">
+          <div style="flex:1;display:flex;flex-direction:column;gap:18px;min-height:clamp(180px,14vw,220px);padding:clamp(20px,2vw,28px);background:#F7F7F7;border:1px solid rgba(0,0,0,0.08);border-radius:4px;transition:border-color 220ms ease-out, transform 220ms ease-out, background 220ms ease-out, box-shadow 220ms ease-out" style-hover="border-color:#FF0000;transform:translateY(-4px);background:#FFFFFF;box-shadow:0 12px 32px -16px rgba(0,0,0,0.18)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+              <span style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,0,0,0.25);background:#FFFFFF;border-radius:4px"><i class="iconsax" icon-name="{{ m.icon }}" aria-hidden="true" style="font-size:26px;line-height:1;color:#FF0000"></i></span>
+              <span style="font-size:13px;font-weight:700;letter-spacing:0.08em;color:#FF0000;font-variant-numeric:tabular-nums">{{ m.n }}</span>
+            </div>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <h3 style="margin:0;font-size:clamp(20px,1.7vw,26px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;color:#0A0A0A">{{ m.title }}</h3>
+              <p style="margin:0;max-width:38ch;font-size:16px;line-height:1.5;color:#3F3F3F;text-wrap:pretty">{{ m.text }}</p>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-rv="" data-theme="dark" data-screen-label="System — How it works" style="padding:clamp(64px,7vw,96px) clamp(16px,3vw,48px);border-top:1px solid #1F1F1F">
+    <div style="display:grid;grid-template-columns:{{ sys.split }};gap:clamp(24px,3vw,48px) clamp(32px,4vw,80px);align-items:end">
+      <h2 style="margin:0;min-width:0;font-weight:700;font-size:clamp(48px,6vw,104px);line-height:0.86;letter-spacing:-0.06em;text-transform:uppercase;color:#FFFFFF"><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-up="" style="animation-delay:80ms">How it</span></span><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-up="" style="animation-delay:180ms">works<span style="color:#FF0000">.</span></span></span></h2>
+      <p data-fade="" style="margin:0;max-width:44ch;padding-bottom:0.3em;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#BDBDBD;text-wrap:pretty;animation-delay:300ms">{{ sys.flowLead }}</p>
+    </div>
+    <div style="margin-top:clamp(40px,4.5vw,64px);display:grid;grid-template-columns:{{ sys.flowCols }};gap:1px;background:#262626;border:1px solid #262626;border-radius:4px;overflow:hidden">
+      <sc-for list="{{ sys.flow }}" as="f" hint-placeholder-count="6">
+        <div data-fade="" style="display:flex;flex-direction:column;gap:18px;min-width:0;padding:clamp(22px,2vw,32px);background:{{ f.bg }};animation-delay:{{ f.delay }}">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <span style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:{{ f.numInk }};font-variant-numeric:tabular-nums">Step {{ f.n }}</span>
+            <i class="iconsax" icon-name="{{ f.arrow }}" aria-hidden="true" style="font-size:16px;line-height:1;color:{{ f.arrowInk }}"></i>
+          </div>
+          <span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid {{ f.iconRule }};border-radius:4px"><i class="iconsax" icon-name="{{ f.icon }}" aria-hidden="true" style="font-size:22px;line-height:1;color:{{ f.iconInk }}"></i></span>
+          <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+            <h3 style="margin:0;font-size:clamp(17px,1.3vw,20px);font-weight:700;letter-spacing:-0.02em;line-height:1.15;color:#FFFFFF">{{ f.title }}</h3>
+            <p style="margin:0;font-size:15px;line-height:1.5;color:#BDBDBD;text-wrap:pretty">{{ f.text }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-rv="" data-theme="dark" data-screen-label="System — The product" data-sys-product="" style="padding:clamp(64px,7vw,96px) clamp(16px,3vw,48px);border-top:1px solid #1F1F1F">
+    <div style="display:grid;grid-template-columns:{{ sys.split }};gap:clamp(24px,3vw,48px) clamp(32px,4vw,80px);align-items:end">
+      <h2 style="margin:0;min-width:0;font-weight:700;font-size:clamp(48px,6vw,104px);line-height:0.86;letter-spacing:-0.06em;text-transform:uppercase;color:#FFFFFF"><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-up="" style="animation-delay:80ms">The</span></span><span style="display:block;overflow:hidden;padding-bottom:0.06em"><span data-up="" style="animation-delay:180ms">product<span style="color:#FF0000">.</span></span></span></h2>
+      <p data-fade="" style="margin:0;max-width:44ch;padding-bottom:0.3em;font-size:clamp(17px,1.4vw,21px);line-height:1.45;color:#BDBDBD;text-wrap:pretty;animation-delay:300ms">{{ sys.productLead }}</p>
+    </div>
+    <div data-rv="" style="margin-top:clamp(56px,7vw,112px)">
+      <div data-fade="" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;border-bottom:1px solid #333333">
+        <div role="tablist" aria-label="Product screens" style="display:flex;flex-wrap:wrap;align-self:stretch;margin-bottom:-1px">
+          <sc-for list="{{ sys.tabs }}" as="t" hint-placeholder-count="6">
+            <button type="button" role="tab" aria-selected="{{ t.pressed }}" onClick="{{ t.go }}" style="display:flex;align-items:center;gap:10px;height:60px;padding:0 16px;border:0;border-bottom:2px solid {{ t.rule }};background:transparent;color:{{ t.ink }};cursor:pointer;font-family:system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:color 200ms,border-color 200ms" style-hover="color:#FFFFFF"><span style="color:{{ t.num }}">{{ t.n }}</span>{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:8px 0"><span style="font-weight:600;font-size:14px;letter-spacing:0.04em;color:#D9D9D9;font-variant-numeric:tabular-nums">{{ sys.shot.count }}</span><div style="display:flex;gap:8px"><button type="button" onClick="{{ sys.shotPrev }}" aria-label="Previous screen" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border:1px solid #444444;border-radius:999px;background:transparent;color:#D9D9D9;cursor:pointer;opacity:{{ sys.prevOp }};transition:background-color 200ms,border-color 200ms,color 200ms" style-hover="border-color:#FF0000;background:#FF0000;color:#FFFFFF"><i class="iconsax" icon-name="arrow-left" aria-hidden="true" style="font-size:18px;line-height:1;display:block"></i></button><button type="button" onClick="{{ sys.shotNext }}" aria-label="Next screen" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border:1px solid #444444;border-radius:999px;background:transparent;color:#D9D9D9;cursor:pointer;opacity:{{ sys.nextOp }};transition:background-color 200ms,border-color 200ms,color 200ms" style-hover="border-color:#FF0000;background:#FF0000;color:#FFFFFF"><i class="iconsax" icon-name="arrow-right" aria-hidden="true" style="font-size:18px;line-height:1;display:block"></i></button></div></div>
+      </div>
+      <div data-fade="" style="position:relative;width:100%;aspect-ratio:16/10;min-height:240px;background:#111111;border:1px solid #333333;border-top:0;overflow:hidden;animation-delay:160ms">
+        <sc-for list="{{ sys.screens }}" as="s" hint-placeholder-count="1">
+          <div style="position:absolute;inset:0;opacity:{{ s.op }};visibility:{{ s.vis }};transition:opacity 500ms ease, visibility 500ms"><sc-if value="{{ s.hasSrc }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="{{ s.ph }}" style="position:absolute;inset:0;background-image:{{ s.bg }};background-size:cover;background-position:center"></div></sc-if><sc-if value="{{ s.noSrc }}" hint-placeholder-val="{{ true }}"><image-slot id="{{ s.slot }}" placeholder="{{ s.ph }}" style="position:absolute;inset:0;display:block;width:100%;height:100%"></image-slot></sc-if></div>
+        </sc-for>
+      </div>
+      <div style="margin-top:clamp(20px,2.4vw,32px);display:grid;grid-template-columns:{{ sys.shotCols }};gap:12px clamp(24px,5vw,96px);align-items:baseline">
+        <h3 style="margin:0;display:flex;align-items:baseline;gap:14px;font-size:clamp(22px,2.2vw,32px);font-weight:700;letter-spacing:-0.03em;line-height:1;text-transform:uppercase;color:#FFFFFF"><span style="font-size:14px;letter-spacing:0.04em;color:#FF0000">{{ sys.shot.n }}</span>{{ sys.shot.label }}</h3>
+        <p style="margin:0;max-width:52ch;font-size:16px;line-height:1.55;color:#BDBDBD;text-wrap:pretty">{{ sys.shot.text }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-rv="" data-theme="dark" data-rail="Outcome" data-screen-label="System — Outcome" style="border-top:1px solid #262626;padding:clamp(128px,13vw,224px) clamp(16px,3vw,48px) clamp(160px,16vw,256px)">
+    <div style="display:grid;grid-template-columns:{{ sys.outCols }};gap:clamp(48px,5vw,96px) clamp(32px,4vw,80px);align-items:center">
+      <h2 style="margin:0;min-width:0;container-type:inline-size;font-weight:700;text-transform:uppercase;line-height:0.84;color:#FFFFFF"><span style="display:block;overflow:hidden;padding-bottom:0.06em;font-size:19cqi;letter-spacing:-0.065em"><span data-up="" style="animation-delay:80ms">Outcome<span style="color:#FF0000">.</span></span></span></h2>
+      <div style="min-width:0;display:flex;flex-direction:column;gap:clamp(28px,3vw,48px);padding-left:{{ sys.outInset }};border-left:{{ sys.outRule }}">
+        <p data-fade="" style="margin:0;max-width:22ch;font-size:clamp(26px,2.7vw,48px);font-weight:500;line-height:1.18;letter-spacing:-0.035em;color:#FFFFFF;text-wrap:balance;animation-delay:260ms">{{ sys.outA }}<span style="position:relative;display:inline-block;isolation:isolate">{{ sys.outMark }}<svg data-draw="" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;left:0;top:calc(100% - 0.06em);width:100%;height:0.16em;overflow:visible;pointer-events:none;z-index:-1;animation-delay:1000ms"><path pathLength="1" d="M4 26C60 12 140 8 210 14C270 19 330 12 396 6" fill="none" stroke="#FF0000" stroke-width="6" stroke-linecap="round"></path></svg></span>{{ sys.outB }}</p>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:clamp(16px,1.6vw,22px)">
+          <sc-for list="{{ sys.outPoints }}" as="pt" hint-placeholder-count="4">
+            <li data-fade="" style="display:flex;align-items:flex-start;gap:14px;animation-delay:{{ pt.delay }}"><i class="iconsax" icon-name="tick-circle" aria-hidden="true" style="flex:none;font-size:22px;line-height:1.2;color:#FF0000"></i><span style="font-size:clamp(16px,1.3vw,19px);line-height:1.4;color:#EDEAE3"><strong style="font-weight:700;color:#FFFFFF">{{ pt.b }}</strong> {{ pt.t }}</span></li>
+          </sc-for>
+        </ul>
+      </div>
+    </div>
+  </section>
+</article>
+</sc-if>
+
 </main>
 
 <sc-if value="{{ showContact }}" hint-placeholder-val="{{ true }}">
@@ -881,7 +1024,7 @@ button{font:inherit}
 </section>
 </sc-if>
 
-<footer data-theme="dark" data-screen-label="Footer" style="background:#0D0D0D;color:#EDEAE3;font-family:system-ui,sans-serif;padding:clamp(56px,7vw,112px) clamp(16px,3vw,48px) 28px">
+<footer data-theme="dark" data-screen-label="Footer" style="background:#0D0D0D;border-top:1px solid rgba(255,255,255,0.1);color:#EDEAE3;font-family:system-ui,sans-serif;padding:clamp(56px,7vw,112px) clamp(16px,3vw,48px) 28px">
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 48px;padding-bottom:clamp(40px,5vw,72px);border-bottom:1px solid #262624">
     <a href="#/" style="display:flex;align-items:center;gap:12px;color:#EDEAE3;text-decoration:none;font-weight:700;font-size:clamp(28px,3.6vw,56px);letter-spacing:-0.04em;line-height:1" style-hover="color:#EDEAE3"><img src="assets/inetwork-logo.png" alt="" aria-hidden="true" style="width:1.3em;height:1.3em;display:block;object-fit:contain">INETWORK-ME</a>
     <p style="margin:0;max-width:44ch;font-size:clamp(15px,1.2vw,18px);line-height:1.5;color:#B8B5AE;text-wrap:pretty">A 360° creative agency building brands, websites and digital products — from first idea to launch and beyond.</p>
@@ -1102,6 +1245,66 @@ const caseOf = (p) => {
 };
 const wsCat = (id) => (WEBSITE_CATEGORIES.find(c => c[0] === id) || [id, id])[1];
 
+// Systems archive data; slug drives #/work/systems/<slug> → Systems Case Study template.
+const SYSTEM_CATEGORIES = [['operations', 'Operations'], ['cms', 'CMS'], ['erp', 'ERP'], ['crm', 'CRM'], ['healthcare', 'Healthcare'], ['analytics', 'Analytics']];
+// Screens: {label, text, image} — image is the image-slot id; drop real product screenshots into each slot.
+// Headlines are [before, marked word, after] — the marked word gets the hand-drawn annotation.
+const SYSTEMS = [
+  { slug: 'cloudquila', title: 'CloudQuila', category: 'operations', type: 'Business Operations System', year: '2026', thumbSlot: 'cloudquila-hero',
+    client: 'CloudQuila', services: ['Product Design', 'UX/UI Design', 'Development'],
+    description: 'A company operations system connecting employees, tasks, projects, clients, time tracking, calendar and leave management in one place.',
+    business: { lead: 'A company that runs on people, projects and clients — every day, across every team.', text: 'Employees check in, pick up tasks, log hours and plan around each other’s availability. The business depends on all of that being accurate, current and visible.' },
+    challenge: { headline: ['A company that runs on people, projects, and clients — every day, across every team. But work was happening everywhere and remaining completely ', 'disconnected', '.'], points: [
+      { title: 'Scattered tools', text: 'Tasks, hours, client records and leave requests lived in separate places, updated by hand.' },
+      { title: 'Time without context', text: 'Hours were logged, but rarely tied back to the task, project or client they belonged to.' },
+      { title: 'No shared picture', text: 'Knowing who was working on what — and who was away — meant chasing people for updates.' } ] },
+    systemLead: 'Six connected areas on one shared data model. Every action in one area updates the others.',
+    modules: [
+      { title: 'Daily Work', text: 'Each employee’s day: check-in, assigned tasks and what comes next.', icon: 'task-list-square' },
+      { title: 'Time Tracking', text: 'Hours logged directly against tasks — never in a separate sheet.', icon: 'stopwatch' },
+      { title: 'Projects', text: 'Scope, tasks, people and logged time for every project.', icon: 'folder-2' },
+      { title: 'Clients', text: 'Every client linked to its projects, hours and history.', icon: 'briefcase' },
+      { title: 'Calendar', text: 'Deadlines, meetings and availability in one shared view.', icon: 'calendar-1' },
+      { title: 'Leave Management', text: 'Requests, approvals and balances that update the calendar automatically.', icon: 'calendar-tick' } ],
+    workflowLead: 'Every action feeds the next. A single check-in becomes project-level visibility — without anyone writing a report.',
+    workflow: [
+      { title: 'Check in', text: 'The working day starts inside the system.', icon: 'login' },
+      { title: 'Daily work', text: 'Each person sees their tasks for today.', icon: 'task-list-square' },
+      { title: 'Task', text: 'Work is picked up and moved forward.', icon: 'tick-square' },
+      { title: 'Time tracking', text: 'Hours are logged against the task itself.', icon: 'stopwatch' },
+      { title: 'Project', text: 'Time and progress roll up to the project.', icon: 'folder-2' },
+      { title: 'Operational visibility', text: 'Management sees the real state of the business.', icon: 'eye' } ],
+    productLead: 'The interface keeps each area focused while the data underneath stays connected.',
+    screens: [
+      { label: 'Daily work', text: 'The starting point for every employee: check-in, today’s tasks and active timers.', image: 'cloudquila-s1', src: 'assets/cloudquila-daily-work.png' },
+      { label: 'Time tracking', text: 'Timers and logged hours attached to tasks, projects and clients.', image: 'cloudquila-s2', src: 'assets/cloudquila-time-tracking.png' },
+      { label: 'Projects', text: 'Each project’s tasks, team and time in a single view.', image: 'cloudquila-s3', src: 'assets/cloudquila-projects.png' },
+      { label: 'Clients', text: 'Client records connected to their projects and hours.', image: 'cloudquila-s4', src: 'assets/cloudquila-clients.png' },
+      { label: 'Calendar', text: 'Deadlines, meetings and approved leave on one shared calendar.', image: 'cloudquila-s5', src: 'assets/cloudquila-calendar.png' },
+      { label: 'Leave management', text: 'Requests, approvals and balances in one clear flow.', image: 'cloudquila-s6', src: 'assets/cloudquila-leave.png' } ],
+    outcome: { headline: ['CloudQuila gives the company ', 'one operational picture', ' — from a single check-in to project-level decisions.'],
+      points: [['Unified records:', 'People, tasks, projects and clients in one place.'], ['Time tied to work:', 'Hours logged against the task itself.'], ['Live project effort:', 'Progress visible as it happens.'], ['No status chasing:', 'Management sees the real picture.']] },
+    nextProject: null }
+];
+const ARCHIVES = {
+  websites: { key: 'websites', label: 'Websites', desc: 'Custom digital experiences built for organisations, products and brands.', icon: 'globe', list: WEBSITES, cats: WEBSITE_CATEGORIES, slot: 'ws-' },
+  systems: { key: 'systems', label: 'Systems', desc: 'Business systems that connect people, work and data into one operational product.', icon: 'layers-1', list: SYSTEMS, cats: SYSTEM_CATEGORIES, slot: 'sys-', hideEmpty: true }
+};
+const archiveKey = (r) => (r.kind === 'systems' || r.kind === 'system' ? 'systems' : 'websites');
+// Fills any Systems case-study field a project hasn't defined yet.
+const sysOf = (p) => {
+  const s = p.slug, H = (h, d) => (Array.isArray(h) ? [h[0] || '', h[1] || '', h[2] || ''] : [h || d, '', '']);
+  return Object.assign({}, p, {
+    client: p.client || p.title, type: p.type || 'Business System', services: p.services || ['To be confirmed'],
+    business: p.business || { lead: 'Business context to be added.', text: '' },
+    challenge: { headline: H(p.challenge && p.challenge.headline, 'Challenge to be added.'), points: (p.challenge && p.challenge.points) || [] },
+    systemLead: p.systemLead || '', modules: p.modules || [], workflowLead: p.workflowLead || '', workflow: p.workflow || [],
+    productLead: p.productLead || '', heroImage: p.heroImage || s + '-hero',
+    screens: (p.screens && p.screens.length ? p.screens : [{ label: 'Overview' }]).map((x, k) => ({ label: x.label || 'Screen', text: x.text || '', image: x.image || s + '-s' + (k + 1), src: x.src || '' })),
+    outcome: { headline: H(p.outcome && p.outcome.headline, 'Outcome to be confirmed.'), points: (p.outcome && p.outcome.points) || [] }
+  });
+};
+
 const ANCHORS = ['solutions', 'company', 'contact'];
 const OFFER = {
   web: [['Websites', 'Corporate and marketing sites', 'globe'], ['Web applications', 'Portals and browser-based tools', 'code-1'], ['E-commerce', 'Stores and product discovery', 'shopping-cart'], ['Government platforms', 'Public services and portals', 'courthouse'], ['Healthcare platforms', 'Patient-facing services', 'hospital'], ['Tourism platforms', 'Hotels, travel and destinations', 'airplane']],
@@ -1139,6 +1342,10 @@ const parseRoute = () => {
   if (h[0] === 'work' && h[1] === 'websites') {
     if (h[2] && WEBSITES.some(p => p.slug === h[2])) return { kind: 'website', slug: h[2] };
     return { kind: 'websites' };
+  }
+  if (h[0] === 'work' && h[1] === 'systems') {
+    if (h[2] && SYSTEMS.some(p => p.slug === h[2])) return { kind: 'system', slug: h[2] };
+    return { kind: 'systems' };
   }
   if (h[0] === 'work') {
     const cat = catOf(h[1]);
@@ -1187,7 +1394,7 @@ class Component extends DCLogic {
     this._lastW = 0;
     this.syncW = () => { const w = document.documentElement.clientWidth || window.innerWidth; if (w !== this._lastW) { this._lastW = w; this.forceUpdate(); } };
     [0, 80, 400].forEach(ms => setTimeout(this.syncW, ms));
-    this.onHash = () => { const r = parseRoute(), prev = this.state.route; this.setState(Object.assign({ route: r, menu: false, hover: null }, (r.kind === 'work' || r.kind === 'websites') && r.kind !== prev.kind ? { wsF: null, wsQ: '' } : null)); };
+    this.onHash = () => { const r = parseRoute(), prev = this.state.route; this.setState(Object.assign({ route: r, menu: false, hover: null }, ['work', 'websites', 'systems'].includes(r.kind) && r.kind !== prev.kind ? { wsF: null, wsQ: '' } : null)); };
     this.onScroll = () => { if (!this.raf) this.raf = requestAnimationFrame(() => { this.raf = 0; this.frame(); }); };
     this.onResize = () => { this.syncW(); clearTimeout(this.rt); this.rt = setTimeout(() => { document.querySelectorAll('[data-strip]').forEach(el => { el.__s = null; }); this.frame(); }, 120); };
     window.addEventListener('hashchange', this.onHash);
@@ -1332,7 +1539,7 @@ class Component extends DCLogic {
     return OFFER[key].map(([title, , icon], i) => {
       const on = any && cur.i === i, [col, row, big] = narrow ? [L[i][2] || (key === 'web' && i === 1) ? 'span 2' : 'span 1', 'auto', L[i][2]] : L[i];
       return {
-        title, icon, col, row, href: key === 'web' && title === 'Websites' ? '#/work/websites' : '#/contact',
+        title, icon, col, row, href: key === 'web' && title === 'Websites' ? '#/work/websites' : key === 'saas' ? '#/work/systems' : '#/contact',
         pad: big ? 'clamp(20px,2.2vw,32px)' : 'clamp(16px,1.6vw,22px)',
         size: big ? 'clamp(20px,1.9vw,28px)' : '16px',
         iconSize: big ? '36px' : '24px',
@@ -1352,33 +1559,37 @@ class Component extends DCLogic {
   }
 
   websites(route, w) {
+    const A = ARCHIVES[archiveKey(route)], L = A.list, base = '#/work/' + A.key + '/';
+    const catL = (id) => (A.cats.find(c => c[0] === id) || [id, id])[1];
     const q = (this.state.wsQ || '').trim().toLowerCase(), f = this.state.wsF || null;
-    const match = (p) => (!f || p.category === f) && (!q || [p.title, wsCat(p.category), p.year, p.description].join(' ').toLowerCase().includes(q));
-    const list = WEBSITES.filter(match);
+    const match = (p) => (!f || p.category === f) && (!q || [p.title, catL(p.category), p.year, p.description, p.type || ''].join(' ').toLowerCase().includes(q));
+    const list = L.filter(match);
     const rows = list.map((p) => {
-      const n = pad(WEBSITES.indexOf(p) + 1), on = this.state.wsH === p.slug;
-      return { n, slug: p.slug, title: p.title, cat: wsCat(p.category), year: p.year, description: p.description,
-        href: '#/work/websites/' + p.slug, slot: 'ws-' + p.slug, hasThumb: !!p.thumbSrc, noThumb: !p.thumbSrc, thumbBg: p.thumbSrc ? 'url("' + p.thumbSrc + '")' : 'none',
+      const n = pad(L.indexOf(p) + 1), on = this.state.wsH === p.slug;
+      return { n, slug: p.slug, title: p.title, cat: catL(p.category), year: p.year, description: p.description,
+        href: base + p.slug, slot: p.thumbSlot || A.slot + p.slug, hasThumb: !!p.thumbSrc, noThumb: !p.thumbSrc, thumbBg: p.thumbSrc ? 'url("' + p.thumbSrc + '")' : 'none',
         rule: on ? '#080808' : '#D8D6D0', bg: on ? '#FFFFFF' : '#FBFAF8',
         shift: on ? 'translateX(6px)' : 'none', arrow: on ? 'translateX(5px)' : 'none', ink: on ? '#F2231A' : '#080808',
         px1: on ? '#F2231A' : 'transparent', px2: on ? '#080808' : 'transparent',
         prevFilter: on ? 'none' : 'grayscale(1)', prevOp: on ? '1' : '0.72',
         on: () => this.setState({ wsH: p.slug }), off: () => this.setState(s => (s.wsH === p.slug ? { wsH: null } : null)) };
     });
-    const filters = [[null, 'All']].concat(WEBSITE_CATEGORIES).map(([id, label]) => {
+    const cats = A.hideEmpty ? A.cats.filter(c => L.some(p => p.category === c[0])) : A.cats;
+    const filters = [[null, 'All']].concat(cats).map(([id, label]) => {
       const on = f === id, hov = this.state.wsFH === (id || 'all'), show = on || hov;
       return { label, pressed: on ? 'true' : 'false', weight: on ? '600' : '500', ink: show ? '#080808' : '#8A8984',
         dotW: show ? '6px' : '0px', dotGap: show ? '10px' : '0px', dotOp: show ? (on ? '1' : '0.6') : '0', dotX: show ? 'none' : 'translateX(-4px)',
         pick: () => this.setState({ wsF: id }), on: () => this.setState({ wsFH: id || 'all' }), off: () => this.setState(s => (s.wsFH === (id || 'all') ? { wsFH: null } : null)) };
     });
-    const cur = route.kind === 'website' ? WEBSITES.find(p => p.slug === route.slug) : null;
+    const cur = route.kind === 'website' || route.kind === 'system' ? L.find(p => p.slug === route.slug) : null;
     return { ws: {
-      count: pad(WEBSITES.length) + ' projects', shown: pad(list.length) + ' / ' + pad(WEBSITES.length),
+      label: A.label, desc: A.desc, icon: A.icon,
+      count: pad(L.length) + (L.length === 1 ? ' project' : ' projects'), shown: pad(list.length) + ' / ' + pad(L.length),
       isAll: route.kind === 'work', isCat: route.kind !== 'work',
       rows, filters, hasRows: list.length > 0, empty: list.length === 0,
       q: this.state.wsQ || '', onSearch: (e) => this.setState({ wsQ: e.target.value }), reset: () => this.setState({ wsQ: '', wsF: null }),
       desk: w >= 1000, compact: w < 1000, tablet: w >= 640 && w < 1000,
-      cur: cur ? { n: pad(WEBSITES.indexOf(cur) + 1), title: cur.title, cat: wsCat(cur.category) } : { n: '', title: '', cat: '' }
+      cur: cur ? { n: pad(L.indexOf(cur) + 1), title: cur.title, cat: catL(cur.category) } : { n: '', title: '', cat: '' }
     } };
   }
 
@@ -1480,6 +1691,53 @@ class Component extends DCLogic {
     };
   }
 
+  systemCase(route, w) {
+    if (route.kind !== 'system') return null;
+    const raw = SYSTEMS.find(x => x.slug === route.slug); if (!raw) return null;
+    const p = sysOf(raw), i = SYSTEMS.indexOf(raw), desk = w >= 900, tab = w >= 640, ms = (v) => v + 'ms';
+    const catL = (SYSTEM_CATEGORIES.find(c => c[0] === p.category) || [p.category, p.category])[1];
+    const nx = (p.nextProject && SYSTEMS.find(x => x.slug === p.nextProject)) || (SYSTEMS.length > 1 ? SYSTEMS[(i + 1) % SYSTEMS.length] : null);
+    const w0 = WEBSITES[0], nxt = nx ? { href: '#/work/systems/' + nx.slug, title: nx.title, meta: 'Systems · ' + (nx.type || 'Business System') } : { href: '#/work/websites/' + w0.slug, title: w0.title, meta: 'Websites · ' + (w0.type || 'Website') };
+    const S = p.screens, st = this.state.shot, si = st && st.slug === p.slug ? Math.min(st.i, S.length - 1) : 0;
+    const go = (j) => this.setState({ shot: { slug: p.slug, i: Math.max(0, Math.min(S.length - 1, j)) } });
+    const nOn = this.state.hb === 'sysNext', len = Math.max(4, p.title.length);
+    const cols3 = w >= 1000 ? 'repeat(3,minmax(0,1fr))' : tab ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)';
+    return {
+      root: this._ncsRoot, title: p.title, year: p.year, type: p.type, description: p.description,
+      titleSize: 'clamp(30px,' + Math.min(15, 84 / (len * 0.95)).toFixed(2) + 'vw,210px)',
+      ctaLabel: p.liveUrl ? 'View live system' : 'Explore the product', ctaHref: p.liveUrl || '#/work/systems/' + p.slug,
+      ctaTarget: p.liveUrl ? '_blank' : '_self', ctaRot: p.liveUrl ? 'rotate(-45deg)' : 'rotate(90deg)',
+      ctaClick: p.liveUrl ? undefined : (e) => { e.preventDefault(); const el = document.querySelector('[data-sys-product]'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 40, behavior: 'smooth' }); },
+      heroSlot: p.heroImage, heroPh: p.title + ' — product overview screen', heroLabel: p.title + ' / Overview',
+      meta: [['Client', p.client], ['Type', p.type], ['Category', catL], ['Services', p.services.join(', ')]].map(([k, v], n) => ({ k, v, delay: ms(500 + n * 90) })),
+      split: desk ? 'minmax(0,5fr) minmax(0,7fr)' : 'minmax(0,1fr)',
+      outCols: desk ? 'minmax(0,1fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      outInset: desk ? 'clamp(32px,3vw,56px)' : '0', outRule: desk ? '1px solid #262626' : 'none',
+      bizLead: p.business.lead, bizText: p.business.text, hasBizText: !!p.business.text,
+      chA: p.challenge.headline[0], chMark: p.challenge.headline[1], chB: p.challenge.headline[2],
+      points: p.challenge.points.map((x, k) => ({ title: x.title, text: x.text, n: pad(k + 1), delay: ms(250 + k * 120) })), ptCols: cols3,
+      sysLead: p.systemLead, modCols: w >= 1000 ? 'repeat(3,minmax(0,1fr))' : (w >= 640 ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)'),
+      modules: p.modules.map((m, k) => ({ title: m.title, text: m.text, n: pad(k + 1), icon: m.icon || 'element-3', delay: ms(200 + k * 90) })),
+      indent: desk ? '41.666%' : '0', split: w >= 900 ? 'minmax(0,5fr) minmax(0,7fr)' : 'minmax(0,1fr)',
+      flowLead: p.workflowLead, flowCols: w >= 1100 ? 'repeat(' + Math.max(1, p.workflow.length) + ',minmax(0,1fr))' : (w >= 640 ? 'repeat(3,minmax(0,1fr))' : 'minmax(0,1fr)'),
+      flow: p.workflow.map((f, k, arr) => { const last = k === arr.length - 1, node = last ? 14 : 10;
+        return { n: pad(k + 1), title: f.title, text: f.text, icon: f.icon || 'arrow-right', lineDelay: ms(300 + k * 240), delay: ms(300 + k * 240),
+          node: node + 'px', nodeOff: (-node / 2) + 'px', nodeLeft: (14 - node / 2) + 'px', nodeBg: last ? '#FF0000' : '#0A0A0A', nodeRule: last ? '#FF0000' : '#FFFFFF',
+          numInk: last ? '#FF0000' : '#9A9A9A', iconInk: last ? '#FF0000' : '#FFFFFF', iconRule: last ? '#FF0000' : 'rgba(255,255,255,0.14)', bg: last ? '#140A0A' : '#111111', arrow: last ? 'tick-circle' : 'arrow-right', arrowInk: last ? '#FF0000' : '#4A4A4A' }; }),
+      productLead: p.productLead,
+      screens: S.map((s, k) => ({ slot: s.image, bg: s.src ? 'url("' + s.src + '")' : 'none', hasSrc: !!s.src, noSrc: !s.src, ph: p.title + ' — ' + s.label + ' screen', op: k === si ? '1' : '0', vis: k === si ? 'visible' : 'hidden' })),
+      tabs: S.map((s, k) => { const on = k === si; return { label: s.label, n: pad(k + 1), pressed: on ? 'true' : 'false', go: () => go(k),
+        ink: on ? '#FFFFFF' : '#7A7A7A', num: on ? '#FF0000' : '#555555', rule: on ? '#FF0000' : 'transparent' }; }),
+      shot: { label: S[si].label, text: S[si].text, n: pad(si + 1), count: pad(si + 1) + ' / ' + pad(S.length) },
+      shotPrev: () => go(si - 1), shotNext: () => go(si + 1), prevOp: si === 0 ? '0.3' : '1', nextOp: si === S.length - 1 ? '0.3' : '1',
+      shotCols: desk ? 'minmax(0,5fr) minmax(0,7fr)' : 'minmax(0,1fr)',
+      outA: p.outcome.headline[0], outMark: p.outcome.headline[1], outB: p.outcome.headline[2],
+      outPoints: p.outcome.points.map(([b, t], k) => ({ b, t, delay: (520 + k * 110) + 'ms' })),
+      next: Object.assign(nxt, { shift: nOn ? 'translateX(12px)' : 'none', bg: nOn ? '#F2231A' : 'transparent', rule: nOn ? '#F2231A' : '#3A3A38', ink: nOn ? '#F2231A' : '#8A8984',
+        on: () => this.setState({ hb: 'sysNext' }), off: () => this.setState(s => (s.hb === 'sysNext' ? { hb: null } : null)) })
+    };
+  }
+
   renderVals() {
     const { route, menu, navDark, scrolled } = this.state;
     const w = document.documentElement.clientWidth || window.innerWidth || 1200;
@@ -1488,7 +1746,7 @@ class Component extends DCLogic {
 
     const navItems = [
       ['Solutions', '#/solutions', route.anchor === 'solutions'],
-      ['Work', '#/work', ['work', 'archive', 'detail', 'websites', 'website'].includes(route.kind)],
+      ['Work', '#/work', ['work', 'archive', 'detail', 'websites', 'website', 'systems', 'system'].includes(route.kind)],
       ['About', '#/company', route.anchor === 'company'],
       ['Contact', '#/contact', route.anchor === 'contact']
     ].map(([label, href, on]) => ({ label, href, op: on ? 1 : 0.62, dot: on ? RED : 'transparent' }));
@@ -1545,7 +1803,8 @@ class Component extends DCLogic {
 
     return {
       pageRef: this.pageRef,
-      isWebsites: route.kind === 'websites' || route.kind === 'work', isWebsite: route.kind === 'website', ...this.websites(route, w),
+      isWebsites: ['websites', 'work', 'systems'].includes(route.kind), isWebsite: route.kind === 'website',
+      isSystem: route.kind === 'system', sys: this.systemCase(route, w), ...this.websites(route, w),
       isHome: route.kind === 'home', isArchive: route.kind === 'archive', isDetail: route.kind === 'detail',
       isMobile, desktopNav: !isMobile, wide, menuOpen, menuLabel: menuOpen ? 'Close' : 'Menu',
       toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
@@ -1582,7 +1841,7 @@ class Component extends DCLogic {
         const list = HW.map(([n, t, d, icon], i) => ({ n, t, d, icon, ...look[i] }));
         return { hwWide: w >= 820, hwNarrow: w < 820, hw1: list[0], hw2: list[1], hw3: list[2] };
       })(),
-      arc, cs, ...((wc) => ({ wc, ncs: this.newCase(wc, w) }))(this.caseStudy(route, w)), showContact: route.kind !== 'website',
+      arc, cs, ...((wc) => ({ wc, ncs: this.newCase(wc, w) }))(this.caseStudy(route, w)), showContact: route.kind !== 'website' && route.kind !== 'system',
       footCols: w >= 800 ? 'minmax(0,1fr) auto minmax(0,1fr)' : 'minmax(0,1fr)', footSocAlign: w >= 800 ? 'center' : 'start', footTopAlign: w >= 800 ? 'end' : 'start',
       footTime: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Cairo' }),
       toTop: () => window.scrollTo({ top: 0, behavior: 'smooth' })
